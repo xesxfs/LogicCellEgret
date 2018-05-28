@@ -1,0 +1,4 @@
+class SharedManager {
+	public constructor() {
+	}
+}

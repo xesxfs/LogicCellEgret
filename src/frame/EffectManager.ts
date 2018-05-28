@@ -1,0 +1,4 @@
+class EffectManager {
+	public constructor() {
+	}
+}

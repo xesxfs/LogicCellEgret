@@ -1,0 +1,4 @@
+class StageData {
+	public constructor() {
+	}
+}

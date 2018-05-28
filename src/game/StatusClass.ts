@@ -1,0 +1,4 @@
+class StatusClass {
+	public constructor() {
+	}
+}

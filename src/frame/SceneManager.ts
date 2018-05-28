@@ -1,4 +1,54 @@
-class SceneManager {
+class SceneManagerClass extends egret.Sprite {
 	public constructor() {
+		super();
 	}
+	public scene: Scene;
+
+	private nextScene: Scene;
+
+
+	public newScene(param1: Scene) {
+		this.nextScene = param1;
+		if (this.scene != null) {
+			// KTW.to(this.scene, 0.3, { "alpha": 0 }, Linear.easeOut, this.next);
+			this.next();
+		}
+		else {
+			this.next();
+		}
+	}
+
+	public next() {
+		var sceneId = 0;
+		this.removeChildren();
+		this.scene = null;
+		this.scene = this.nextScene;
+		if (this.scene instanceof SetPuzzleScene) {
+			sceneId = 0;
+		}
+		else if (this.scene instanceof SetScoreScene) {
+			sceneId = 1;
+		}
+		else if (this.scene instanceof SetScore30Scene) {
+			// SetScore30Scene.cnt = 30;
+			// SetScore30Scene.isFinish = false;
+			sceneId = 2;
+		}
+		else if (this.scene instanceof SetScore1minScene) {
+			// SetScore1minScene.cnt = -95;
+			// SetScore1minScene.isFinish = false;
+			sceneId = 3;
+		}
+		else if (this.scene instanceof SetScore1comboScene) {
+			// SetScore1comboScene.isFinish = false;
+			sceneId = 4;
+		}
+		// Status.reset(_loc1_);
+		this.nextScene.alpha = 0;
+		// KTW.to(this.nextScene, 0.3, { "alpha": 1 }, Linear.easeOut, null, 0.2);
+		this.addChild(this.scene);
+	}
+
 }
+
+var SceneManager: SceneManagerClass = new SceneManagerClass();

@@ -16,7 +16,9 @@ var Input = (function (_super) {
         _this.graphics.drawRect(0, 0, 480, 762);
         _this.addEventListener("touchBegin", _this.mouseDownEvent, _this);
         _this.addEventListener("touchEnd", _this.mouseUpEvent, _this);
+        _this.addEventListener("touchMove", _this.mouseMoveEvent, _this);
         _this.addEventListener("touchReleaseOutside", _this.mouseOutEvent, _this);
+        _this.touchEnabled = true;
         return _this;
     }
     Input.prototype.mouseDownEvent = function (param1) {
@@ -24,6 +26,8 @@ var Input = (function (_super) {
     Input.prototype.mouseUpEvent = function (param1) {
     };
     Input.prototype.mouseOutEvent = function (param1) {
+    };
+    Input.prototype.mouseMoveEvent = function (e) {
     };
     return Input;
 }(egret.Sprite));

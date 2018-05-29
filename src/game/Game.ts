@@ -7,6 +7,7 @@ class Game extends egret.Sprite {
 		SceneManager.touchEnabled = false;
 		this.addChild(InputManager);
 		this.addEventListener(egret.Event.ENTER_FRAME, this.ent, this);
+		SceneManager.newScene(new SetPuzzleScene(StageManager.getStage(2)));
 	}
 
 	private ent(e: egret.Event) {

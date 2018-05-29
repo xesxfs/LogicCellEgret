@@ -7,8 +7,8 @@ class SceneManagerClass extends egret.Sprite {
 	private nextScene: Scene;
 
 
-	public newScene(param1: Scene) {
-		this.nextScene = param1;
+	public newScene(next: Scene) {
+		this.nextScene = next;
 		if (this.scene != null) {
 			// KTW.to(this.scene, 0.3, { "alpha": 0 }, Linear.easeOut, this.next);
 			this.next();
@@ -44,7 +44,7 @@ class SceneManagerClass extends egret.Sprite {
 			sceneId = 4;
 		}
 		// Status.reset(_loc1_);
-		this.nextScene.alpha = 0;
+		// this.nextScene.alpha = 0;
 		// KTW.to(this.nextScene, 0.3, { "alpha": 1 }, Linear.easeOut, null, 0.2);
 		this.addChild(this.scene);
 	}

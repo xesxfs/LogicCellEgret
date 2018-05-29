@@ -1,215 +1,198 @@
 {
-	"groups": [
+	"groups":[{
+			"keys":"checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,selected_png,border_png,header_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,button_down_png,button_up_png,thumb_pb_png,track_pb_png,track_sb_png,bg_jpg,egret_icon_png,description_json,SoundD_mp3,SoundE_mp3,SoundF_mp3,SoundG_mp3,SoundA_mp3,SoundB_mp3,SoundC_mp3,SoundCC_mp3,Chip_png,Icon48_png,LogicalCell_png,TitleLogo_png",
+			"name":"preload"
+		}],
+	"resources":[
 		{
-			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,selected_png,border_png,header_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,button_down_png,button_up_png,thumb_pb_png,track_pb_png,track_sb_png,bg_jpg,egret_icon_png,description_json,1_Resource_SoundCC_Resource_SoundCC_mp3,2_Resource_SoundG_Resource_SoundG_mp3,3_Resource_SoundF_Resource_SoundF_mp3,4_Resource_SoundA_Resource_SoundA_mp3,5_Resource_SoundC_Resource_SoundC_mp3,6_Resource_SoundB_Resource_SoundB_mp3,7_Resource_SoundE_Resource_SoundE_mp3,8_Resource_SoundD_Resource_SoundD_mp3,10_Resource_BorderStringChip_png,11_Resource_Icon48_png,12_Resource_LogicalCell_png,13_Resource_Chip_png,14_Resource_StringChip_png,15_Resource_TitleLogo_png,9_Resource_StringChip714_png",
-			"name": "preload"
-		}
-	],
-	"resources": [
-		{
-			"url": "assets/CheckBox/checkbox_select_disabled.png",
-			"type": "image",
-			"name": "checkbox_select_disabled_png"
+			"name":"checkbox_select_disabled_png",
+			"type":"image",
+			"url":"assets/CheckBox/checkbox_select_disabled.png"
 		},
 		{
-			"url": "assets/CheckBox/checkbox_select_down.png",
-			"type": "image",
-			"name": "checkbox_select_down_png"
+			"name":"checkbox_select_down_png",
+			"type":"image",
+			"url":"assets/CheckBox/checkbox_select_down.png"
 		},
 		{
-			"url": "assets/CheckBox/checkbox_select_up.png",
-			"type": "image",
-			"name": "checkbox_select_up_png"
+			"name":"checkbox_select_up_png",
+			"type":"image",
+			"url":"assets/CheckBox/checkbox_select_up.png"
 		},
 		{
-			"url": "assets/CheckBox/checkbox_unselect.png",
-			"type": "image",
-			"name": "checkbox_unselect_png"
+			"name":"checkbox_unselect_png",
+			"type":"image",
+			"url":"assets/CheckBox/checkbox_unselect.png"
 		},
 		{
-			"url": "assets/ItemRenderer/selected.png",
-			"type": "image",
-			"name": "selected_png"
+			"name":"selected_png",
+			"type":"image",
+			"url":"assets/ItemRenderer/selected.png"
 		},
 		{
-			"url": "assets/Panel/border.png",
-			"type": "image",
-			"name": "border_png"
+			"name":"border_png",
+			"type":"image",
+			"url":"assets/Panel/border.png"
 		},
 		{
-			"url": "assets/Panel/header.png",
-			"type": "image",
-			"name": "header_png"
+			"name":"header_png",
+			"type":"image",
+			"url":"assets/Panel/header.png"
 		},
 		{
-			"url": "assets/RadioButton/radiobutton_select_disabled.png",
-			"type": "image",
-			"name": "radiobutton_select_disabled_png"
+			"name":"radiobutton_select_disabled_png",
+			"type":"image",
+			"url":"assets/RadioButton/radiobutton_select_disabled.png"
 		},
 		{
-			"url": "assets/RadioButton/radiobutton_select_down.png",
-			"type": "image",
-			"name": "radiobutton_select_down_png"
+			"name":"radiobutton_select_down_png",
+			"type":"image",
+			"url":"assets/RadioButton/radiobutton_select_down.png"
 		},
 		{
-			"url": "assets/RadioButton/radiobutton_select_up.png",
-			"type": "image",
-			"name": "radiobutton_select_up_png"
+			"name":"radiobutton_select_up_png",
+			"type":"image",
+			"url":"assets/RadioButton/radiobutton_select_up.png"
 		},
 		{
-			"url": "assets/RadioButton/radiobutton_unselect.png",
-			"type": "image",
-			"name": "radiobutton_unselect_png"
+			"name":"radiobutton_unselect_png",
+			"type":"image",
+			"url":"assets/RadioButton/radiobutton_unselect.png"
 		},
 		{
-			"url": "assets/ScrollBar/roundthumb.png",
-			"type": "image",
-			"name": "roundthumb_png"
+			"name":"roundthumb_png",
+			"type":"image",
+			"url":"assets/ScrollBar/roundthumb.png"
 		},
 		{
-			"url": "assets/Slider/thumb.png",
-			"type": "image",
-			"name": "thumb_png"
+			"name":"thumb_png",
+			"type":"image",
+			"url":"assets/Slider/thumb.png"
 		},
 		{
-			"url": "assets/Slider/track.png",
-			"type": "image",
-			"name": "track_png"
+			"name":"track_png",
+			"type":"image",
+			"url":"assets/Slider/track.png"
 		},
 		{
-			"url": "assets/Slider/tracklight.png",
-			"type": "image",
-			"name": "tracklight_png"
+			"name":"tracklight_png",
+			"type":"image",
+			"url":"assets/Slider/tracklight.png"
 		},
 		{
-			"url": "assets/ToggleSwitch/handle.png",
-			"type": "image",
-			"name": "handle_png"
+			"name":"handle_png",
+			"type":"image",
+			"url":"assets/ToggleSwitch/handle.png"
 		},
 		{
-			"url": "assets/ToggleSwitch/off.png",
-			"type": "image",
-			"name": "off_png"
+			"name":"off_png",
+			"type":"image",
+			"url":"assets/ToggleSwitch/off.png"
 		},
 		{
-			"url": "assets/ToggleSwitch/on.png",
-			"type": "image",
-			"name": "on_png"
+			"name":"on_png",
+			"type":"image",
+			"url":"assets/ToggleSwitch/on.png"
 		},
 		{
-			"url": "assets/Button/button_down.png",
-			"type": "image",
-			"name": "button_down_png"
+			"name":"button_down_png",
+			"type":"image",
+			"url":"assets/Button/button_down.png"
 		},
 		{
-			"url": "assets/Button/button_up.png",
-			"type": "image",
-			"name": "button_up_png"
+			"name":"button_up_png",
+			"type":"image",
+			"url":"assets/Button/button_up.png"
 		},
 		{
-			"url": "assets/ProgressBar/thumb_pb.png",
-			"type": "image",
-			"name": "thumb_pb_png"
+			"name":"thumb_pb_png",
+			"type":"image",
+			"url":"assets/ProgressBar/thumb_pb.png"
 		},
 		{
-			"url": "assets/ProgressBar/track_pb.png",
-			"type": "image",
-			"name": "track_pb_png"
+			"name":"track_pb_png",
+			"type":"image",
+			"url":"assets/ProgressBar/track_pb.png"
 		},
 		{
-			"url": "assets/ScrollBar/track_sb.png",
-			"type": "image",
-			"name": "track_sb_png"
+			"name":"track_sb_png",
+			"type":"image",
+			"url":"assets/ScrollBar/track_sb.png"
 		},
 		{
-			"url": "assets/bg.jpg",
-			"type": "image",
-			"name": "bg_jpg"
+			"name":"bg_jpg",
+			"type":"image",
+			"url":"assets/bg.jpg"
 		},
 		{
-			"url": "assets/egret_icon.png",
-			"type": "image",
-			"name": "egret_icon_png"
+			"name":"egret_icon_png",
+			"type":"image",
+			"url":"assets/egret_icon.png"
 		},
 		{
-			"name": "description_json",
-			"type": "json",
-			"url": "config/description.json"
+			"name":"description_json",
+			"type":"json",
+			"url":"config/description.json"
 		},
 		{
-			"name": "1_Resource_SoundCC_Resource_SoundCC_mp3",
-			"type": "sound",
-			"url": "assets/sounds/1_Resource_SoundCC_Resource_SoundCC.mp3"
+			"name":"Chip_png",
+			"type":"image",
+			"url":"assets/images/Chip.png"
 		},
 		{
-			"name": "2_Resource_SoundG_Resource_SoundG_mp3",
-			"type": "sound",
-			"url": "assets/sounds/2_Resource_SoundG_Resource_SoundG.mp3"
+			"name":"Icon48_png",
+			"type":"image",
+			"url":"assets/images/Icon48.png"
 		},
 		{
-			"name": "3_Resource_SoundF_Resource_SoundF_mp3",
-			"type": "sound",
-			"url": "assets/sounds/3_Resource_SoundF_Resource_SoundF.mp3"
+			"name":"LogicalCell_png",
+			"type":"image",
+			"url":"assets/images/LogicalCell.png"
 		},
 		{
-			"name": "4_Resource_SoundA_Resource_SoundA_mp3",
-			"type": "sound",
-			"url": "assets/sounds/4_Resource_SoundA_Resource_SoundA.mp3"
+			"name":"TitleLogo_png",
+			"type":"image",
+			"url":"assets/images/TitleLogo.png"
 		},
 		{
-			"name": "5_Resource_SoundC_Resource_SoundC_mp3",
-			"type": "sound",
-			"url": "assets/sounds/5_Resource_SoundC_Resource_SoundC.mp3"
+			"name":"SoundD_mp3",
+			"type":"sound",
+			"url":"assets/sounds/SoundD.mp3"
 		},
 		{
-			"name": "6_Resource_SoundB_Resource_SoundB_mp3",
-			"type": "sound",
-			"url": "assets/sounds/6_Resource_SoundB_Resource_SoundB.mp3"
+			"name":"SoundE_mp3",
+			"type":"sound",
+			"url":"assets/sounds/SoundE.mp3"
 		},
 		{
-			"name": "7_Resource_SoundE_Resource_SoundE_mp3",
-			"type": "sound",
-			"url": "assets/sounds/7_Resource_SoundE_Resource_SoundE.mp3"
+			"name":"SoundF_mp3",
+			"type":"sound",
+			"url":"assets/sounds/SoundF.mp3"
 		},
 		{
-			"name": "8_Resource_SoundD_Resource_SoundD_mp3",
-			"type": "sound",
-			"url": "assets/sounds/8_Resource_SoundD_Resource_SoundD.mp3"
+			"name":"SoundG_mp3",
+			"type":"sound",
+			"url":"assets/sounds/SoundG.mp3"
 		},
 		{
-			"name": "10_Resource_BorderStringChip_png",
-			"type": "image",
-			"url": "assets/images/10_Resource_BorderStringChip.png"
+			"name":"SoundA_mp3",
+			"type":"sound",
+			"url":"assets/sounds/SoundA.mp3"
 		},
 		{
-			"name": "11_Resource_Icon48_png",
-			"type": "image",
-			"url": "assets/images/11_Resource_Icon48.png"
+			"name":"SoundB_mp3",
+			"type":"sound",
+			"url":"assets/sounds/SoundB.mp3"
 		},
 		{
-			"name": "12_Resource_LogicalCell_png",
-			"type": "image",
-			"url": "assets/images/12_Resource_LogicalCell.png"
+			"name":"SoundC_mp3",
+			"type":"sound",
+			"url":"assets/sounds/SoundC.mp3"
 		},
 		{
-			"name": "13_Resource_Chip_png",
-			"type": "image",
-			"url": "assets/images/13_Resource_Chip.png"
-		},
-		{
-			"name": "14_Resource_StringChip_png",
-			"type": "image",
-			"url": "assets/images/14_Resource_StringChip.png"
-		},
-		{
-			"name": "15_Resource_TitleLogo_png",
-			"type": "image",
-			"url": "assets/images/15_Resource_TitleLogo.png"
-		},
-		{
-			"name": "9_Resource_StringChip714_png",
-			"type": "image",
-			"url": "assets/images/9_Resource_StringChip714.png"
+			"name":"SoundCC_mp3",
+			"type":"sound",
+			"url":"assets/sounds/SoundCC.mp3"
 		}
 	]
 }

@@ -5,7 +5,9 @@ class Input extends egret.Sprite {
 		this.graphics.drawRect(0, 0, 480, 762);
 		this.addEventListener("touchBegin", this.mouseDownEvent, this);
 		this.addEventListener("touchEnd", this.mouseUpEvent, this);
+		this.addEventListener("touchMove", this.mouseMoveEvent, this);
 		this.addEventListener("touchReleaseOutside", this.mouseOutEvent, this);
+		this.touchEnabled = true;
 	}
 
 	protected mouseDownEvent(param1: egret.TouchEvent): void {
@@ -15,5 +17,9 @@ class Input extends egret.Sprite {
 	}
 
 	protected mouseOutEvent(param1: egret.TouchEvent): void {
+	}
+
+	protected mouseMoveEvent(e: egret.TouchEvent): void {
+
 	}
 }

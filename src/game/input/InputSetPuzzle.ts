@@ -14,10 +14,8 @@ class InputSetPuzzleClass extends Input {
 	}
 
 	protected mouseDownEvent(e: egret.TouchEvent): void {
-		console.log(e.stageX, e.stageY);
 		if (e.stageY > 240 && e.stageY < 285) {
 			let selectBlock = ~~(e.stageX / 48);
-			console.log("sel block:", selectBlock)
 			BlockManager.mouseX = e.stageX;
 			BlockManager.mouseY = e.stageY;
 			BlockManager.mouseDownInventory(selectBlock);

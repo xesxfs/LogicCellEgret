@@ -23,6 +23,12 @@ var Field = (function (_super) {
         _this.stageData = stageData;
         _this.fieldW = stageData.fieldW;
         _this.fieldH = stageData.fieldH;
+        _this.width = _this.fieldW * 45;
+        _this.height = _this.fieldH * 45;
+        _this.x = ~~(120 - _this.width / 2);
+        _this.y = ~~(110 - _this.height / 2) + 30;
+        Field.fieldX = _this.x;
+        Field.fieldY = _this.y;
         _this.vec2Grid = [];
         while (w < _this.fieldW) {
             _this.vec2Grid.push([]);
@@ -36,11 +42,16 @@ var Field = (function (_super) {
                     grid.x = 45 * w + 2;
                     grid.y = 45 * h + 2;
                     _this.addChild(grid);
+                    console.log(grid.width);
+                    grid.scaleX = 2;
+                    grid.scaleY = 2;
+                    console.log(grid.width);
                 }
                 h++;
             }
             w++;
         }
+        /****!!放到这里代码可读性和逻辑性变差，但是省去了在多个场景调用!!****/
         BlockManager.reset(_this);
         BlockManager.AddAllBlock(stageData.vecBlockData, false);
         return _this;
@@ -133,7 +144,7 @@ var Field = (function (_super) {
             // }
             // this.matchingJob = KTW.to(this,0.5,{},null,function():void
             // {
-            // this.matchCheck();
+            this.matchCheck();
             // });
         }
         else {
@@ -158,10 +169,9 @@ var Field = (function (_super) {
                 }
             }
             // Status.combo = 0;
-            // if(mode == 0 && !BlockManager.clearCheck())
-            // {
-            //    BlockManager.addUndoString();
-            // }
+            if (mode == 0 && !BlockManager.clearCheck()) {
+                //    BlockManager.addUndoString();
+            }
             // else if(mode == 1)
             // {
             //    BlockManager.finishCheck(SetScoreScene);

@@ -157,10 +157,10 @@ class BlockManagerClass extends egret.Sprite {
 		}
 		InputManager.newInput(null);
 		// KTW.to(this, 1, {}, null, function (): void {
-		// 	InputManager.newInput(InputClear);
+		InputManager.newInput(InputClear);
 		// });
 		// if (this.field.stageData.star3 <= Status.score) {
-		// 	parent.addChild(new ClearSprite(true));
+		this.parent.addChild(new ClearSprite(true));
 		// 	SharedManager.vecPuzzleClear[this.field.stageData.stageNo - 1] = 2;
 		// }
 		// else {

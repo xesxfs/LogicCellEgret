@@ -17,6 +17,12 @@ class Field extends egret.Sprite {
 		this.stageData = stageData;
 		this.fieldW = stageData.fieldW;
 		this.fieldH = stageData.fieldH;
+		this.width = this.fieldW * 45;
+		this.height = this.fieldH * 45;
+		this.x = ~~(120 - this.width / 2);
+		this.y = ~~(110 - this.height / 2) + 30;
+		Field.fieldX = this.x;
+		Field.fieldY = this.y;
 		this.vec2Grid = [];
 
 		while (w < this.fieldW) {
@@ -31,12 +37,17 @@ class Field extends egret.Sprite {
 					grid.x = 45 * w + 2;
 					grid.y = 45 * h + 2;
 					this.addChild(grid);
+					console.log(grid.width);
+					grid.scaleX = 2;
+					grid.scaleY = 2;
+					console.log(grid.width);
 				}
 
 				h++;
 			}
 			w++;
 		}
+		/****!!放到这里代码可读性和逻辑性变差，但是省去了在多个场景调用!!****/
 		BlockManager.reset(this);
 		BlockManager.AddAllBlock(stageData.vecBlockData, false);
 	}
@@ -156,10 +167,9 @@ class Field extends egret.Sprite {
 				}
 			}
 			// Status.combo = 0;
-			// if(mode == 0 && !BlockManager.clearCheck())
-			// {
-			//    BlockManager.addUndoString();
-			// }
+			if (mode == 0 && !BlockManager.clearCheck()) {
+				//    BlockManager.addUndoString();
+			}
 			// else if(mode == 1)
 			// {
 			//    BlockManager.finishCheck(SetScoreScene);

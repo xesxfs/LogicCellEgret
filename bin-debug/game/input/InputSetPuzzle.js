@@ -14,10 +14,8 @@ var InputSetPuzzleClass = (function (_super) {
         return _super.call(this) || this;
     }
     InputSetPuzzleClass.prototype.mouseDownEvent = function (e) {
-        console.log(e.stageX, e.stageY);
         if (e.stageY > 240 && e.stageY < 285) {
             var selectBlock = ~~(e.stageX / 48);
-            console.log("sel block:", selectBlock);
             BlockManager.mouseX = e.stageX;
             BlockManager.mouseY = e.stageY;
             BlockManager.mouseDownInventory(selectBlock);

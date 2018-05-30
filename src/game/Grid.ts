@@ -23,8 +23,11 @@ class Grid extends egret.Sprite {
 		this.block = block;
 		block.gridX = this.gridX;
 		block.gridY = this.gridY;
-		block.x = this.x;
-		block.y = this.y;
+		// let point = this.localToGlobal(this.x, this.y);
+		// block.x = point.x;
+		// block.y = point.y;
+		block.x = this.parent.x + this.x;
+		block.y = this.parent.y + this.y;
 	}
 
 	public drawBroderRect() {

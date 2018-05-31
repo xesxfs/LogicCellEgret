@@ -16,4 +16,3 @@ var NameScene = (function (_super) {
     return NameScene;
 }(Scene));
 __reflect(NameScene.prototype, "NameScene");
-//# sourceMappingURL=NameScene.js.map

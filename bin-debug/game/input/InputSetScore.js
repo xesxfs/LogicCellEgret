@@ -16,4 +16,3 @@ var InputSetScore = (function (_super) {
     return InputSetScore;
 }(Input));
 __reflect(InputSetScore.prototype, "InputSetScore");
-//# sourceMappingURL=InputSetScore.js.map

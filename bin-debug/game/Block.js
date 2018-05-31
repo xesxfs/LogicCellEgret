@@ -56,12 +56,14 @@ var Block = (function (_super) {
             return;
         }
         this.drawPhase++;
-        this.graphics.clear();
+        // this.graphics.clear();
         this.removeChildren();
         i = 0;
         while (i < length) {
             // this.copy(Block.CHIP, ((2 - _loc1_) * 5 + this.drawPhase) * 44, this.vecLayer[_loc1_] * 44, 44, 44);
             var blockChip = Resource.getBlockChips(((2 - i) * 5 + this.drawPhase) * 44, this.vecLayer[i] * 44);
+            blockChip.width = 120;
+            blockChip.height = 120;
             this.addChild(blockChip);
             i++;
         }
@@ -72,6 +74,5 @@ var Block = (function (_super) {
     // public static CHIP: egret.BitmapData = Resource.chip;
     Block.COLOR = [4282664191, 4294919236, 4282711876, 4294967074, 4294919423];
     return Block;
-}(egret.Sprite));
+}(eui.Component));
 __reflect(Block.prototype, "Block");
-//# sourceMappingURL=Block.js.map

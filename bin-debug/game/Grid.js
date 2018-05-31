@@ -16,6 +16,11 @@ var Grid = (function (_super) {
         _this.gridY = gy;
         _this.x = x;
         _this.y = y;
+        _this.width = 120;
+        _this.height = 120;
+        _this.fillAlpha = 0;
+        _this.strokeWeight = 10;
+        _this.strokeAlpha = 0;
         return _this;
     }
     Grid.prototype.setBlock = function (block) {
@@ -25,16 +30,19 @@ var Grid = (function (_super) {
         // let point = this.localToGlobal(this.x, this.y);
         // block.x = point.x;
         // block.y = point.y;
-        block.x = this.parent.x + this.x;
-        block.y = this.parent.y + this.y;
+        // block.x = this.parent.x + this.x;
+        // block.y = this.parent.y + this.y;
+        block.x = 0;
+        block.y = 0;
+        this.addChild(block);
     };
     Grid.prototype.drawBroderRect = function () {
-        this.graphics.beginFill(0x00000);
-        this.graphics.lineStyle(4, 587202559);
-        this.graphics.drawRect(0, 0, 40, 40);
-        this.graphics.endFill();
+        this.strokeAlpha = 1;
+        // this.graphics.beginFill(0x00000);
+        // this.graphics.lineStyle(4, 587202559);
+        // this.graphics.drawRect(0, 0, 40, 40);
+        // this.graphics.endFill();
     };
     return Grid;
-}(egret.Sprite));
+}(eui.Rect));
 __reflect(Grid.prototype, "Grid");
-//# sourceMappingURL=Grid.js.map

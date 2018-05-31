@@ -12,8 +12,10 @@ var Input = (function (_super) {
     __extends(Input, _super);
     function Input() {
         var _this = _super.call(this) || this;
-        _this.graphics.beginFill(0, 0);
-        _this.graphics.drawRect(0, 0, 480, 762);
+        // this.graphics.beginFill(0, 0);
+        // this.graphics.drawRect(0, 0, 480, 762);
+        _this.percentWidth = 100;
+        _this.percentHeight = 100;
         _this.addEventListener("touchBegin", _this.mouseDownEvent, _this);
         _this.addEventListener("touchEnd", _this.mouseUpEvent, _this);
         _this.addEventListener("touchMove", _this.mouseMoveEvent, _this);
@@ -30,6 +32,5 @@ var Input = (function (_super) {
     Input.prototype.mouseMoveEvent = function (e) {
     };
     return Input;
-}(egret.Sprite));
+}(eui.Group));
 __reflect(Input.prototype, "Input");
-//# sourceMappingURL=Input.js.map

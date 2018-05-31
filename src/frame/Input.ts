@@ -1,8 +1,10 @@
-class Input extends egret.Sprite {
+class Input extends eui.Group {
 	public constructor() {
 		super();
-		this.graphics.beginFill(0, 0);
-		this.graphics.drawRect(0, 0, 480, 762);
+		// this.graphics.beginFill(0, 0);
+		// this.graphics.drawRect(0, 0, 480, 762);
+		this.percentWidth = 100;
+		this.percentHeight = 100;
 		this.addEventListener("touchBegin", this.mouseDownEvent, this);
 		this.addEventListener("touchEnd", this.mouseUpEvent, this);
 		this.addEventListener("touchMove", this.mouseMoveEvent, this);

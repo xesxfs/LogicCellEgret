@@ -11,7 +11,12 @@ r.prototype = e.prototype, t.prototype = new r();
 var InputManagerClass = (function (_super) {
     __extends(InputManagerClass, _super);
     function InputManagerClass() {
-        return _super.call(this) || this;
+        var _this = _super.call(this) || this;
+        _this.percentWidth = 100;
+        _this.percentHeight = 100;
+        return _this;
+        // this.touchChildren = true;
+        // this.touchEnabled = false;	
     }
     InputManagerClass.prototype.newInput = function (input) {
         this.removeChildren();
@@ -21,7 +26,6 @@ var InputManagerClass = (function (_super) {
         }
     };
     return InputManagerClass;
-}(egret.Sprite));
+}(eui.Component));
 __reflect(InputManagerClass.prototype, "InputManagerClass");
 var InputManager = new InputManagerClass();
-//# sourceMappingURL=InputManagerClass.js.map

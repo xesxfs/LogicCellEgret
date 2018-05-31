@@ -94,7 +94,18 @@ class Main extends eui.UILayer {
      * Create scene interface
      */
     protected createGameScene(): void {
+        // let skey = new eui.Image("bg_jpg");
+        // skey.width = this.width;
+        // skey.height = this.height;
+        // this.addChild(skey);        
+        // this.touchThrough = true;
+        // this.touchChildren = true;
         this.addChild(new Game());
+
+
+    }
+
+    private onclick() {
 
     }
 

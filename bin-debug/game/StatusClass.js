@@ -7,4 +7,3 @@ var StatusClass = (function () {
     return StatusClass;
 }());
 __reflect(StatusClass.prototype, "StatusClass");
-//# sourceMappingURL=StatusClass.js.map

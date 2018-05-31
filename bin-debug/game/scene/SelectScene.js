@@ -18,4 +18,3 @@ var SelectScene = (function (_super) {
     return SelectScene;
 }(Scene));
 __reflect(SelectScene.prototype, "SelectScene");
-//# sourceMappingURL=SelectScene.js.map

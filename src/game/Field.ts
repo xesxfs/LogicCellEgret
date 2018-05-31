@@ -1,4 +1,4 @@
-class Field extends egret.Sprite {
+class Field extends eui.Group {
 	public static fieldX: number = 0;
 	public static fieldY: number = 0;
 	public vec2Grid: Array<Array<Grid>>;
@@ -10,17 +10,30 @@ class Field extends egret.Sprite {
 	private vecSound: Array<egret.Sound>;
 	public constructor(stageData: StageData) {
 		super();
+		let layout = new eui.TileLayout();
+
+		layout.horizontalGap = 22;
+		layout.verticalGap = 18;
+		// layout.verticalAlign = egret.VerticalAlign.BOTTOM;
+		this.layout = layout;
+		this.horizontalCenter = 0;
+		this.verticalCenter = 0;
+
 		var w = 0;
 		var h = 0;
 		var grid: Grid = null;
 		this.vecSound = [Resource.soundC, Resource.soundD, Resource.soundE, Resource.soundF, Resource.soundG, Resource.soundA, Resource.soundB, Resource.soundCC];
 		this.stageData = stageData;
-		this.fieldW = stageData.fieldW;
-		this.fieldH = stageData.fieldH;
-		this.width = this.fieldW * 45;
-		this.height = this.fieldH * 45;
-		this.x = ~~(120 - this.width / 2);
-		this.y = ~~(110 - this.height / 2) + 30;
+		layout.requestedColumnCount = this.fieldW = stageData.fieldW;
+		layout.requestedRowCount = this.fieldH = stageData.fieldH;
+		// layout.requestedRowCount = 5;
+		// layout.requestedColumnCount = 4;
+		// this.width = this.fieldW * 45;
+		// this.height = this.fieldH * 45;
+		// this.width = 546;
+		// this.height = 672;
+		// this.x = ~~(120 - this.width / 2);
+		// this.y = ~~(110 - this.height / 2) + 30;
 		Field.fieldX = this.x;
 		Field.fieldY = this.y;
 		this.vec2Grid = [];
@@ -34,14 +47,15 @@ class Field extends egret.Sprite {
 				this.vec2Grid[w].push(grid);
 				if (grid.type == 1) {
 					grid.drawBroderRect();
-					grid.x = 45 * w + 2;
-					grid.y = 45 * h + 2;
-					this.addChild(grid);
-					console.log(grid.width);
-					grid.scaleX = 2;
-					grid.scaleY = 2;
-					console.log(grid.width);
+					// grid.x = 45 * w + 2;
+					// grid.y = 45 * h + 2;
+
+					// console.log(grid.width);
+					// grid.scaleX = 2;
+					// grid.scaleY = 2;
+					// console.log(grid.width);
 				}
+				this.addChild(grid);
 
 				h++;
 			}

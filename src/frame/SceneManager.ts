@@ -1,6 +1,8 @@
-class SceneManagerClass extends egret.Sprite {
+class SceneManagerClass extends eui.Component {
 	public constructor() {
 		super();
+		this.percentHeight = 100;
+		this.percentWidth = 100;
 	}
 	public scene: Scene;
 

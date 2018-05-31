@@ -1,4 +1,4 @@
-class BlockManagerClass extends egret.Sprite {
+class BlockManagerClass extends eui.Group {
 
 	public vecBlock: Array<Block>;
 
@@ -20,6 +20,7 @@ class BlockManagerClass extends egret.Sprite {
 
 	public constructor() {
 		super();
+		this.tidy();
 	}
 
 	public reset(field: Field): void {
@@ -31,6 +32,14 @@ class BlockManagerClass extends egret.Sprite {
 		this.inventoryPadding = 0;
 	}
 
+	public tidy() {
+		let horizontalLayout = new eui.HorizontalLayout();
+		horizontalLayout.horizontalAlign = egret.HorizontalAlign.CENTER;
+		this.bottom = 150;
+		this.horizontalCenter = 0;
+		this.layout = horizontalLayout;
+	}
+
 	public update(): void {
 		var i = 0;
 		var length = this.vecBlock.length;
@@ -40,14 +49,14 @@ class BlockManagerClass extends egret.Sprite {
 			i++;
 		}
 		if (this.mouseDownBlock != null) {
-			this.mouseDownBlock.x = BlockManager.mouseX - 22;
-			this.mouseDownBlock.y = BlockManager.mouseY - 22;
+			this.mouseDownBlock.x = BlockManager.mouseX - 60;
+			this.mouseDownBlock.y = BlockManager.mouseY - 60;
 		}
 	}
 
 	public addBlock(block: Block): void {
 		this.vecBlock.push(block);
-		this.addChild(block);
+		this.addChildAt(block, block.inventoryNumber);
 	}
 
 	public AddAllBlock(blockDataStr: Array<string>, param2: Boolean = true): void {
@@ -78,7 +87,7 @@ class BlockManagerClass extends egret.Sprite {
 			}
 			else {
 				this.field.getGrid(blockType, childIdx).setBlock(block);
-				this.addBlock(block);
+				// this.addBlock(block);
 			}
 			block.draw();
 			i++;
@@ -98,8 +107,8 @@ class BlockManagerClass extends egret.Sprite {
 			this.vecInventoryBlock.push(null);
 		}
 		this.vecInventoryBlock[layerIndex] = block;
-		block.x = layerIndex * 48 + 2 + this.inventoryPadding;
-		block.y = 240;
+		// block.x = layerIndex * 48 + 2 + this.inventoryPadding;
+		// block.y = 240;
 		block.inventoryNumber = layerIndex;
 		this.addChild(block);
 	}
@@ -111,7 +120,8 @@ class BlockManagerClass extends egret.Sprite {
 		while (i < length) {
 			if (block == this.vecBlock[i]) {
 				this.vecBlock.splice(i, 1);
-				this.removeChild(block);
+				block.parent && block.parent.removeChild(block);
+				// this.removeChild(block);
 				this.field.getGrid(block.gridX, block.gridY).block = null;
 				break;
 			}
@@ -126,7 +136,11 @@ class BlockManagerClass extends egret.Sprite {
 		var down: Block = this.vecInventoryBlock[idx];
 		if (down != null) {
 			this.mouseDownBlock = down;
-			this.setChildIndex(down, this.numChildren - 1);
+			// this.setChildIndex(down, this.numChildren - 1);
+			let p = this.localToGlobal(down.x, down.y)
+			this.parent.addChild(down);
+			down.x = p.x;
+			down.y = p.y;
 		}
 	}
 
@@ -136,8 +150,9 @@ class BlockManagerClass extends egret.Sprite {
 			// 	"x": this.mouseDownBlock.inventoryNumber * 48 + 2 + this.inventoryPadding,
 			// 	"y": 240
 			// });
-			this.mouseDownBlock.x = this.mouseDownBlock.inventoryNumber * 48 + 2 + this.inventoryPadding;
-			this.mouseDownBlock.y = 240;
+			// this.mouseDownBlock.x = this.mouseDownBlock.inventoryNumber * 48 + 2 + this.inventoryPadding;
+			// this.mouseDownBlock.y = 240;
+			this.addBlock(this.mouseDownBlock);
 			this.mouseDownBlock = null;
 		}
 	}

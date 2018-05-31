@@ -33,4 +33,3 @@ var BitmapDisplay = (function (_super) {
     return BitmapDisplay;
 }(egret.Sprite));
 __reflect(BitmapDisplay.prototype, "BitmapDisplay");
-//# sourceMappingURL=BitmapDisplay.js.map

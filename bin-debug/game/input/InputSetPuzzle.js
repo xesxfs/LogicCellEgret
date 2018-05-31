@@ -14,14 +14,18 @@ var InputSetPuzzleClass = (function (_super) {
         return _super.call(this) || this;
     }
     InputSetPuzzleClass.prototype.mouseDownEvent = function (e) {
-        if (e.stageY > 240 && e.stageY < 285) {
-            var selectBlock = ~~(e.stageX / 48);
+        this.blockRect = new egret.Rectangle(BlockManager.x, BlockManager.y, BlockManager.width, BlockManager.height);
+        if (this.blockRect.containsPoint(egret.Point.create(e.stageX, e.stageY))) {
+            // console.log("down0");
+            var selectBlock = ~~((e.stageX - this.blockRect.x) / 120);
             BlockManager.mouseX = e.stageX;
             BlockManager.mouseY = e.stageY;
             BlockManager.mouseDownInventory(selectBlock);
+            // console.log("down0", selectBlock);
         }
     };
     InputSetPuzzleClass.prototype.mouseMoveEvent = function (e) {
+        // console.log(e.stageX);
         BlockManager.mouseX = e.stageX;
         BlockManager.mouseY = e.stageY;
     };
@@ -29,9 +33,10 @@ var InputSetPuzzleClass = (function (_super) {
         if (!BlockManager.mouseDownBlock) {
             return;
         }
+        InputSetPuzzle.fieldRect = new egret.Rectangle(this.field.x, this.field.y, this.field.width, this.field.height);
         if (this.fieldRect.containsPoint(egret.Point.create(e.stageX, e.stageY))) {
-            var gx = (e.stageX - this.field.x) / 45;
-            var gy = (e.stageY - this.field.y) / 45;
+            var gx = (e.stageX - this.field.x) / 120;
+            var gy = (e.stageY - this.field.y) / 120;
             this.field.mouseUpField(~~gx, ~~gy);
         }
         else {
@@ -40,8 +45,8 @@ var InputSetPuzzleClass = (function (_super) {
     };
     InputSetPuzzleClass.prototype.mouseOutEvent = function (e) {
         if (this.fieldRect.containsPoint(egret.Point.create(e.stageX, e.stageY))) {
-            var gx = (e.stageX - this.field.x) / 45;
-            var gy = (e.stageY - this.field.y) / 45;
+            var gx = (e.stageX - this.field.x) / 120;
+            var gy = (e.stageY - this.field.y) / 120;
             this.field.mouseUpField(gx, gy);
         }
         else {
@@ -52,4 +57,3 @@ var InputSetPuzzleClass = (function (_super) {
 }(Input));
 __reflect(InputSetPuzzleClass.prototype, "InputSetPuzzleClass");
 var InputSetPuzzle = new InputSetPuzzleClass();
-//# sourceMappingURL=InputSetPuzzle.js.map

@@ -7,4 +7,3 @@ var EffectManager = (function () {
     return EffectManager;
 }());
 __reflect(EffectManager.prototype, "EffectManager");
-//# sourceMappingURL=EffectManager.js.map

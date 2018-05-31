@@ -16,17 +16,28 @@ var Field = (function (_super) {
         _this.fieldH = 0;
         // public matchingJob: net.kawa.tween.KTJob;
         _this.exScore = 0;
+        var layout = new eui.TileLayout();
+        layout.horizontalGap = 22;
+        layout.verticalGap = 18;
+        // layout.verticalAlign = egret.VerticalAlign.BOTTOM;
+        _this.layout = layout;
+        _this.horizontalCenter = 0;
+        _this.verticalCenter = 0;
         var w = 0;
         var h = 0;
         var grid = null;
         _this.vecSound = [Resource.soundC, Resource.soundD, Resource.soundE, Resource.soundF, Resource.soundG, Resource.soundA, Resource.soundB, Resource.soundCC];
         _this.stageData = stageData;
-        _this.fieldW = stageData.fieldW;
-        _this.fieldH = stageData.fieldH;
-        _this.width = _this.fieldW * 45;
-        _this.height = _this.fieldH * 45;
-        _this.x = ~~(120 - _this.width / 2);
-        _this.y = ~~(110 - _this.height / 2) + 30;
+        layout.requestedColumnCount = _this.fieldW = stageData.fieldW;
+        layout.requestedRowCount = _this.fieldH = stageData.fieldH;
+        // layout.requestedRowCount = 5;
+        // layout.requestedColumnCount = 4;
+        // this.width = this.fieldW * 45;
+        // this.height = this.fieldH * 45;
+        // this.width = 546;
+        // this.height = 672;
+        // this.x = ~~(120 - this.width / 2);
+        // this.y = ~~(110 - this.height / 2) + 30;
         Field.fieldX = _this.x;
         Field.fieldY = _this.y;
         _this.vec2Grid = [];
@@ -39,14 +50,14 @@ var Field = (function (_super) {
                 _this.vec2Grid[w].push(grid);
                 if (grid.type == 1) {
                     grid.drawBroderRect();
-                    grid.x = 45 * w + 2;
-                    grid.y = 45 * h + 2;
-                    _this.addChild(grid);
-                    console.log(grid.width);
-                    grid.scaleX = 2;
-                    grid.scaleY = 2;
-                    console.log(grid.width);
+                    // grid.x = 45 * w + 2;
+                    // grid.y = 45 * h + 2;
+                    // console.log(grid.width);
+                    // grid.scaleX = 2;
+                    // grid.scaleY = 2;
+                    // console.log(grid.width);
                 }
+                _this.addChild(grid);
                 h++;
             }
             w++;
@@ -235,6 +246,5 @@ var Field = (function (_super) {
     Field.fieldX = 0;
     Field.fieldY = 0;
     return Field;
-}(egret.Sprite));
+}(eui.Group));
 __reflect(Field.prototype, "Field");
-//# sourceMappingURL=Field.js.map

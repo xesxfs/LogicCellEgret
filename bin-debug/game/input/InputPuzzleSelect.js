@@ -24,4 +24,3 @@ var InputPuzzleSelectClass = (function (_super) {
 }(Input));
 __reflect(InputPuzzleSelectClass.prototype, "InputPuzzleSelectClass");
 var InputPuzzleSelect = new InputPuzzleSelectClass();
-//# sourceMappingURL=InputPuzzleSelect.js.map

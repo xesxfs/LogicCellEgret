@@ -15,6 +15,7 @@ var BlockManagerClass = (function (_super) {
         _this.mouseX = 0;
         _this.mouseY = 0;
         _this.inventoryPadding = 0;
+        _this.tidy();
         return _this;
     }
     BlockManagerClass.prototype.reset = function (field) {
@@ -25,6 +26,13 @@ var BlockManagerClass = (function (_super) {
         this.field = field;
         this.inventoryPadding = 0;
     };
+    BlockManagerClass.prototype.tidy = function () {
+        var horizontalLayout = new eui.HorizontalLayout();
+        horizontalLayout.horizontalAlign = egret.HorizontalAlign.CENTER;
+        this.bottom = 150;
+        this.horizontalCenter = 0;
+        this.layout = horizontalLayout;
+    };
     BlockManagerClass.prototype.update = function () {
         var i = 0;
         var length = this.vecBlock.length;
@@ -34,13 +42,13 @@ var BlockManagerClass = (function (_super) {
             i++;
         }
         if (this.mouseDownBlock != null) {
-            this.mouseDownBlock.x = BlockManager.mouseX - 22;
-            this.mouseDownBlock.y = BlockManager.mouseY - 22;
+            this.mouseDownBlock.x = BlockManager.mouseX - 60;
+            this.mouseDownBlock.y = BlockManager.mouseY - 60;
         }
     };
     BlockManagerClass.prototype.addBlock = function (block) {
         this.vecBlock.push(block);
-        this.addChild(block);
+        this.addChildAt(block, block.inventoryNumber);
     };
     BlockManagerClass.prototype.AddAllBlock = function (blockDataStr, param2) {
         if (param2 === void 0) { param2 = true; }
@@ -71,7 +79,7 @@ var BlockManagerClass = (function (_super) {
             }
             else {
                 this.field.getGrid(blockType, childIdx).setBlock(block);
-                this.addBlock(block);
+                // this.addBlock(block);
             }
             block.draw();
             i++;
@@ -90,8 +98,8 @@ var BlockManagerClass = (function (_super) {
             this.vecInventoryBlock.push(null);
         }
         this.vecInventoryBlock[layerIndex] = block;
-        block.x = layerIndex * 48 + 2 + this.inventoryPadding;
-        block.y = 240;
+        // block.x = layerIndex * 48 + 2 + this.inventoryPadding;
+        // block.y = 240;
         block.inventoryNumber = layerIndex;
         this.addChild(block);
     };
@@ -102,7 +110,8 @@ var BlockManagerClass = (function (_super) {
         while (i < length) {
             if (block == this.vecBlock[i]) {
                 this.vecBlock.splice(i, 1);
-                this.removeChild(block);
+                block.parent && block.parent.removeChild(block);
+                // this.removeChild(block);
                 this.field.getGrid(block.gridX, block.gridY).block = null;
                 break;
             }
@@ -116,7 +125,11 @@ var BlockManagerClass = (function (_super) {
         var down = this.vecInventoryBlock[idx];
         if (down != null) {
             this.mouseDownBlock = down;
-            this.setChildIndex(down, this.numChildren - 1);
+            // this.setChildIndex(down, this.numChildren - 1);
+            var p = this.localToGlobal(down.x, down.y);
+            this.parent.addChild(down);
+            down.x = p.x;
+            down.y = p.y;
         }
     };
     BlockManagerClass.prototype.mouseUp = function () {
@@ -125,8 +138,9 @@ var BlockManagerClass = (function (_super) {
             // 	"x": this.mouseDownBlock.inventoryNumber * 48 + 2 + this.inventoryPadding,
             // 	"y": 240
             // });
-            this.mouseDownBlock.x = this.mouseDownBlock.inventoryNumber * 48 + 2 + this.inventoryPadding;
-            this.mouseDownBlock.y = 240;
+            // this.mouseDownBlock.x = this.mouseDownBlock.inventoryNumber * 48 + 2 + this.inventoryPadding;
+            // this.mouseDownBlock.y = 240;
+            this.addBlock(this.mouseDownBlock);
             this.mouseDownBlock = null;
         }
     };
@@ -171,7 +185,6 @@ var BlockManagerClass = (function (_super) {
     BlockManagerClass.prototype.finish = function (param1) {
     };
     return BlockManagerClass;
-}(egret.Sprite));
+}(eui.Group));
 __reflect(BlockManagerClass.prototype, "BlockManagerClass");
 var BlockManager = new BlockManagerClass();
-//# sourceMappingURL=BlockManager.js.map

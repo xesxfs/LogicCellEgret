@@ -16,4 +16,3 @@ var SetScore1minScene = (function (_super) {
     return SetScore1minScene;
 }(Scene));
 __reflect(SetScore1minScene.prototype, "SetScore1minScene");
-//# sourceMappingURL=SetScore1minScene.js.map

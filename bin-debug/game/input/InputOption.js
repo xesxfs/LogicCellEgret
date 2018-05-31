@@ -16,4 +16,3 @@ var InputOption = (function (_super) {
     return InputOption;
 }(Input));
 __reflect(InputOption.prototype, "InputOption");
-//# sourceMappingURL=InputOption.js.map

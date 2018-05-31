@@ -1,6 +1,10 @@
-class InputManagerClass extends egret.Sprite {
+class InputManagerClass extends eui.Component {
 	public constructor() {
 		super();
+		this.percentWidth = 100;
+		this.percentHeight = 100;
+		// this.touchChildren = true;
+		// this.touchEnabled = false;	
 	}
 	private input: Input;
 

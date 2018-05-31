@@ -13,7 +13,7 @@ var Resource = (function () {
             chip = this.ChipsSpriteSheet.getTexture(x + "_" + y);
         }
         ;
-        return new egret.Bitmap(chip);
+        return new eui.Image(chip);
     };
     Resource.StringChip = "";
     return Resource;
@@ -49,4 +49,3 @@ __reflect(Resource.prototype, "Resource");
 // Resource.soundCC = new Resource.SoundCC();
 // Resource.TitleLogo = Resource_TitleLogo;
 // Resource.titleLogo = (<flash.Bitmap>(new Resource.TitleLogo())).bitmapData;
-//# sourceMappingURL=Resource.js.map

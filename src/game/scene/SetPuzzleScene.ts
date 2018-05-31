@@ -6,6 +6,7 @@ class SetPuzzleScene extends Scene {
 		this.addChild(BlockManager);
 		InputSetPuzzle.field = this.field;
 		InputSetPuzzle.fieldRect = new egret.Rectangle(this.field.x, this.field.y, this.field.width, this.field.height);
+		InputSetPuzzle.blockRect = new egret.Rectangle(BlockManager.x, BlockManager.y, BlockManager.width, BlockManager.height);
 		InputManager.newInput(InputSetPuzzle);
 	}
 	public update() {

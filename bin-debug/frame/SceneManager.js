@@ -11,7 +11,10 @@ r.prototype = e.prototype, t.prototype = new r();
 var SceneManagerClass = (function (_super) {
     __extends(SceneManagerClass, _super);
     function SceneManagerClass() {
-        return _super.call(this) || this;
+        var _this = _super.call(this) || this;
+        _this.percentHeight = 100;
+        _this.percentWidth = 100;
+        return _this;
     }
     SceneManagerClass.prototype.newScene = function (next) {
         this.nextScene = next;
@@ -54,7 +57,6 @@ var SceneManagerClass = (function (_super) {
         this.addChild(this.scene);
     };
     return SceneManagerClass;
-}(egret.Sprite));
+}(eui.Component));
 __reflect(SceneManagerClass.prototype, "SceneManagerClass");
 var SceneManager = new SceneManagerClass();
-//# sourceMappingURL=SceneManager.js.map

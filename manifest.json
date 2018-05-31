@@ -8,10 +8,10 @@
 		"libs/modules/promise/promise.js"
 	],
 	"game": [
+		"bin-debug/game/StageData.js",
+		"bin-debug/frame/Input.js",
 		"bin-debug/frame/Scene.js",
 		"bin-debug/game/BitmapDisplay.js",
-		"bin-debug/frame/Input.js",
-		"bin-debug/LoadingUI.js",
 		"bin-debug/ThemeAdapter.js",
 		"bin-debug/frame/EffectManager.js",
 		"bin-debug/AssetAdapter.js",
@@ -29,7 +29,7 @@
 		"bin-debug/game/Field.js",
 		"bin-debug/game/Game.js",
 		"bin-debug/game/Grid.js",
-		"bin-debug/game/StageData.js",
+		"bin-debug/LoadingUI.js",
 		"bin-debug/game/StageManager.js",
 		"bin-debug/game/StatusClass.js",
 		"bin-debug/game/input/InputClear.js",

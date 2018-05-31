@@ -7,4 +7,3 @@ var SharedManager = (function () {
     return SharedManager;
 }());
 __reflect(SharedManager.prototype, "SharedManager");
-//# sourceMappingURL=SharedManager.js.map

@@ -154,9 +154,16 @@ var Main = (function (_super) {
      * Create scene interface
      */
     Main.prototype.createGameScene = function () {
+        var skey = new eui.Image("bg_jpg");
+        skey.width = this.width;
+        skey.height = this.height;
+        this.addChild(skey);
+        // this.touchThrough = true;
+        // this.touchChildren = true;
         this.addChild(new Game());
+    };
+    Main.prototype.onclick = function () {
     };
     return Main;
 }(eui.UILayer));
 __reflect(Main.prototype, "Main");
-//# sourceMappingURL=Main.js.map

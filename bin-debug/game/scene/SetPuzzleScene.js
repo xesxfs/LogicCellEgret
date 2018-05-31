@@ -16,6 +16,7 @@ var SetPuzzleScene = (function (_super) {
         _this.addChild(BlockManager);
         InputSetPuzzle.field = _this.field;
         InputSetPuzzle.fieldRect = new egret.Rectangle(_this.field.x, _this.field.y, _this.field.width, _this.field.height);
+        InputSetPuzzle.blockRect = new egret.Rectangle(BlockManager.x, BlockManager.y, BlockManager.width, BlockManager.height);
         InputManager.newInput(InputSetPuzzle);
         return _this;
     }
@@ -29,4 +30,3 @@ var SetPuzzleScene = (function (_super) {
     return SetPuzzleScene;
 }(Scene));
 __reflect(SetPuzzleScene.prototype, "SetPuzzleScene");
-//# sourceMappingURL=SetPuzzleScene.js.map

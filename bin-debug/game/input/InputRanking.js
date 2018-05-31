@@ -16,4 +16,3 @@ var InputRanking = (function (_super) {
     return InputRanking;
 }(Input));
 __reflect(InputRanking.prototype, "InputRanking");
-//# sourceMappingURL=InputRanking.js.map

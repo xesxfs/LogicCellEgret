@@ -16,4 +16,3 @@ var SetScore30Scene = (function (_super) {
     return SetScore30Scene;
 }(Scene));
 __reflect(SetScore30Scene.prototype, "SetScore30Scene");
-//# sourceMappingURL=SetScore30Scene.js.map

@@ -36,14 +36,14 @@ class Resource {
 	public constructor() {
 	}
 
-	public static getBlockChips(x: number, y: number): egret.Bitmap {
+	public static getBlockChips(x: number, y: number):eui.Image {
 		if (!this.ChipsSpriteSheet) this.ChipsSpriteSheet = new egret.SpriteSheet(RES.getRes("Chip_png"))
 		let chip = this.ChipsSpriteSheet.getTexture(x + "_" + y);
 		if (!chip) {
 			this.ChipsSpriteSheet.createTexture(x + "_" + y, x, y, 44, 44);
 			chip = this.ChipsSpriteSheet.getTexture(x + "_" + y);
 		};
-		return new egret.Bitmap(chip);
+		return new eui.Image(chip);
 	}
 
 }

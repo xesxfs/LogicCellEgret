@@ -12,19 +12,21 @@ var Game = (function (_super) {
     __extends(Game, _super);
     function Game() {
         var _this = _super.call(this) || this;
+        _this.percentHeight = 100;
+        _this.percentWidth = 100;
         _this.addChild(SceneManager);
         SceneManager.newScene(new TitleScene());
         SceneManager.touchChildren = false;
         SceneManager.touchEnabled = false;
         _this.addChild(InputManager);
         _this.addEventListener(egret.Event.ENTER_FRAME, _this.ent, _this);
-        SceneManager.newScene(new SetPuzzleScene(StageManager.getStage(2)));
+        SceneManager.newScene(new SetPuzzleScene(StageManager.getStage(0)));
+        _this.touchChildren = true;
         return _this;
     }
     Game.prototype.ent = function (e) {
         SceneManager.scene.update();
     };
     return Game;
-}(egret.Sprite));
+}(eui.Component));
 __reflect(Game.prototype, "Game");
-//# sourceMappingURL=Game.js.map

@@ -11,11 +11,13 @@ r.prototype = e.prototype, t.prototype = new r();
 var Scene = (function (_super) {
     __extends(Scene, _super);
     function Scene() {
-        return _super.call(this) || this;
+        var _this = _super.call(this) || this;
+        _this.percentHeight = 100;
+        _this.percentWidth = 100;
+        return _this;
     }
     Scene.prototype.update = function () {
     };
     return Scene;
-}(egret.Sprite));
+}(eui.Component));
 __reflect(Scene.prototype, "Scene");
-//# sourceMappingURL=Scene.js.map

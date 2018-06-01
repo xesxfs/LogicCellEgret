@@ -4,6 +4,7 @@ class SetPuzzleScene extends Scene {
 		super();
 		this.addChild(this.field = new Field(stageData));
 		this.addChild(BlockManager);
+		this.addChild(EffectManager);
 		InputSetPuzzle.field = this.field;
 		InputSetPuzzle.fieldRect = new egret.Rectangle(this.field.x, this.field.y, this.field.width, this.field.height);
 		InputSetPuzzle.blockRect = new egret.Rectangle(BlockManager.x, BlockManager.y, BlockManager.width, BlockManager.height);
@@ -11,7 +12,7 @@ class SetPuzzleScene extends Scene {
 	}
 	public update() {
 		BlockManager.update();
-		// EffectManager.update();
+		EffectManager.update();
 		// Status.update();
 		// BackMenuBitmap.update();
 		// this.hudManager.update();

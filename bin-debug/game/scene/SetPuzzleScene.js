@@ -14,6 +14,7 @@ var SetPuzzleScene = (function (_super) {
         var _this = _super.call(this) || this;
         _this.addChild(_this.field = new Field(stageData));
         _this.addChild(BlockManager);
+        _this.addChild(EffectManager);
         InputSetPuzzle.field = _this.field;
         InputSetPuzzle.fieldRect = new egret.Rectangle(_this.field.x, _this.field.y, _this.field.width, _this.field.height);
         InputSetPuzzle.blockRect = new egret.Rectangle(BlockManager.x, BlockManager.y, BlockManager.width, BlockManager.height);
@@ -22,7 +23,7 @@ var SetPuzzleScene = (function (_super) {
     }
     SetPuzzleScene.prototype.update = function () {
         BlockManager.update();
-        // EffectManager.update();
+        EffectManager.update();
         // Status.update();
         // BackMenuBitmap.update();
         // this.hudManager.update();

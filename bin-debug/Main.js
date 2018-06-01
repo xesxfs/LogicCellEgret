@@ -154,10 +154,10 @@ var Main = (function (_super) {
      * Create scene interface
      */
     Main.prototype.createGameScene = function () {
-        var skey = new eui.Image("bg_jpg");
-        skey.width = this.width;
-        skey.height = this.height;
-        this.addChild(skey);
+        // let skey = new eui.Image("bg_jpg");
+        // skey.width = this.width;
+        // skey.height = this.height;
+        // this.addChild(skey);        
         // this.touchThrough = true;
         // this.touchChildren = true;
         this.addChild(new Game());

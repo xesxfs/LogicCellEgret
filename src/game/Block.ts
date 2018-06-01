@@ -28,7 +28,7 @@ class Block extends eui.Component {
 		// EffectManager.addEffect(new EffectScore("" + Status.addScore(), this.gridX, this.gridY));
 		this.removeFlag = false;
 		this.drawPhase = 3;
-		// EffectManager.addEffect(new EffectLayerErase(this.gridX, this.gridY, Block.COLOR[this.vecLayer[0]]));
+		EffectManager.addEffect(new EffectLayerErase(this.gridX, this.gridY, Block.COLOR[this.vecLayer[0]]));
 		this.vecLayer.shift();
 		if (this.vecLayer.length != 0) {
 			this.draw();

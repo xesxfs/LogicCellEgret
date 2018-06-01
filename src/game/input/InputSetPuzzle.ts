@@ -19,6 +19,7 @@ class InputSetPuzzleClass extends Input {
 		this.blockRect = new egret.Rectangle(BlockManager.x, BlockManager.y, BlockManager.width, BlockManager.height);
 		if (this.blockRect.containsPoint(egret.Point.create(e.stageX, e.stageY))) {
 			// console.log("down0");
+	
 			let selectBlock = ~~((e.stageX - this.blockRect.x) / 120);
 			BlockManager.mouseX = e.stageX;
 			BlockManager.mouseY = e.stageY;

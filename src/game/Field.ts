@@ -4,7 +4,7 @@ class Field extends eui.Group {
 	public vec2Grid: Array<Array<Grid>>;
 	public fieldW: number = 0;
 	public fieldH: number = 0;
-	// public matchingJob: net.kawa.tween.KTJob;
+	public matchingJob: TweenLite;
 	private exScore: number = 0;
 	public stageData: StageData;
 	private vecSound: Array<egret.Sound>;
@@ -96,7 +96,7 @@ class Field extends eui.Group {
 		var combo = 0;
 		var mode = 0;
 		//  Status.combo++;
-		//  this.matchingJob = null;
+		this.matchingJob = null;
 		var nestFlag: Boolean = false;
 		i = 0;
 		while (i < this.fieldW) {
@@ -154,10 +154,9 @@ class Field extends eui.Group {
 			// {
 			//    this.vecSound[7].play(0,0,SoundManager.soundTransform);
 			// }
-			// this.matchingJob = KTW.to(this,0.5,{},null,function():void
-			// {
-			this.matchCheck();
-			// });
+			this.matchingJob = TweenLite.to(this, 0.5, {
+				onComplete: () => { this.matchCheck(); }
+			});
 		}
 		else {
 			// addScore = Status.score - this.exScore;
@@ -226,9 +225,11 @@ class Field extends eui.Group {
 			// }
 			BlockManager.mouseDownBlock = null;
 			// this.exScore = Status.score;
-			// this.matchingJob = KTW.to(this, 0.2, {}, null, function (): void {
-			this.matchCheck();
-			// });
+			this.matchingJob = TweenLite.to(this, 0.2, {
+				onComplete: () => {
+					this.matchCheck();
+				}
+			})
 		}
 		else {
 			BlockManager.mouseUp();

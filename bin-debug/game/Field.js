@@ -14,7 +14,6 @@ var Field = (function (_super) {
         var _this = _super.call(this) || this;
         _this.fieldW = 0;
         _this.fieldH = 0;
-        // public matchingJob: net.kawa.tween.KTJob;
         _this.exScore = 0;
         var layout = new eui.TileLayout();
         layout.horizontalGap = 22;
@@ -79,6 +78,7 @@ var Field = (function (_super) {
     };
     /***检查匹配 **/
     Field.prototype.matchCheck = function () {
+        var _this = this;
         var i = 0;
         var j = 0;
         var gridX = 0;
@@ -95,7 +95,7 @@ var Field = (function (_super) {
         var combo = 0;
         var mode = 0;
         //  Status.combo++;
-        //  this.matchingJob = null;
+        this.matchingJob = null;
         var nestFlag = false;
         i = 0;
         while (i < this.fieldW) {
@@ -153,10 +153,9 @@ var Field = (function (_super) {
             // {
             //    this.vecSound[7].play(0,0,SoundManager.soundTransform);
             // }
-            // this.matchingJob = KTW.to(this,0.5,{},null,function():void
-            // {
-            this.matchCheck();
-            // });
+            this.matchingJob = TweenLite.to(this, 0.5, {
+                onComplete: function () { _this.matchCheck(); }
+            });
         }
         else {
             // addScore = Status.score - this.exScore;
@@ -206,6 +205,7 @@ var Field = (function (_super) {
         }
     };
     Field.prototype.mouseUpField = function (gx, gy) {
+        var _this = this;
         var gridX = gx;
         var gridY = gy;
         var grid = this.getGrid(gridX, gridY);
@@ -222,9 +222,11 @@ var Field = (function (_super) {
             // }
             BlockManager.mouseDownBlock = null;
             // this.exScore = Status.score;
-            // this.matchingJob = KTW.to(this, 0.2, {}, null, function (): void {
-            this.matchCheck();
-            // });
+            this.matchingJob = TweenLite.to(this, 0.2, {
+                onComplete: function () {
+                    _this.matchCheck();
+                }
+            });
         }
         else {
             BlockManager.mouseUp();

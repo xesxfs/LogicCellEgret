@@ -30,7 +30,7 @@ class StageManagerClass {
 		this.vecStageData.push(new StageData("2780,25,testes,3,3,111111111,100324,014130,123424,211214,904213,911334,922124,933240,940144"));
 	}
 
-	public getStage(stageId: number): StageData {
+	public getStage(stageId: number): StageData {		
 		if (stageId == -1) {
 			if (this.vecStageData.length > this.index + 1) {
 				this.index++;

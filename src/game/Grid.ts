@@ -13,12 +13,11 @@ class Grid extends eui.Rect {
 
 	private sprite: egret.Sprite
 
-	public constructor(gx: number, gy: number, x: number, y: number) {
+	public constructor(gx: number, gy: number, ) {
 		super();
 		this.gridX = gx;
 		this.gridY = gy;
-		this.x = x;
-		this.y = y;
+
 
 		this.width = 120;
 		this.height = 120;

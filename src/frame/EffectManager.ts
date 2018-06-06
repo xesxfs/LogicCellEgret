@@ -14,7 +14,7 @@ class EffectManagerClass extends egret.Sprite {
 			ef = this.vecEffect[i];
 			if (ef.update()) {
 				console.log("removeEffect");
-				// EffectManager.removeEffect(i);
+				EffectManager.removeEffect(i);
 				i--;
 				length--;
 			}
@@ -32,8 +32,8 @@ class EffectManagerClass extends egret.Sprite {
 		var i = 0;
 		let effect = this.vecEffect.splice(effectNumber, 1);
 		if (effect) {
-			// var length = this.vecEffect.length;
-			// this.removeChild(effect[0]);
+			var length = this.vecEffect.length;
+			this.removeChild(effect[0]);
 			// i = effectNumber;
 			// while (i < length) {
 			// 	this.vecEffect[i].effectNumber--;

@@ -17,11 +17,11 @@ var SceneManagerClass = (function (_super) {
         return _this;
     }
     SceneManagerClass.prototype.newScene = function (next) {
-        var _this = this;
         this.nextScene = next;
         if (this.scene != null) {
             // KTW.to(this.scene, 0.3, { "alpha": 0 }, Linear.easeOut, this.next);
-            TweenLite.to(this.scene, 0.3, { alpha: 0, ease: Linear.easeOut, onComplete: function () { _this.next(); } });
+            // TweenLite.to(this.scene, 0.3, { alpha: 0, ease: Linear.easeOut, onComplete: () => { this.next(); } });
+            egret.Tween.get(this.scene).to({ alpha: 0 }, 300, egret.Ease.elasticOut).call(this.next, this);
             // this.next();
         }
         else {

@@ -20,7 +20,8 @@ var Game = (function (_super) {
         SceneManager.touchEnabled = false;
         _this.addChild(InputManager);
         _this.addEventListener(egret.Event.ENTER_FRAME, _this.ent, _this);
-        SceneManager.newScene(new SetPuzzleScene(StageManager.getStage(0)));
+        var sid = parseInt(egret.getOption("sid"));
+        SceneManager.newScene(new SetPuzzleScene(StageManager.getStage(sid - 1)));
         _this.touchChildren = true;
         return _this;
     }

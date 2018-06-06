@@ -9,7 +9,7 @@ var StageManagerClass = (function () {
         this.vecStageData.push(new StageData("30,2,testes,3,1,111,901,911,921"));
         this.vecStageData.push(new StageData("60,3,testes,3,1,111,900,911,9201"));
         this.vecStageData.push(new StageData("50,4,testes,3,1,111,000,900,911,9210"));
-        this.vecStageData.push(new StageData("220,5,testes,3,2,111101,010,1000,21000,900,9100,92000"));
+        this.vecStageData.push(new StageData("220,5,testes,3,2,111011,010,1000,21000,900,9100,92000"));
         this.vecStageData.push(new StageData("140,6,tes,3,3,010111010,101,212,90001,91002,9201,9302"));
         this.vecStageData.push(new StageData("400,7,score400,4,4,1111111111111111,0001,2010,1101,3110,0201,2210,1301,3310,9001,9110,9201,9310"));
         this.vecStageData.push(new StageData("530,8,testes,3,3,010111010,1001,1212,0123,2130,900,9101,92012,930123"));

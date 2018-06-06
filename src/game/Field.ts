@@ -4,7 +4,7 @@ class Field extends eui.Group {
 	public vec2Grid: Array<Array<Grid>>;
 	public fieldW: number = 0;
 	public fieldH: number = 0;
-	public matchingJob: TweenLite;
+	public matchingJob: egret.Tween;
 	private exScore: number = 0;
 	public stageData: StageData;
 	private vecSound: Array<egret.Sound>;
@@ -22,45 +22,31 @@ class Field extends eui.Group {
 		var w = 0;
 		var h = 0;
 		var grid: Grid = null;
-		this.vecSound = [Resource.soundC, Resource.soundD, Resource.soundE, Resource.soundF, Resource.soundG, Resource.soundA, Resource.soundB, Resource.soundCC];
+		this.vecSound = Resource.getMusic();
 		this.stageData = stageData;
 		layout.requestedColumnCount = this.fieldW = stageData.fieldW;
 		layout.requestedRowCount = this.fieldH = stageData.fieldH;
-		// layout.requestedRowCount = 5;
-		// layout.requestedColumnCount = 4;
-		// this.width = this.fieldW * 45;
-		// this.height = this.fieldH * 45;
-		// this.width = 546;
-		// this.height = 672;
-		// this.x = ~~(120 - this.width / 2);
-		// this.y = ~~(110 - this.height / 2) + 30;
 		Field.fieldX = this.x;
 		Field.fieldY = this.y;
 		this.vec2Grid = [];
 
-		while (w < this.fieldW) {
+		while (h < this.fieldH) {
 			this.vec2Grid.push([]);
-			h = 0;
-			while (h < this.fieldH) {
-				grid = new Grid(w, h, this.x + 45 * w, this.y + 45 * h);
+			w = 0;
+			while (w < this.fieldW) {
+				grid = new Grid(h, w);
 				grid.type = parseInt(this.stageData.fieldData.charAt(w * this.fieldH + h));
-				this.vec2Grid[w].push(grid);
+				this.vec2Grid[h].push(grid);
 				if (grid.type == 1) {
 					grid.drawBroderRect();
-					// grid.x = 45 * w + 2;
-					// grid.y = 45 * h + 2;
-
-					// console.log(grid.width);
-					// grid.scaleX = 2;
-					// grid.scaleY = 2;
-					// console.log(grid.width);
 				}
 				this.addChild(grid);
 
-				h++;
+				w++;
 			}
-			w++;
+			h++;
 		}
+		console.log(this.vec2Grid)
 		/****!!放到这里代码可读性和逻辑性变差，但是省去了在多个场景调用!!****/
 		BlockManager.reset(this);
 		BlockManager.AddAllBlock(stageData.vecBlockData, false);
@@ -95,13 +81,13 @@ class Field extends eui.Group {
 		var addScore = 0;
 		var combo = 0;
 		var mode = 0;
-		//  Status.combo++;
+		Status.combo++;
 		this.matchingJob = null;
 		var nestFlag: Boolean = false;
 		i = 0;
-		while (i < this.fieldW) {
+		while (i < this.fieldH) {
 			j = 0;
-			while (j < this.fieldH) {
+			while (j < this.fieldW) {
 				grid = this.vec2Grid[i][j];
 				if (grid.block != null) {
 					block = grid.block;
@@ -146,28 +132,26 @@ class Field extends eui.Group {
 			i++;
 		}
 		if (nestFlag) {
-			// if(Status.combo < 8)
-			// {
-			//    this.vecSound[Status.combo - 1].play(0,0,SoundManager.soundTransform);
-			// }
-			// else
-			// {
-			//    this.vecSound[7].play(0,0,SoundManager.soundTransform);
-			// }
-			this.matchingJob = TweenLite.to(this, 0.5, {
-				onComplete: () => { this.matchCheck(); }
-			});
+			if (Status.combo < 8) {
+				this.vecSound[Status.combo - 1].play(0, 1);
+			}
+			else {
+				this.vecSound[7].play(0, 1);
+			}
+			// this.matchingJob = TweenLite.to(this, 0.5, {
+			// 	onComplete: () => { this.matchCheck(); }
+			// });
+			this.matchingJob = egret.Tween.get(this).to({}, 500).call(this.matchCheck, this);
 		}
 		else {
 			// addScore = Status.score - this.exScore;
-			// combo = Status.combo - 1;
-			// if(Status.maxCombo < combo)
-			// {
-			//    Status.maxCombo = combo;
-			// }
+			combo = Status.combo - 1;
+			if (Status.maxCombo < combo) {
+				Status.maxCombo = combo;
+			}
 			// mode = Status.mode;
 			if (mode > 0 && mode != 4 && BlockManager.vecBlock.length == 0) {
-				//    Status.combo = Status.combo - 1;
+				Status.combo = Status.combo - 1;
 				i = 0;
 				while (i < 9) {
 					if (i != 4) {
@@ -179,7 +163,7 @@ class Field extends eui.Group {
 					i++;
 				}
 			}
-			// Status.combo = 0;
+			Status.combo = 0;
 			if (mode == 0 && !BlockManager.clearCheck()) {
 				//    BlockManager.addUndoString();
 			}
@@ -225,11 +209,13 @@ class Field extends eui.Group {
 			// }
 			BlockManager.mouseDownBlock = null;
 			// this.exScore = Status.score;
-			this.matchingJob = TweenLite.to(this, 0.2, {
-				onComplete: () => {
-					this.matchCheck();
-				}
-			})
+			// this.matchingJob = TweenLite.to(this, 0.2, {
+			// 	onComplete: () => {
+			// 		this.matchCheck();
+			// 	}
+			// })
+
+			this.matchingJob = egret.Tween.get(this).to({}, 200).call(this.matchCheck, this);
 		}
 		else {
 			BlockManager.mouseUp();

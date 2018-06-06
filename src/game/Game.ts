@@ -9,9 +9,11 @@ class Game extends eui.Component {
 		SceneManager.touchEnabled = false;
 		this.addChild(InputManager);
 		this.addEventListener(egret.Event.ENTER_FRAME, this.ent, this);
-		SceneManager.newScene(new SetPuzzleScene(StageManager.getStage(0)));
-		this.touchChildren=true;
-		
+		let sid = parseInt(egret.getOption("sid"));
+		if (!sid) sid = 25;
+		SceneManager.newScene(new SetPuzzleScene(StageManager.getStage(sid - 1)));
+		this.touchChildren = true;
+
 	}
 
 	private ent(e: egret.Event) {

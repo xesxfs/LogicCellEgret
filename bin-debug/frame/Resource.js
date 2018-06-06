@@ -3,6 +3,8 @@ var __reflect = (this && this.__reflect) || function (p, c, t) {
 };
 var Resource = (function () {
     function Resource() {
+        if (Resource.Instance)
+            return Resource.Instance;
     }
     Resource.getBlockChips = function (x, y) {
         if (!this.ChipsSpriteSheet)
@@ -15,37 +17,16 @@ var Resource = (function () {
         ;
         return new eui.Image(chip);
     };
-    Resource.StringChip = "";
+    Resource.getMusic = function () {
+        if (!this.sounds) {
+            this.sounds = [RES.getRes("SoundC_mp3"), RES.getRes("SoundD_mp3"), RES.getRes("SoundE_mp3"), RES.getRes("SoundF_mp3"), RES.getRes("SoundG_mp3"), RES.getRes("SoundA_mp3"), RES.getRes("SoundB_mp3"), RES.getRes("SoundCC_mp3")];
+            this.sounds.forEach(function (sound) {
+                sound.type = egret.Sound.EFFECT;
+            });
+        }
+        return this.sounds;
+    };
+    Resource.Instance = new Resource();
     return Resource;
 }());
 __reflect(Resource.prototype, "Resource");
-// Resource.StringChip = Resource_StringChip;
-// Resource.stringChip = (<flash.Bitmap>(new Resource.StringChip())).bitmapData;
-// Resource.StringChip714 = Resource_StringChip714;
-// Resource.stringChip714 = (<flash.Bitmap>(new Resource.StringChip714())).bitmapData;
-// Resource.BorderStringChip = Resource_BorderStringChip;
-// Resource.borderStringChip = (<flash.Bitmap>(new Resource.BorderStringChip())).bitmapData;
-// Resource.LogicalCell = Resource_LogicalCell;
-// Resource.logicalCell = (<flash.Bitmap>(new Resource.LogicalCell())).bitmapData;
-// Resource.Chip = Resource_Chip;
-// Resource.chip = (<flash.Bitmap>(new Resource.Chip())).bitmapData;
-// Resource.Icon48 = Resource_Icon48;
-// Resource.icon48 = (<flash.Bitmap>(new Resource.Icon48())).bitmapData;
-// Resource.SoundC = Resource_SoundC;
-// Resource.soundC = new Resource.SoundC();
-// Resource.SoundD = Resource_SoundD;
-// Resource.soundD = new Resource.SoundD();
-// Resource.SoundE = Resource_SoundE;
-// Resource.soundE = new Resource.SoundE();
-// Resource.SoundF = Resource_SoundF;
-// Resource.soundF = new Resource.SoundF();
-// Resource.SoundG = Resource_SoundG;
-// Resource.soundG = new Resource.SoundG();
-// Resource.SoundA = Resource_SoundA;
-// Resource.soundA = new Resource.SoundA();
-// Resource.SoundB = Resource_SoundB;
-// Resource.soundB = new Resource.SoundB();
-// Resource.SoundCC = Resource_SoundCC;
-// Resource.soundCC = new Resource.SoundCC();
-// Resource.TitleLogo = Resource_TitleLogo;
-// Resource.titleLogo = (<flash.Bitmap>(new Resource.TitleLogo())).bitmapData;

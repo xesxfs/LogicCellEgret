@@ -24,7 +24,7 @@ var EffectManagerClass = (function (_super) {
             ef = this.vecEffect[i];
             if (ef.update()) {
                 console.log("removeEffect");
-                // EffectManager.removeEffect(i);
+                EffectManager.removeEffect(i);
                 i--;
                 length--;
             }
@@ -40,8 +40,8 @@ var EffectManagerClass = (function (_super) {
         var i = 0;
         var effect = this.vecEffect.splice(effectNumber, 1);
         if (effect) {
-            // var length = this.vecEffect.length;
-            // this.removeChild(effect[0]);
+            var length = this.vecEffect.length;
+            this.removeChild(effect[0]);
             // i = effectNumber;
             // while (i < length) {
             // 	this.vecEffect[i].effectNumber--;

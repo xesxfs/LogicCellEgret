@@ -14,7 +14,7 @@ var BlockManagerClass = (function (_super) {
         var _this = _super.call(this) || this;
         _this.mouseX = 0;
         _this.mouseY = 0;
-        _this.inventoryPadding = 0;
+        _this.inventoryPadding = 20;
         _this.tidy();
         return _this;
     }
@@ -27,11 +27,11 @@ var BlockManagerClass = (function (_super) {
         this.inventoryPadding = 0;
     };
     BlockManagerClass.prototype.tidy = function () {
-        var horizontalLayout = new eui.HorizontalLayout();
-        horizontalLayout.horizontalAlign = egret.HorizontalAlign.CENTER;
+        // let horizontalLayout = new eui.HorizontalLayout();
+        // horizontalLayout.horizontalAlign = egret.HorizontalAlign.CENTER;
         this.bottom = 150;
         this.horizontalCenter = 0;
-        this.layout = horizontalLayout;
+        // this.layout = horizontalLayout;
     };
     BlockManagerClass.prototype.update = function () {
         var i = 0;
@@ -56,8 +56,8 @@ var BlockManagerClass = (function (_super) {
         var j = 0;
         var splitStr = null;
         var block = null;
-        var blockType = 0;
-        var childIdx = 0;
+        var xGrid = 0;
+        var yGrid = 0;
         var l = blockDataStr.length;
         if (param2) {
             l--;
@@ -65,21 +65,21 @@ var BlockManagerClass = (function (_super) {
         i = 0;
         while (i < l) {
             splitStr = blockDataStr[i];
-            blockType = parseInt(splitStr.charAt(0));
-            childIdx = parseInt(splitStr.charAt(1));
+            xGrid = parseInt(splitStr.charAt(0));
+            yGrid = parseInt(splitStr.charAt(1));
             block = new Block();
             j = 2;
             while (j < splitStr.length) {
                 block.vecLayer.push(parseInt(splitStr.charAt(j)));
                 j++;
             }
-            /**可操作砖块**/
-            if (blockType == 9) {
-                this.addInventoryBlock(block, childIdx);
+            /**==9 可操作砖块**/
+            if (xGrid == 9) {
+                this.addInventoryBlock(block, yGrid);
             }
             else {
-                this.field.getGrid(blockType, childIdx).setBlock(block);
-                // this.addBlock(block);
+                this.field.getGrid(yGrid, xGrid).setBlock(block);
+                this.vecBlock.push(block);
             }
             block.draw();
             i++;
@@ -98,7 +98,7 @@ var BlockManagerClass = (function (_super) {
             this.vecInventoryBlock.push(null);
         }
         this.vecInventoryBlock[layerIndex] = block;
-        // block.x = layerIndex * 48 + 2 + this.inventoryPadding;
+        block.x = layerIndex * 125;
         // block.y = 240;
         block.inventoryNumber = layerIndex;
         this.addChild(block);
@@ -108,7 +108,7 @@ var BlockManagerClass = (function (_super) {
         var length = this.vecBlock.length;
         i = 0;
         while (i < length) {
-            if (block == this.vecBlock[i]) {
+            if (block === this.vecBlock[i]) {
                 this.vecBlock.splice(i, 1);
                 block.parent && block.parent.removeChild(block);
                 // this.removeChild(block);
@@ -127,20 +127,18 @@ var BlockManagerClass = (function (_super) {
             this.mouseDownBlock = down;
             // this.setChildIndex(down, this.numChildren - 1);
             var p = this.localToGlobal(down.x, down.y);
-            this.parent.addChild(down);
             down.x = p.x;
             down.y = p.y;
+            this.parent.addChild(down);
         }
     };
     BlockManagerClass.prototype.mouseUp = function () {
         if (this.mouseDownBlock != null) {
-            // KTW.to(this.mouseDownBlock, 0.1, {
-            // 	"x": this.mouseDownBlock.inventoryNumber * 48 + 2 + this.inventoryPadding,
-            // 	"y": 240
-            // });
-            // this.mouseDownBlock.x = this.mouseDownBlock.inventoryNumber * 48 + 2 + this.inventoryPadding;
-            // this.mouseDownBlock.y = 240;
+            var p = this.globalToLocal(this.mouseDownBlock.x, this.mouseDownBlock.y);
             this.addBlock(this.mouseDownBlock);
+            this.mouseDownBlock.x = p.x;
+            this.mouseDownBlock.y = p.y;
+            egret.Tween.get(this.mouseDownBlock).to({ x: this.mouseDownBlock.inventoryNumber * 125, y: 0 }, 100);
             this.mouseDownBlock = null;
         }
     };

@@ -25,42 +25,29 @@ var Field = (function (_super) {
         var w = 0;
         var h = 0;
         var grid = null;
-        _this.vecSound = [Resource.soundC, Resource.soundD, Resource.soundE, Resource.soundF, Resource.soundG, Resource.soundA, Resource.soundB, Resource.soundCC];
+        _this.vecSound = Resource.getMusic();
         _this.stageData = stageData;
         layout.requestedColumnCount = _this.fieldW = stageData.fieldW;
         layout.requestedRowCount = _this.fieldH = stageData.fieldH;
-        // layout.requestedRowCount = 5;
-        // layout.requestedColumnCount = 4;
-        // this.width = this.fieldW * 45;
-        // this.height = this.fieldH * 45;
-        // this.width = 546;
-        // this.height = 672;
-        // this.x = ~~(120 - this.width / 2);
-        // this.y = ~~(110 - this.height / 2) + 30;
         Field.fieldX = _this.x;
         Field.fieldY = _this.y;
         _this.vec2Grid = [];
-        while (w < _this.fieldW) {
+        while (h < _this.fieldH) {
             _this.vec2Grid.push([]);
-            h = 0;
-            while (h < _this.fieldH) {
-                grid = new Grid(w, h, _this.x + 45 * w, _this.y + 45 * h);
+            w = 0;
+            while (w < _this.fieldW) {
+                grid = new Grid(h, w);
                 grid.type = parseInt(_this.stageData.fieldData.charAt(w * _this.fieldH + h));
-                _this.vec2Grid[w].push(grid);
+                _this.vec2Grid[h].push(grid);
                 if (grid.type == 1) {
                     grid.drawBroderRect();
-                    // grid.x = 45 * w + 2;
-                    // grid.y = 45 * h + 2;
-                    // console.log(grid.width);
-                    // grid.scaleX = 2;
-                    // grid.scaleY = 2;
-                    // console.log(grid.width);
                 }
                 _this.addChild(grid);
-                h++;
+                w++;
             }
-            w++;
+            h++;
         }
+        console.log(_this.vec2Grid);
         /****!!放到这里代码可读性和逻辑性变差，但是省去了在多个场景调用!!****/
         BlockManager.reset(_this);
         BlockManager.AddAllBlock(stageData.vecBlockData, false);
@@ -78,7 +65,6 @@ var Field = (function (_super) {
     };
     /***检查匹配 **/
     Field.prototype.matchCheck = function () {
-        var _this = this;
         var i = 0;
         var j = 0;
         var gridX = 0;
@@ -94,13 +80,13 @@ var Field = (function (_super) {
         var addScore = 0;
         var combo = 0;
         var mode = 0;
-        //  Status.combo++;
+        Status.combo++;
         this.matchingJob = null;
         var nestFlag = false;
         i = 0;
-        while (i < this.fieldW) {
+        while (i < this.fieldH) {
             j = 0;
-            while (j < this.fieldH) {
+            while (j < this.fieldW) {
                 grid = this.vec2Grid[i][j];
                 if (grid.block != null) {
                     block = grid.block;
@@ -145,28 +131,26 @@ var Field = (function (_super) {
             i++;
         }
         if (nestFlag) {
-            // if(Status.combo < 8)
-            // {
-            //    this.vecSound[Status.combo - 1].play(0,0,SoundManager.soundTransform);
-            // }
-            // else
-            // {
-            //    this.vecSound[7].play(0,0,SoundManager.soundTransform);
-            // }
-            this.matchingJob = TweenLite.to(this, 0.5, {
-                onComplete: function () { _this.matchCheck(); }
-            });
+            if (Status.combo < 8) {
+                this.vecSound[Status.combo - 1].play(0, 1);
+            }
+            else {
+                this.vecSound[7].play(0, 1);
+            }
+            // this.matchingJob = TweenLite.to(this, 0.5, {
+            // 	onComplete: () => { this.matchCheck(); }
+            // });
+            this.matchingJob = egret.Tween.get(this).to({}, 500).call(this.matchCheck, this);
         }
         else {
             // addScore = Status.score - this.exScore;
-            // combo = Status.combo - 1;
-            // if(Status.maxCombo < combo)
-            // {
-            //    Status.maxCombo = combo;
-            // }
+            combo = Status.combo - 1;
+            if (Status.maxCombo < combo) {
+                Status.maxCombo = combo;
+            }
             // mode = Status.mode;
             if (mode > 0 && mode != 4 && BlockManager.vecBlock.length == 0) {
-                //    Status.combo = Status.combo - 1;
+                Status.combo = Status.combo - 1;
                 i = 0;
                 while (i < 9) {
                     if (i != 4) {
@@ -178,7 +162,7 @@ var Field = (function (_super) {
                     i++;
                 }
             }
-            // Status.combo = 0;
+            Status.combo = 0;
             if (mode == 0 && !BlockManager.clearCheck()) {
                 //    BlockManager.addUndoString();
             }
@@ -205,7 +189,6 @@ var Field = (function (_super) {
         }
     };
     Field.prototype.mouseUpField = function (gx, gy) {
-        var _this = this;
         var gridX = gx;
         var gridY = gy;
         var grid = this.getGrid(gridX, gridY);
@@ -222,11 +205,12 @@ var Field = (function (_super) {
             // }
             BlockManager.mouseDownBlock = null;
             // this.exScore = Status.score;
-            this.matchingJob = TweenLite.to(this, 0.2, {
-                onComplete: function () {
-                    _this.matchCheck();
-                }
-            });
+            // this.matchingJob = TweenLite.to(this, 0.2, {
+            // 	onComplete: () => {
+            // 		this.matchCheck();
+            // 	}
+            // })
+            this.matchingJob = egret.Tween.get(this).to({}, 200).call(this.matchCheck, this);
         }
         else {
             BlockManager.mouseUp();

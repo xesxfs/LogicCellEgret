@@ -23,5 +23,5 @@
 	</e:Group>
 	<e:Image source="Chip_106_02_png" y="1008" width="110" height="110" x="130"/>
 	<e:Image source="Chip_106_01_png" y="1006" width="100" height="110" right="130"/>
-	<e:Rect width="120" height="120" x="230" y="24" strokeWeight="10" fillAlpha="0"/>
+	<e:Rect width="120" height="120" x="230" y="24" strokeWeight="10" fillAlpha="1" fillColor="0x000000"/>
 </e:Skin>

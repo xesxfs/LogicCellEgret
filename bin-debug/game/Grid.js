@@ -10,12 +10,10 @@ r.prototype = e.prototype, t.prototype = new r();
 };
 var Grid = (function (_super) {
     __extends(Grid, _super);
-    function Grid(gx, gy, x, y) {
+    function Grid(gx, gy) {
         var _this = _super.call(this) || this;
         _this.gridX = gx;
         _this.gridY = gy;
-        _this.x = x;
-        _this.y = y;
         _this.width = 120;
         _this.height = 120;
         _this.fillAlpha = 0;

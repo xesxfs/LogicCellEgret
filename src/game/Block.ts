@@ -1,6 +1,5 @@
 class Block extends eui.Component {
 
-	// public static CHIP: egret.BitmapData = Resource.chip;
 	public static COLOR: Array<number> = [4282664191, 4294919236, 4282711876, 4294967074, 4294919423];
 	public vecLayer: Array<number>;
 	public drawPhase: number = 8;
@@ -25,10 +24,11 @@ class Block extends eui.Component {
 	}
 
 	public removeLayer(): boolean {
-		// EffectManager.addEffect(new EffectScore("" + Status.addScore(), this.gridX, this.gridY));
 		this.removeFlag = false;
 		this.drawPhase = 3;
-		EffectManager.addEffect(new EffectLayerErase(this.gridX, this.gridY, Block.COLOR[this.vecLayer[0]]));
+		let resultPoint: egret.Point;
+		resultPoint = this.localToGlobal(this.x, this.y);
+		EffectManager.addEffect(new EffectLayerErase(resultPoint.x, resultPoint.y, Block.COLOR[this.vecLayer[0]]));
 		this.vecLayer.shift();
 		if (this.vecLayer.length != 0) {
 			this.draw();
@@ -49,11 +49,9 @@ class Block extends eui.Component {
 			return;
 		}
 		this.drawPhase++;
-		// this.graphics.clear();
 		this.removeChildren();
 		i = 0;
 		while (i < length) {
-			// this.copy(Block.CHIP, ((2 - _loc1_) * 5 + this.drawPhase) * 44, this.vecLayer[_loc1_] * 44, 44, 44);
 			let blockChip = Resource.getBlockChips(((2 - i) * 5 + this.drawPhase) * 44, this.vecLayer[i] * 44)
 			blockChip.width = 120;
 			blockChip.height = 120;

@@ -1,6 +1,6 @@
 class Block extends eui.Component {
 
-	public static COLOR: Array<number> = [4282664191, 4294919236, 4282711876, 4294967074, 4294919423];
+	public static COLOR: Array<number> = [0x484CFF, 0xFF3030, 0x37FF48, 0xFFFF34, 0xFF6EFF];
 	public vecLayer: Array<number>;
 	public drawPhase: number = 8;
 	public gridX: number = 0;

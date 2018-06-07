@@ -13,20 +13,34 @@ var SetPuzzleScene = (function (_super) {
     function SetPuzzleScene(stageData) {
         var _this = _super.call(this) || this;
         _this.addChild(_this.field = new Field(stageData));
+        var undoBitmap = Resource.getBlockChips(0, 220, 22, 22);
+        undoBitmap.width = 110;
+        undoBitmap.height = 110;
+        undoBitmap.x = 410;
+        undoBitmap.y = 1000;
+        _this.addChild(undoBitmap);
+        _this.undoBmd = undoBitmap;
+        var backBitmap = Resource.getBlockChips(22, 220, 22, 22);
+        backBitmap.width = 110;
+        backBitmap.height = 110;
+        backBitmap.x = 130;
+        backBitmap.y = 1000;
+        _this.addChild(backBitmap);
         _this.addChild(BlockManager);
+        _this.addChild(_this.hudManager = new HudManagerScore());
         _this.addChild(EffectManager);
         InputSetPuzzle.field = _this.field;
         InputSetPuzzle.fieldRect = new egret.Rectangle(_this.field.x, _this.field.y, _this.field.width, _this.field.height);
         InputSetPuzzle.blockRect = new egret.Rectangle(BlockManager.x, BlockManager.y, BlockManager.width, BlockManager.height);
         InputManager.newInput(InputSetPuzzle);
+        _this.addChild(App.BackMenu);
         return _this;
     }
     SetPuzzleScene.prototype.update = function () {
         BlockManager.update();
         EffectManager.update();
-        // Status.update();
-        // BackMenuBitmap.update();
-        // this.hudManager.update();
+        App.BackMenu.update();
+        this.hudManager.update();
     };
     return SetPuzzleScene;
 }(Scene));

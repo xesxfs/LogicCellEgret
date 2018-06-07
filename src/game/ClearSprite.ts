@@ -1,51 +1,52 @@
-class ClearSprite extends egret.Sprite {
-	private clearBmd: BitmapDisplay;
-	private menuBmd: BitmapDisplay;
-	private retryBmd: BitmapDisplay;
-	private nextBmd: BitmapDisplay;
+class ClearSprite extends eui.Component {
 
-	public constructor(param1: boolean = false) {
+	public clearGroup: eui.Group;
+	public menuGroup: eui.Group;
+	public retryGroup: eui.Group;
+	public nextGroup: eui.Group;
+	public nextLab: eui.Label;
+	public statusLab: eui.Label;
+
+	private toY: number = 500;
+	private isPerfect: boolean;
+
+	public constructor(isPerfect: boolean = false) {
 		super();
-		var _self__ = this;	
-		this.touchChildren = false;
-		this.touchEnabled = false;
-		this.alpha = 0.9;
-		this.clearBmd = new BitmapDisplay(90, 44, 4290493371);
-		this.clearBmd.x = 46;
-		// this.clearBmd.y = -44;
-		this.menuBmd = new BitmapDisplay(44, 44, 4290493371);
-		this.menuBmd.x = 69;
-		// this.menuBmd.y = -128;
-		this.retryBmd = new BitmapDisplay(44, 44, 4290493371);
-		this.retryBmd.x = 115;
-		// this.retryBmd.y = -128;
-		this.nextBmd = new BitmapDisplay(44, 44, 4290493371);
-		this.nextBmd.x = 161;
-		// this.nextBmd.y = -128;
-		if (param1) {
-			this.clearBmd.drawString("Perfect", -1, -1, 2236962);
-		}
-		else {
-			this.clearBmd.drawString("Clear", -1, -1, 2236962);
-		}
-		this.menuBmd.drawString("Menu", -1, -1, 2236962);
-		this.retryBmd.drawString("Retry", -1, -1, 2236962);
-		if (StageManager.index == 24) {
-			this.nextBmd.drawString("Tweet", -1, -1, 2236962);
-		}
-		else {
-			this.nextBmd.drawString("Next", -1, -1, 2236962);
-		}
-		_self__.addChild(this.clearBmd);
-		_self__.addChild(this.menuBmd);
-		_self__.addChild(this.retryBmd);
-		_self__.addChild(this.nextBmd);
-		this.x = 29;
-		// KTW.to(this.clearBmd,0.5,{"y":141,"x":46},net.kawa.tween.easing.Quint.easeOut);
-		// KTW.to(this.clearBmd,0.5,{"x":-23},net.kawa.tween.easing.Quint.easeOut,null,0.6);
-		// KTW.to(this.menuBmd,0.5,{"y":141},net.kawa.tween.easing.Quint.easeOut,null,0.6);
-		// KTW.to(this.retryBmd,0.5,{"y":141},net.kawa.tween.easing.Quint.easeOut,null,0.8);
-		// KTW.to(this.nextBmd,0.5,{"y":141},net.kawa.tween.easing.Quint.easeOut,null,1);
+		this.isPerfect = isPerfect;
+		this.skinName = "ClearSpriteSkin"
 	}
+
+	protected childrenCreated() {
+		if (!this.isPerfect) this.statusLab.text = "Clear";
+		egret.Tween.get(this.clearGroup).to({ y: this.toY }, 500, egret.Ease.quintOut).wait(100).to({ x: 66 }, 500, egret.Ease.quintOut);
+		egret.Tween.get(this.menuGroup).wait(600).to({ y: this.toY }, 500, egret.Ease.quintOut);
+		egret.Tween.get(this.retryGroup).wait(800).to({ y: this.toY }, 500, egret.Ease.quintOut);
+		egret.Tween.get(this.nextGroup).wait(1000).to({ y: this.toY }, 500, egret.Ease.quintOut);
+		this.addEventListener("touchTap", this.onTouch, this);
+	}
+
+	private onTouch(e: egret.TouchEvent) {
+		switch (e.target) {
+			case this.clearGroup:
+				break;
+			case this.menuGroup:
+				SceneManager.newScene(new SelectScene());
+				break;
+			case this.retryGroup:
+				SceneManager.newScene(new SetPuzzleScene(StageManager.getStage(-2)));
+				break;
+			case this.nextGroup:
+				let stageData = StageManager.getStage(-1);
+				if (stageData != null) {
+					SceneManager.newScene(new SetPuzzleScene(stageData));
+				}
+
+				break;
+		}
+	}
+
+
+
+
 
 }

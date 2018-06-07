@@ -27,7 +27,7 @@ class BlockManagerClass extends eui.Group {
 		this.removeChildren();
 		this.vecBlock = new Array<Block>();
 		this.vecInventoryBlock = [null, null, null, null, null];
-		this.vec2UndoString = [[]];
+		this.vec2UndoString = [];
 		this.field = field;
 		this.inventoryPadding = 0;
 	}
@@ -137,7 +137,7 @@ class BlockManagerClass extends eui.Group {
 		if (down != null) {
 			this.mouseDownBlock = down;
 			// this.setChildIndex(down, this.numChildren - 1);
-			let p = this.localToGlobal(down.x, down.y);			
+			let p = this.localToGlobal(down.x, down.y);
 			down.x = p.x;
 			down.y = p.y;
 			this.parent.addChild(down);
@@ -151,9 +151,79 @@ class BlockManagerClass extends eui.Group {
 			this.mouseDownBlock.x = p.x;
 			this.mouseDownBlock.y = p.y;
 			egret.Tween.get(this.mouseDownBlock).to({ x: this.mouseDownBlock.inventoryNumber * 125, y: 0 }, 100);
-
 			this.mouseDownBlock = null;
 		}
+	}
+
+	public undo() {
+		if (this.field.matchingJob !== null || this.vec2UndoString.length <= 1) { return };
+		this.removeChildren();
+		this.vecInventoryBlock = [];
+		this.field.resetGridBlock();
+		this.AddAllBlock(this.vec2UndoString[this.vec2UndoString.length - 2]);
+		this.vec2UndoString.pop();
+		if (SceneManager.scene instanceof SetPuzzleScene) {
+			if (this.vec2UndoString.length === 1) {
+				(SceneManager.scene as SetPuzzleScene).undoBmd.alpha = 0.2;
+			}
+			else {
+				(SceneManager.scene as SetPuzzleScene).undoBmd.alpha = 0.8;
+			}
+		}
+	}
+
+	public addUndoString() {
+		var i = 0;
+		var j = 0;
+		var str: string = null;
+		var block: Block = null;
+		var undoStr: Array<string> = [];
+		i = 0;
+
+		while (i < this.vecBlock.length) {
+			block = this.vecBlock[i];
+			str = "" + block.gridX + block.gridY;
+			j = 0;
+			while (j < block.vecLayer.length) {
+				str = str + block.vecLayer[j];
+				j++;
+			}
+			undoStr.push(str);
+			i++;
+		}
+
+		i = 0;
+		while (i < this.vecInventoryBlock.length) {
+			block = this.vecInventoryBlock[i];
+			if (block != null) {
+				str = "" + 9 + block.inventoryNumber;
+				j = 0;
+				while (j < block.vecLayer.length) {
+					str = str + block.vecLayer[j];
+					j++;
+				}
+				undoStr.push(str);
+			}
+			i++;
+		}
+
+		if (this.vec2UndoString.length != 0) {
+			undoStr.push("" + Status.score);
+		}
+		else {
+			undoStr.push("0");
+		}
+		this.vec2UndoString.push(undoStr);
+
+		if (SceneManager.scene instanceof SetPuzzleScene) {
+			if (this.vec2UndoString.length == 1) {
+				(SceneManager.scene as SetPuzzleScene).undoBmd.alpha = 0.2;
+			}
+			else {
+				(SceneManager.scene as SetPuzzleScene).undoBmd.alpha = 0.8;
+			}
+		}
+
 	}
 
 	public clearCheck(): boolean {
@@ -171,10 +241,12 @@ class BlockManagerClass extends eui.Group {
 		}
 		InputManager.newInput(null);
 		// KTW.to(this, 1, {}, null, function (): void {
-		InputManager.newInput(InputClear);
+
 		// });
 		// if (this.field.stageData.star3 <= Status.score) {
-		this.parent.addChild(new ClearSprite(true));
+		// this.parent.addChild();
+		// InputManager.newInput(InputClear);
+		InputManager.addChild(new ClearSprite(true))
 		// 	SharedManager.vecPuzzleClear[this.field.stageData.stageNo - 1] = 2;
 		// }
 		// else {

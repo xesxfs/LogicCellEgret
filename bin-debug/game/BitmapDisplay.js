@@ -25,7 +25,7 @@ var BitmapDisplay = (function (_super) {
     };
     BitmapDisplay.prototype.drawString = function (str, scaleX, scaleY, color) {
         if (!this.text)
-            this.text = new egret.TextField();
+            this.text = new eui.Label();
         this.text.text = str;
         this.text.textColor = color;
         this.addChild(this.text);

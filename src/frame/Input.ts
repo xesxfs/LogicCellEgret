@@ -9,7 +9,9 @@ class Input extends eui.Group {
 		this.addEventListener("touchEnd", this.mouseUpEvent, this);
 		this.addEventListener("touchMove", this.mouseMoveEvent, this);
 		this.addEventListener("touchReleaseOutside", this.mouseOutEvent, this);
-		this.touchEnabled = true;
+		// this.touchEnabled = true;
+		// this.touchThrough = true;
+		
 	}
 
 	protected mouseDownEvent(param1: egret.TouchEvent): void {

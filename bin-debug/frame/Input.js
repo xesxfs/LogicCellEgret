@@ -20,8 +20,9 @@ var Input = (function (_super) {
         _this.addEventListener("touchEnd", _this.mouseUpEvent, _this);
         _this.addEventListener("touchMove", _this.mouseMoveEvent, _this);
         _this.addEventListener("touchReleaseOutside", _this.mouseOutEvent, _this);
-        _this.touchEnabled = true;
         return _this;
+        // this.touchEnabled = true;
+        // this.touchThrough = true;
     }
     Input.prototype.mouseDownEvent = function (param1) {
     };

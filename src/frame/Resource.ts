@@ -10,11 +10,11 @@ class Resource {
 		if (Resource.Instance) return Resource.Instance;
 	}
 
-	public static getBlockChips(x: number, y: number): eui.Image {
+	public static getBlockChips(x: number, y: number, w = 44, h = 44): eui.Image {
 		if (!this.ChipsSpriteSheet) this.ChipsSpriteSheet = new egret.SpriteSheet(RES.getRes("Chip_png"))
 		let chip = this.ChipsSpriteSheet.getTexture(x + "_" + y);
 		if (!chip) {
-			this.ChipsSpriteSheet.createTexture(x + "_" + y, x, y, 44, 44);
+			this.ChipsSpriteSheet.createTexture(x + "_" + y, x, y, w, h);
 			chip = this.ChipsSpriteSheet.getTexture(x + "_" + y);
 		};
 		return new eui.Image(chip);

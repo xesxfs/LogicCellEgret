@@ -160,7 +160,8 @@ var Main = (function (_super) {
         // this.addChild(skey);        
         // this.touchThrough = true;
         // this.touchChildren = true;
-        this.addChild(new Game());
+        // this.addChild(new Game());
+        App.startUp(this);
     };
     Main.prototype.onclick = function () {
     };

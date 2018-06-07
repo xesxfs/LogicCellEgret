@@ -25,6 +25,10 @@ class InputSetPuzzleClass extends Input {
 			BlockManager.mouseY = e.stageY;
 			BlockManager.mouseDownInventory(selectBlock);
 			// console.log("down0", selectBlock);
+		} else if (e.stageY >= 1000 && e.stageX >= 130 && e.stageX <= (130 + 110)) {
+			App.BackMenu.updateStart();
+		} else if (e.stageY >= 1000 && e.stageX >= 410 && e.stageX <= (410 + 110)) {
+			BlockManager.undo();
 		}
 	}
 
@@ -35,6 +39,7 @@ class InputSetPuzzleClass extends Input {
 	}
 
 	protected mouseUpEvent(e: egret.TouchEvent): void {
+		App.BackMenu.updateFinish();
 		if (!BlockManager.mouseDownBlock) {
 			return;
 		}

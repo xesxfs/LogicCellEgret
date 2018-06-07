@@ -70,7 +70,7 @@ var Block = (function (_super) {
     Block.prototype.update = function () {
         this.draw();
     };
-    Block.COLOR = [4282664191, 4294919236, 4282711876, 4294967074, 4294919423];
+    Block.COLOR = [0x484CFF, 0xFF3030, 0x37FF48, 0xFFFF34, 0xFF6EFF];
     return Block;
 }(eui.Component));
 __reflect(Block.prototype, "Block");

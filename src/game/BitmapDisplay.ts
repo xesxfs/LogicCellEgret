@@ -17,7 +17,7 @@ class BitmapDisplay extends egret.Sprite {
 	}
 
 	public drawString(str: string, scaleX: number, scaleY: number, color: number) {
-		if (!this.text) this.text = new egret.TextField();
+		if (!this.text) this.text = new eui.Label();
 		this.text.text = str;
 		this.text.textColor = color;
 		this.addChild(this.text);

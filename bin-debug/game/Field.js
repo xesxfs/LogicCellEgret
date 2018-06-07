@@ -51,6 +51,7 @@ var Field = (function (_super) {
         /****!!放到这里代码可读性和逻辑性变差，但是省去了在多个场景调用!!****/
         BlockManager.reset(_this);
         BlockManager.AddAllBlock(stageData.vecBlockData, false);
+        BlockManager.addUndoString();
         return _this;
     }
     Field.prototype.getGrid = function (x, y) {
@@ -137,21 +138,19 @@ var Field = (function (_super) {
             else {
                 this.vecSound[7].play(0, 1);
             }
-            // this.matchingJob = TweenLite.to(this, 0.5, {
-            // 	onComplete: () => { this.matchCheck(); }
-            // });
             this.matchingJob = egret.Tween.get(this).to({}, 500).call(this.matchCheck, this);
         }
         else {
-            // addScore = Status.score - this.exScore;
+            addScore = Status.score - this.exScore;
             combo = Status.combo - 1;
             if (Status.maxCombo < combo) {
                 Status.maxCombo = combo;
             }
-            // mode = Status.mode;
+            mode = Status.mode;
             if (mode > 0 && mode != 4 && BlockManager.vecBlock.length == 0) {
                 Status.combo = Status.combo - 1;
                 i = 0;
+                Status.addScore();
                 while (i < 9) {
                     if (i != 4) {
                         //  EffectManager.addEffect(new EffectScore("" + Status.addScore(),i / 3,i % 3));
@@ -162,9 +161,10 @@ var Field = (function (_super) {
                     i++;
                 }
             }
+            Status.addScore();
             Status.combo = 0;
             if (mode == 0 && !BlockManager.clearCheck()) {
-                //    BlockManager.addUndoString();
+                BlockManager.addUndoString();
             }
             // else if(mode == 1)
             // {
@@ -205,11 +205,6 @@ var Field = (function (_super) {
             // }
             BlockManager.mouseDownBlock = null;
             // this.exScore = Status.score;
-            // this.matchingJob = TweenLite.to(this, 0.2, {
-            // 	onComplete: () => {
-            // 		this.matchCheck();
-            // 	}
-            // })
             this.matchingJob = egret.Tween.get(this).to({}, 200).call(this.matchCheck, this);
         }
         else {
@@ -223,6 +218,7 @@ var Field = (function (_super) {
         while (w < this.fieldW) {
             h = 0;
             while (h < this.fieldH) {
+                this.vec2Grid[w][h].block && (this.vec2Grid[w][h].removeChildren());
                 this.vec2Grid[w][h].block = null;
                 h++;
             }

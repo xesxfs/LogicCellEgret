@@ -23,6 +23,12 @@ var InputSetPuzzleClass = (function (_super) {
             BlockManager.mouseDownInventory(selectBlock);
             // console.log("down0", selectBlock);
         }
+        else if (e.stageY >= 1000 && e.stageX >= 130 && e.stageX <= (130 + 110)) {
+            App.BackMenu.updateStart();
+        }
+        else if (e.stageY >= 1000 && e.stageX >= 410 && e.stageX <= (410 + 110)) {
+            BlockManager.undo();
+        }
     };
     InputSetPuzzleClass.prototype.mouseMoveEvent = function (e) {
         // console.log(e.stageX);
@@ -30,6 +36,7 @@ var InputSetPuzzleClass = (function (_super) {
         BlockManager.mouseY = e.stageY;
     };
     InputSetPuzzleClass.prototype.mouseUpEvent = function (e) {
+        App.BackMenu.updateFinish();
         if (!BlockManager.mouseDownBlock) {
             return;
         }

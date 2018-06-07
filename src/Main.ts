@@ -100,7 +100,8 @@ class Main extends eui.UILayer {
         // this.addChild(skey);        
         // this.touchThrough = true;
         // this.touchChildren = true;
-        this.addChild(new Game());
+        // this.addChild(new Game());
+        App.startUp(this);
 
 
     }

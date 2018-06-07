@@ -6,12 +6,14 @@ var Resource = (function () {
         if (Resource.Instance)
             return Resource.Instance;
     }
-    Resource.getBlockChips = function (x, y) {
+    Resource.getBlockChips = function (x, y, w, h) {
+        if (w === void 0) { w = 44; }
+        if (h === void 0) { h = 44; }
         if (!this.ChipsSpriteSheet)
             this.ChipsSpriteSheet = new egret.SpriteSheet(RES.getRes("Chip_png"));
         var chip = this.ChipsSpriteSheet.getTexture(x + "_" + y);
         if (!chip) {
-            this.ChipsSpriteSheet.createTexture(x + "_" + y, x, y, 44, 44);
+            this.ChipsSpriteSheet.createTexture(x + "_" + y, x, y, w, h);
             chip = this.ChipsSpriteSheet.getTexture(x + "_" + y);
         }
         ;

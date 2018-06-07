@@ -12,9 +12,12 @@ var SelectScene = (function (_super) {
     __extends(SelectScene, _super);
     function SelectScene() {
         var _this = _super.call(this) || this;
-        InputManager.newInput(InputSelect);
+        _this.skinName = "SelectSceneSkin";
         return _this;
     }
+    SelectScene.prototype.childrenCreated = function () {
+        InputManager.newInput(InputSelect);
+    };
     return SelectScene;
 }(Scene));
 __reflect(SelectScene.prototype, "SelectScene");

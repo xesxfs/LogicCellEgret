@@ -18,6 +18,8 @@ declare module skins{
 	class HSliderSkin extends eui.Skin{
 	}
 }
+declare class HudManagerScoreSkin extends eui.Skin{
+}
 declare module skins{
 	class ItemRendererSkin extends eui.Skin{
 	}
@@ -37,6 +39,8 @@ declare module skins{
 declare module skins{
 	class ScrollerSkin extends eui.Skin{
 	}
+}
+declare class SelectSceneSkin extends eui.Skin{
 }
 declare module skins{
 	class TextInputSkin extends eui.Skin{

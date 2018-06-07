@@ -42,7 +42,7 @@ class BackMenuBitmapClass extends eui.Component {
 		this.backGrogress.width = this.cnt * 10;
 		if (this.cnt++ === 40) {
 			this.updateFinish();
-			// SceneManager.newScene(new SelectScene());
+			SceneManager.newScene(new SelectScene());
 		}
 
 	}

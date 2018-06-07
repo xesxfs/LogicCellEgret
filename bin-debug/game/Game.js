@@ -15,14 +15,8 @@ var Game = (function (_super) {
         _this.percentHeight = 100;
         _this.percentWidth = 100;
         _this.addChild(SceneManager);
-        // SceneManager.newScene(new TitleScene());
-        // SceneManager.touchChildren = false;
-        // SceneManager.touchEnabled = false;
-        var sid = parseInt(egret.getOption("sid"));
-        if (!sid)
-            sid = 25;
-        SceneManager.newScene(new SetPuzzleScene(StageManager.getStage(sid - 1)));
         _this.addChild(InputManager);
+        SceneManager.newScene(new SelectScene());
         _this.addEventListener(egret.Event.ENTER_FRAME, _this.ent, _this);
         return _this;
         // this.addChild(new ClearSprite());

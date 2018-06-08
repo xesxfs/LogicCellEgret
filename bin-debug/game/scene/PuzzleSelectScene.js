@@ -12,9 +12,12 @@ var PuzzleSelectScene = (function (_super) {
     __extends(PuzzleSelectScene, _super);
     function PuzzleSelectScene() {
         var _this = _super.call(this) || this;
-        InputManager.newInput(InputPuzzleSelect);
+        _this.skinName = "PuzzleSelectSceneSkin";
         return _this;
     }
+    PuzzleSelectScene.prototype.childrenCreated = function () {
+        InputManager.newInput(InputPuzzleSelect);
+    };
     return PuzzleSelectScene;
 }(Scene));
 __reflect(PuzzleSelectScene.prototype, "PuzzleSelectScene");

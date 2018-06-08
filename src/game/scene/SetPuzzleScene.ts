@@ -30,10 +30,11 @@ class SetPuzzleScene extends Scene {
 		InputSetPuzzle.blockRect = new egret.Rectangle(BlockManager.x, BlockManager.y, BlockManager.width, BlockManager.height);
 		InputManager.newInput(InputSetPuzzle);
 		this.addChild(App.BackMenu);
+		this.hudManager.stageNOLab.text = stageData.stageNo.toString();
 	}
 	public update() {
 		BlockManager.update();
-		EffectManager.update();	
+		EffectManager.update();
 		App.BackMenu.update();
 		this.hudManager.update();
 

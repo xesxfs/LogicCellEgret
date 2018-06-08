@@ -34,6 +34,7 @@ var SetPuzzleScene = (function (_super) {
         InputSetPuzzle.blockRect = new egret.Rectangle(BlockManager.x, BlockManager.y, BlockManager.width, BlockManager.height);
         InputManager.newInput(InputSetPuzzle);
         _this.addChild(App.BackMenu);
+        _this.hudManager.stageNOLab.text = stageData.stageNo.toString();
         return _this;
     }
     SetPuzzleScene.prototype.update = function () {

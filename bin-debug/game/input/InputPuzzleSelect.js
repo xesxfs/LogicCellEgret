@@ -13,8 +13,25 @@ var InputPuzzleSelectClass = (function (_super) {
     function InputPuzzleSelectClass() {
         return _super.call(this) || this;
     }
-    InputPuzzleSelectClass.prototype.mouseDownEvent = function (param1) {
-        SceneManager.newScene(new SetPuzzleScene(StageManager.getStage(0)));
+    InputPuzzleSelectClass.prototype.mouseDownEvent = function (e) {
+        // SceneManager.newScene(new SetPuzzleScene(StageManager.getStage(0)));
+        if (SceneManager.scene instanceof PuzzleSelectScene) {
+            var scene = SceneManager.scene;
+            var p = egret.Point.create(e.stageX, e.stageY);
+            if (scene.stageGroup.getTransformedBounds(this).containsPoint(p)) {
+                var offx = e.stageX - scene.stageGroup.x;
+                var offy = e.stageY - scene.stageGroup.y;
+                offx /= (100 + 22);
+                offy /= (100 + 40);
+                var sid = 5 * ~~offy + ~~offx;
+                if (sid > 24 || sid < 0)
+                    sid = 0;
+                SceneManager.newScene(new SetPuzzleScene(StageManager.getStage(sid)));
+            }
+            else if (scene.backImg.getTransformedBounds(this).containsPoint(p)) {
+                SceneManager.newScene(new SelectScene());
+            }
+        }
     };
     InputPuzzleSelectClass.prototype.mouseUpEvent = function (param1) {
     };

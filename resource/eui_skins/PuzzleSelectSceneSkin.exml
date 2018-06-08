@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="PuzzleSelectSceneSkin" width="640" height="1136" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image id="backImg" source="Chip_106_02_png" width="140" height="140" horizontalCenter="0" bottom="20"/>
+	<e:Label text="Stage Select" y="43" horizontalCenter="0" bold="true" textColor="0xcecaca" size="52"/>
+	<e:Group id="stageGroup" anchorOffsetX="0" anchorOffsetY="0" horizontalCenter="0" verticalCenter="0">
+		<e:Rect width="100" height="100" x="124" y="224" fillColor="0xd1cccc" strokeWeight="10"/>
+		<e:Rect width="100" height="100" x="134" y="234" strokeWeight="10"/>
+		<e:Rect width="100" height="100" x="144" y="244" strokeWeight="10"/>
+		<e:Rect width="100" height="100" x="154" y="254" strokeWeight="10"/>
+		<e:Rect width="100" height="100" x="164" y="264" strokeWeight="10"/>
+		<e:Rect width="100" height="100" x="174" y="274" strokeWeight="10"/>
+		<e:Rect width="100" height="100" x="134" y="234" strokeWeight="10"/>
+		<e:Rect width="100" height="100" x="144" y="244" strokeWeight="10"/>
+		<e:Rect width="100" height="100" x="154" y="254" strokeWeight="10"/>
+		<e:Rect width="100" height="100" x="164" y="264" strokeWeight="10"/>
+		<e:Rect width="100" height="100" x="174" y="274" strokeWeight="10"/>
+		<e:Rect width="100" height="100" x="184" y="284" strokeWeight="10"/>
+		<e:Rect width="100" height="100" x="144" y="244" strokeWeight="10"/>
+		<e:Rect width="100" height="100" x="154" y="254" strokeWeight="10"/>
+		<e:Rect width="100" height="100" x="164" y="264" strokeWeight="10"/>
+		<e:Rect width="100" height="100" x="174" y="274" strokeWeight="10"/>
+		<e:Rect width="100" height="100" x="184" y="284" strokeWeight="10"/>
+		<e:Rect width="100" height="100" x="194" y="294" strokeWeight="10"/>
+		<e:Rect width="100" height="100" x="154" y="254" strokeWeight="10"/>
+		<e:Rect width="100" height="100" x="164" y="264" strokeWeight="10"/>
+		<e:Rect width="100" height="100" x="174" y="274" strokeWeight="10"/>
+		<e:Rect width="100" height="100" x="174" y="274" strokeWeight="10"/>
+		<e:Rect width="100" height="100" x="184" y="284" strokeWeight="10"/>
+		<e:Rect width="100" height="100" x="194" y="294" strokeWeight="10"/>
+		<e:Rect width="100" height="100" x="204" y="304" strokeWeight="10"/>
+		<e:layout>
+			<e:TileLayout requestedRowCount="5" requestedColumnCount="5" verticalAlign="top" horizontalGap="22" verticalGap="40" paddingTop="0"/>
+		</e:layout>
+	</e:Group>
+</e:Skin>

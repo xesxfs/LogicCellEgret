@@ -143,7 +143,7 @@ var BlockManagerClass = (function (_super) {
         }
     };
     BlockManagerClass.prototype.undo = function () {
-        if (this.field.matchingJob !== null || this.vec2UndoString.length <= 1) {
+        if (this.field.matchingJob || this.vec2UndoString.length <= 1) {
             return;
         }
         ;

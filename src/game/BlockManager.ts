@@ -156,7 +156,7 @@ class BlockManagerClass extends eui.Group {
 	}
 
 	public undo() {
-		if (this.field.matchingJob !== null || this.vec2UndoString.length <= 1) { return };
+		if (this.field.matchingJob || this.vec2UndoString.length <= 1) { return };
 		this.removeChildren();
 		this.vecInventoryBlock = [];
 		this.field.resetGridBlock();

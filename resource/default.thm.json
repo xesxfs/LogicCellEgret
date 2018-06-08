@@ -18,7 +18,6 @@
 	"exmls": [
 		"resource/eui_skins/BackMenuSkin.exml",
 		"resource/eui_skins/ButtonSkin.exml",
-		"resource/eui_skins/PuzzleSelectSceneSkin.exml",
 		"resource/eui_skins/CheckBoxSkin.exml",
 		"resource/eui_skins/ClearSpriteSkin.exml",
 		"resource/eui_skins/HScrollBarSkin.exml",
@@ -27,6 +26,7 @@
 		"resource/eui_skins/ItemRendererSkin.exml",
 		"resource/eui_skins/PanelSkin.exml",
 		"resource/eui_skins/ProgressBarSkin.exml",
+		"resource/eui_skins/PuzzleSelectSceneSkin.exml",
 		"resource/eui_skins/RadioButtonSkin.exml",
 		"resource/eui_skins/ScrollerSkin.exml",
 		"resource/eui_skins/SelectSceneSkin.exml",

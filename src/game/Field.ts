@@ -224,17 +224,18 @@ class Field extends eui.Group {
 
 	public resetGridBlock(): void {
 		var w = 0;
-		var h = 0;
-		w = 0;
-		while (w < this.fieldW) {
-			h = 0;
-			while (h < this.fieldH) {
-				this.vec2Grid[w][h].block && (this.vec2Grid[w][h].removeChildren());
-				this.vec2Grid[w][h].block = null;
+		var h = 0;		
+		while (h < this.fieldH ) {
+			w = 0;
+			while (w < this.fieldW) {			
+				if (this.vec2Grid[h][w].block) {
+					this.vec2Grid[h][w].removeChildren();
+				}
+				this.vec2Grid[h][w].block = null;
 
-				h++;
+				w++;
 			}
-			w++;
+			h++;
 		}
 
 	}

@@ -32,6 +32,8 @@ declare module skins{
 	class ProgressBarSkin extends eui.Skin{
 	}
 }
+declare class PuzzleSelectSceneSkin extends eui.Skin{
+}
 declare module skins{
 	class RadioButtonSkin extends eui.Skin{
 	}

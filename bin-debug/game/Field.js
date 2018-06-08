@@ -214,15 +214,16 @@ var Field = (function (_super) {
     Field.prototype.resetGridBlock = function () {
         var w = 0;
         var h = 0;
-        w = 0;
-        while (w < this.fieldW) {
-            h = 0;
-            while (h < this.fieldH) {
-                this.vec2Grid[w][h].block && (this.vec2Grid[w][h].removeChildren());
-                this.vec2Grid[w][h].block = null;
-                h++;
+        while (h < this.fieldH) {
+            w = 0;
+            while (w < this.fieldW) {
+                if (this.vec2Grid[h][w].block) {
+                    this.vec2Grid[h][w].removeChildren();
+                }
+                this.vec2Grid[h][w].block = null;
+                w++;
             }
-            w++;
+            h++;
         }
     };
     Field.fieldX = 0;

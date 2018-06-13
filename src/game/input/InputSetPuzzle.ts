@@ -1,7 +1,4 @@
 class InputSetPuzzleClass extends Input {
-	private mouseIndexX: number;
-
-	private mouseIndexY: number;
 
 	public field: Field;
 
@@ -19,7 +16,6 @@ class InputSetPuzzleClass extends Input {
 		this.blockRect = new egret.Rectangle(BlockManager.x, BlockManager.y, BlockManager.width, BlockManager.height);
 		if (this.blockRect.containsPoint(egret.Point.create(e.stageX, e.stageY))) {
 			// console.log("down0");
-
 			let selectBlock = ~~((e.stageX - this.blockRect.x) / 120);
 			BlockManager.mouseX = e.stageX;
 			BlockManager.mouseY = e.stageY;
@@ -58,14 +54,15 @@ class InputSetPuzzleClass extends Input {
 	}
 
 	protected mouseOutEvent(e: egret.TouchEvent): void {
-		if (this.fieldRect.containsPoint(egret.Point.create(e.stageX, e.stageY))) {
-			let gx = (e.stageX - this.field.x) / 120;
-			let gy = (e.stageY - this.field.y) / 120;
-			this.field.mouseUpField(gx, gy);
-		}
-		else {
-			BlockManager.mouseUp();
-		}
+		if (SceneManager.scene instanceof SetPuzzleScene)
+			if (this.fieldRect.containsPoint(egret.Point.create(e.stageX, e.stageY))) {
+				let gx = (e.stageX - this.field.x) / 120;
+				let gy = (e.stageY - this.field.y) / 120;
+				this.field.mouseUpField(gx, gy);
+			}
+			else {
+				BlockManager.mouseUp();
+			}
 	}
 }
 var InputSetPuzzle: InputSetPuzzleClass = new InputSetPuzzleClass();

@@ -5,8 +5,8 @@ class SetPuzzleScene extends Scene {
 
 	public constructor(stageData: StageData) {
 		super();
+		Status.mode = GameMode.Puzzle;
 		this.addChild(this.field = new Field(stageData));
-
 		let undoBitmap = Resource.getBlockChips(0, 220, 22, 22);
 		undoBitmap.width = 110;
 		undoBitmap.height = 110;
@@ -37,6 +37,5 @@ class SetPuzzleScene extends Scene {
 		EffectManager.update();
 		App.BackMenu.update();
 		this.hudManager.update();
-
 	}
 }

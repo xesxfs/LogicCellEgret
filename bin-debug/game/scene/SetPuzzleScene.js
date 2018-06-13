@@ -12,6 +12,7 @@ var SetPuzzleScene = (function (_super) {
     __extends(SetPuzzleScene, _super);
     function SetPuzzleScene(stageData) {
         var _this = _super.call(this) || this;
+        Status.mode = GameMode.Puzzle;
         _this.addChild(_this.field = new Field(stageData));
         var undoBitmap = Resource.getBlockChips(0, 220, 22, 22);
         undoBitmap.width = 110;

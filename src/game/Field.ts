@@ -112,6 +112,7 @@ class Field extends eui.Group {
 						block.removeFlag = true;
 						nestFlag = true;
 					}
+
 					if (checkBlock2 != null && checkBlock2.vecLayer[0] == blockColor) {
 						checkBlock2.removeFlag = true;
 						block.removeFlag = true;
@@ -149,13 +150,14 @@ class Field extends eui.Group {
 				Status.maxCombo = combo;
 			}
 			mode = Status.mode;
-			if (mode > 0 && mode != 4 && BlockManager.vecBlock.length == 0) {
+			if (combo > 0) {
 				Status.combo = Status.combo - 1;
-				i = 0;
 				Status.addScore();
+				i = 0;
 				while (i < 9) {
 					if (i != 4) {
 						//  EffectManager.addEffect(new EffectScore("" + Status.addScore(),i / 3,i % 3));
+
 					}
 					else {
 						//  EffectManager.addEffect(new EffectScore("Bonus!",i / 3,i % 3));
@@ -163,32 +165,25 @@ class Field extends eui.Group {
 					i++;
 				}
 			}
-			Status.addScore();
 			Status.combo = 0;
-			if (mode == 0 && !BlockManager.clearCheck()) {
-
+			if (mode == GameMode.Puzzle && !BlockManager.clearCheck()) {
 				BlockManager.addUndoString();
 			}
-			// else if(mode == 1)
-			// {
-			//    BlockManager.finishCheck(SetScoreScene);
-			// }
-			// else if(mode == 2)
-			// {
-			//    if(SetScore30Scene.cnt == 0)
-			//    {
-			//       BlockManager.finish(SetScore30Scene);
-			//    }
-			//    BlockManager.finishCheck(SetScore30Scene);
-			// }
-			// else if(Status.mode == 3)
-			// {
-			//    BlockManager.finishCheck(SetScore1minScene);
-			// }
-			// else if(Status.mode == 4 && (Status.score != 0 || BlockManager.vecBlock.length == 20))
-			// {
-			//    BlockManager.finish(SetScore1comboScene);
-			// }
+			else if (mode == GameMode.Score) {
+				BlockManager.finishCheck(SetScoreScene);
+			}
+			else if (mode == GameMode.Score30) {
+				if (SetScore30Scene.cnt == 0) {
+					BlockManager.finish(SetScore30Scene);
+				}
+				BlockManager.finishCheck(SetScore30Scene);
+			}
+			else if (Status.mode == GameMode.Score1M) {
+				BlockManager.finishCheck(SetScore1minScene);
+			}
+			else if (Status.mode == GameMode.ScoreCombo && (Status.score != 0 || BlockManager.vecBlock.length == 20)) {
+				BlockManager.finish(SetScore1comboScene);
+			}
 		}
 
 	}
@@ -203,15 +198,14 @@ class Field extends eui.Group {
 			grid.setBlock(mouseDownBlock);
 			BlockManager.vecInventoryBlock[mouseDownBlock.inventoryNumber] = null;
 			BlockManager.vecBlock.push(mouseDownBlock);
-			// if (Status.mode > 0) {
-			// 	BlockManager.addRandomInventoryBlock(BlockManager.mouseDownBlock.inventoryNumber);
-			// }
-			// if (Status.mode == 2) {
-			// 	SetScore30Scene.cnt--;
-			// }
+			if (Status.mode > 0) {
+				BlockManager.addRandomInventoryBlock(BlockManager.mouseDownBlock.inventoryNumber);
+			}
+			if (Status.mode == 2) {
+				SetScore30Scene.cnt--;
+			}
 			BlockManager.mouseDownBlock = null;
-			// this.exScore = Status.score;
-
+			this.exScore = Status.score;
 
 			this.matchingJob = egret.Tween.get(this).to({}, 200).call(this.matchCheck, this);
 		}
@@ -224,10 +218,10 @@ class Field extends eui.Group {
 
 	public resetGridBlock(): void {
 		var w = 0;
-		var h = 0;		
-		while (h < this.fieldH ) {
+		var h = 0;
+		while (h < this.fieldH) {
 			w = 0;
-			while (w < this.fieldW) {			
+			while (w < this.fieldW) {
 				if (this.vec2Grid[h][w].block) {
 					this.vec2Grid[h][w].removeChildren();
 				}

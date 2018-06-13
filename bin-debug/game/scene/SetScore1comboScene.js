@@ -11,8 +11,35 @@ r.prototype = e.prototype, t.prototype = new r();
 var SetScore1comboScene = (function (_super) {
     __extends(SetScore1comboScene, _super);
     function SetScore1comboScene() {
-        return _super.call(this) || this;
+        var _this = _super.call(this) || this;
+        Status.mode = GameMode.ScoreCombo;
+        _this.addChild(_this.field = new Field(new StageData("0,0,ScoreAttack,5,4,11111111111111111111")));
+        var backBitmap = Resource.getBlockChips(22, 220, 22, 22);
+        backBitmap.width = 110;
+        backBitmap.height = 110;
+        backBitmap.x = 265;
+        backBitmap.y = 1000;
+        _this.addChild(backBitmap);
+        BlockManager.addRandomInventoryBlock(0);
+        BlockManager.addRandomInventoryBlock(1);
+        BlockManager.addRandomInventoryBlock(2);
+        BlockManager.addRandomInventoryBlock(3);
+        BlockManager.addRandomInventoryBlock(4);
+        _this.addChild(BlockManager);
+        _this.addChild(_this.hudManager = new HudManagerScore());
+        _this.addChild(App.BackMenu);
+        _this.addChild(EffectManager);
+        InputManager.newInput(InputSetScore);
+        InputSetScore.field = _this.field;
+        return _this;
     }
+    SetScore1comboScene.prototype.update = function () {
+        BlockManager.update();
+        EffectManager.update();
+        App.BackMenu.update();
+        this.hudManager.update();
+    };
+    SetScore1comboScene.isFinish = false;
     return SetScore1comboScene;
 }(Scene));
 __reflect(SetScore1comboScene.prototype, "SetScore1comboScene");

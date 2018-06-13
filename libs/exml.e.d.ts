@@ -44,6 +44,8 @@ declare module skins{
 }
 declare class SelectSceneSkin extends eui.Skin{
 }
+declare class SetScoreSceneSkin extends eui.Skin{
+}
 declare module skins{
 	class TextInputSkin extends eui.Skin{
 	}

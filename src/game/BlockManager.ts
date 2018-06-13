@@ -59,7 +59,7 @@ class BlockManagerClass extends eui.Group {
 		this.addChildAt(block, block.inventoryNumber);
 	}
 
-	public AddAllBlock(blockDataStr: Array<string>, param2: Boolean = true): void {
+	public AddAllBlock(blockDataStr: Array<string>, bUndo: Boolean = true): void {
 		var i = 0;
 		var j = 0;
 		var splitStr: string = null;
@@ -67,7 +67,7 @@ class BlockManagerClass extends eui.Group {
 		var xGrid = 0;
 		var yGrid = 0;
 		var l = blockDataStr.length;
-		if (param2) {
+		if (bUndo) {
 			l--;
 		}
 		i = 0;
@@ -86,7 +86,7 @@ class BlockManagerClass extends eui.Group {
 				this.addInventoryBlock(block, yGrid);
 			}
 			else {
-				this.field.getGrid(yGrid, xGrid).setBlock(block);
+				this.field.getGrid(xGrid, yGrid).setBlock(block);
 				this.vecBlock.push(block);
 			}
 			block.draw();
@@ -95,9 +95,9 @@ class BlockManagerClass extends eui.Group {
 		while (this.vecInventoryBlock.length < 5) {
 			this.vecInventoryBlock.push(null);
 		}
-		if (param2) {
-			// Status.score = parseInt(param1[_loc3_]);
-			// Status.drawScore = Status.score;
+		if (bUndo) {
+			Status.score = parseInt(blockDataStr[i]);
+			Status.drawScore = Status.score;
 		}
 	}
 
@@ -108,9 +108,28 @@ class BlockManagerClass extends eui.Group {
 		}
 		this.vecInventoryBlock[layerIndex] = block;
 		block.x = layerIndex * 125;
-		// block.y = 240;
 		block.inventoryNumber = layerIndex;
 		this.addChild(block);
+	}
+
+	public addRandomInventoryBlock(idx: number) {
+		let block = new Block();
+		block.inventoryNumber = idx;
+		this.addInventoryBlock(block, idx);
+		if (Status.mode == 1) {
+			block.setLayer(Math.random() * 5, Math.random() * 5, Math.random() * 5, Math.random() * 5);
+		}
+		else if (Status.mode == 2) {
+			block.setLayer(Math.random() * 4, Math.random() * 4, Math.random() * 4, Math.random() * 4);
+		}
+		else if (Status.mode == 3) {
+			block.setLayer(Math.random() * 3, Math.random() * 3, Math.random() * 3, Math.random() * 3);
+		}
+		else if (Status.mode == 4) {
+			block.setLayer(Math.random() * 5, Math.random() * 5, Math.random() * 5, Math.random() * 5);
+		}
+		block.draw();
+
 	}
 
 	public removeBlock(block: Block): void {
@@ -159,6 +178,7 @@ class BlockManagerClass extends eui.Group {
 		if (this.field.matchingJob || this.vec2UndoString.length <= 1) { return };
 		this.removeChildren();
 		this.vecInventoryBlock = [];
+		this.vecBlock = [];
 		this.field.resetGridBlock();
 		this.AddAllBlock(this.vec2UndoString[this.vec2UndoString.length - 2]);
 		this.vec2UndoString.pop();
@@ -227,6 +247,7 @@ class BlockManagerClass extends eui.Group {
 	}
 
 	public clearCheck(): boolean {
+		console.log("clearCheck");
 		var i = 0;
 		var length = this.vecInventoryBlock.length;
 		if (this.vecBlock.length != 0) {
@@ -243,23 +264,22 @@ class BlockManagerClass extends eui.Group {
 		// KTW.to(this, 1, {}, null, function (): void {
 
 		// });
-		// if (this.field.stageData.star3 <= Status.score) {
-		// this.parent.addChild();
-		// InputManager.newInput(InputClear);
-		InputManager.addChild(new ClearSprite(true))
-		// 	SharedManager.vecPuzzleClear[this.field.stageData.stageNo - 1] = 2;
-		// }
-		// else {
-		// 	parent.addChild(new ClearSprite(false));
-		// 	if (SharedManager.vecPuzzleClear[this.field.stageData.stageNo - 1] != 2) {
-		// 		SharedManager.vecPuzzleClear[this.field.stageData.stageNo - 1] = 1;
-		// 	}
-		// }
+		if (this.field.stageData.star3 <= Status.score) {
+
+			InputManager.addChild(new ClearSprite(true))
+			// 	SharedManager.vecPuzzleClear[this.field.stageData.stageNo - 1] = 2;
+		}
+		else {
+			InputManager.addChild(new ClearSprite(false))
+			// 	if (SharedManager.vecPuzzleClear[this.field.stageData.stageNo - 1] != 2) {
+			// 		SharedManager.vecPuzzleClear[this.field.stageData.stageNo - 1] = 1;
+			// 	}
+		}
 		// SharedManager.saveVecPuzzleClear();
 		return true;
 	}
 
-	public finishCheck(param1: any): Boolean {
+	public finishCheck(param1: any): boolean {
 		var length = this.vecInventoryBlock.length;
 		if (this.vecBlock.length != 9) {
 			return false;
@@ -269,6 +289,7 @@ class BlockManagerClass extends eui.Group {
 	}
 
 	public finish(param1: any): void {
+
 
 	}
 

@@ -18,7 +18,7 @@ class Block extends eui.Component {
 		var length: number = ~~(rest.length);
 		i = 0;
 		while (i < length) {
-			this.vecLayer.push(rest[i]);
+			this.vecLayer.push(~~rest[i]);
 			i++;
 		}
 	}

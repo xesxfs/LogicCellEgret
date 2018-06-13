@@ -53,14 +53,15 @@ var InputSetPuzzleClass = (function (_super) {
         }
     };
     InputSetPuzzleClass.prototype.mouseOutEvent = function (e) {
-        if (this.fieldRect.containsPoint(egret.Point.create(e.stageX, e.stageY))) {
-            var gx = (e.stageX - this.field.x) / 120;
-            var gy = (e.stageY - this.field.y) / 120;
-            this.field.mouseUpField(gx, gy);
-        }
-        else {
-            BlockManager.mouseUp();
-        }
+        if (SceneManager.scene instanceof SetPuzzleScene)
+            if (this.fieldRect.containsPoint(egret.Point.create(e.stageX, e.stageY))) {
+                var gx = (e.stageX - this.field.x) / 120;
+                var gy = (e.stageY - this.field.y) / 120;
+                this.field.mouseUpField(gx, gy);
+            }
+            else {
+                BlockManager.mouseUp();
+            }
     };
     return InputSetPuzzleClass;
 }(Input));

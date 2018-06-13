@@ -21,10 +21,12 @@
 			<e:TileLayout requestedRowCount="5" requestedColumnCount="4" horizontalGap="22" verticalGap="18" orientation="rows" verticalAlign="bottom" horizontalAlign="center"/>
 		</e:layout>
 	</e:Group>
-	<e:Image source="Chip_106_02_png" y="1008" width="110" height="110" x="130"/>
+	<e:Image source="Chip_106_02_png" y="1008" width="110" height="110" x="265"/>
 	<e:Image source="Chip_106_01_png" y="1006" width="100" height="110" x="410"/>
 	<e:Rect width="120" height="120" x="230" y="24" strokeWeight="10" fillAlpha="1" fillColor="0x000000"/>
 	<e:Rect width="264" height="106" x="154" y="130" anchorOffsetX="0" anchorOffsetY="0" fillColor="0xb0b0af" fillAlpha="0.9"/>
+	<e:Rect width="250" height="120" anchorOffsetX="0" anchorOffsetY="0" fillColor="0xB0B0AF" fillAlpha="0.9" horizontalCenter="0" verticalCenter="0"/>
+	<e:Label text="3" horizontalCenter="0" verticalCenter="0" textColor="0x000000"/>
 	<e:Label text="Perfect" x="220" y="168" textColor="0x000000" bold="true"/>
 	<e:Group width="100%" height="138" anchorOffsetY="0">
 		<e:Rect width="100%" height="100%" fillColor="0x444436" fillAlpha="0.8"/>

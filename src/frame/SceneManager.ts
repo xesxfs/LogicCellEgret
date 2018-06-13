@@ -31,22 +31,22 @@ class SceneManagerClass extends eui.Component {
 			sceneId = 1;
 		}
 		else if (this.scene instanceof SetScore30Scene) {
-			// SetScore30Scene.cnt = 30;
-			// SetScore30Scene.isFinish = false;
+			SetScore30Scene.cnt = 30;
+			SetScore30Scene.isFinish = false;
 			sceneId = 2;
 		}
 		else if (this.scene instanceof SetScore1minScene) {
-			// SetScore1minScene.cnt = -95;
-			// SetScore1minScene.isFinish = false;
+			SetScore1minScene.cnt = -95;
+			SetScore1minScene.isFinish = false;
 			sceneId = 3;
 		}
 		else if (this.scene instanceof SetScore1comboScene) {
-			// SetScore1comboScene.isFinish = false;
+			SetScore1comboScene.isFinish = false;
 			sceneId = 4;
 		}
-		// Status.reset(_loc1_);
-		// this.nextScene.alpha = 0;
-		// KTW.to(this.nextScene, 0.3, { "alpha": 1 }, Linear.easeOut, null, 0.2);
+		Status.reset(sceneId);
+		this.nextScene.alpha = 0;
+		egret.Tween.get(this.nextScene).to({ alpha: 1 }, 200, egret.Ease.elasticOut);
 		this.addChild(this.scene);
 	}
 

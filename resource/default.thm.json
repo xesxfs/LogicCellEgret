@@ -30,6 +30,7 @@
 		"resource/eui_skins/RadioButtonSkin.exml",
 		"resource/eui_skins/ScrollerSkin.exml",
 		"resource/eui_skins/SelectSceneSkin.exml",
+		"resource/eui_skins/SetScoreSceneSkin.exml",
 		"resource/eui_skins/TextInputSkin.exml",
 		"resource/eui_skins/ToggleSwitchSkin.exml",
 		"resource/eui_skins/VScrollBarSkin.exml",

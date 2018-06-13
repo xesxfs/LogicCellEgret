@@ -50,8 +50,8 @@ var BlockManagerClass = (function (_super) {
         this.vecBlock.push(block);
         this.addChildAt(block, block.inventoryNumber);
     };
-    BlockManagerClass.prototype.AddAllBlock = function (blockDataStr, param2) {
-        if (param2 === void 0) { param2 = true; }
+    BlockManagerClass.prototype.AddAllBlock = function (blockDataStr, bUndo) {
+        if (bUndo === void 0) { bUndo = true; }
         var i = 0;
         var j = 0;
         var splitStr = null;
@@ -59,7 +59,7 @@ var BlockManagerClass = (function (_super) {
         var xGrid = 0;
         var yGrid = 0;
         var l = blockDataStr.length;
-        if (param2) {
+        if (bUndo) {
             l--;
         }
         i = 0;
@@ -78,7 +78,7 @@ var BlockManagerClass = (function (_super) {
                 this.addInventoryBlock(block, yGrid);
             }
             else {
-                this.field.getGrid(yGrid, xGrid).setBlock(block);
+                this.field.getGrid(xGrid, yGrid).setBlock(block);
                 this.vecBlock.push(block);
             }
             block.draw();
@@ -87,9 +87,9 @@ var BlockManagerClass = (function (_super) {
         while (this.vecInventoryBlock.length < 5) {
             this.vecInventoryBlock.push(null);
         }
-        if (param2) {
-            // Status.score = parseInt(param1[_loc3_]);
-            // Status.drawScore = Status.score;
+        if (bUndo) {
+            Status.score = parseInt(blockDataStr[i]);
+            Status.drawScore = Status.score;
         }
     };
     /**增加操作砖块**/
@@ -99,9 +99,26 @@ var BlockManagerClass = (function (_super) {
         }
         this.vecInventoryBlock[layerIndex] = block;
         block.x = layerIndex * 125;
-        // block.y = 240;
         block.inventoryNumber = layerIndex;
         this.addChild(block);
+    };
+    BlockManagerClass.prototype.addRandomInventoryBlock = function (idx) {
+        var block = new Block();
+        block.inventoryNumber = idx;
+        this.addInventoryBlock(block, idx);
+        if (Status.mode == 1) {
+            block.setLayer(Math.random() * 5, Math.random() * 5, Math.random() * 5, Math.random() * 5);
+        }
+        else if (Status.mode == 2) {
+            block.setLayer(Math.random() * 4, Math.random() * 4, Math.random() * 4, Math.random() * 4);
+        }
+        else if (Status.mode == 3) {
+            block.setLayer(Math.random() * 3, Math.random() * 3, Math.random() * 3, Math.random() * 3);
+        }
+        else if (Status.mode == 4) {
+            block.setLayer(Math.random() * 5, Math.random() * 5, Math.random() * 5, Math.random() * 5);
+        }
+        block.draw();
     };
     BlockManagerClass.prototype.removeBlock = function (block) {
         var i = 0;
@@ -149,6 +166,7 @@ var BlockManagerClass = (function (_super) {
         ;
         this.removeChildren();
         this.vecInventoryBlock = [];
+        this.vecBlock = [];
         this.field.resetGridBlock();
         this.AddAllBlock(this.vec2UndoString[this.vec2UndoString.length - 2]);
         this.vec2UndoString.pop();
@@ -210,6 +228,7 @@ var BlockManagerClass = (function (_super) {
         }
     };
     BlockManagerClass.prototype.clearCheck = function () {
+        console.log("clearCheck");
         var i = 0;
         var length = this.vecInventoryBlock.length;
         if (this.vecBlock.length != 0) {
@@ -225,18 +244,16 @@ var BlockManagerClass = (function (_super) {
         InputManager.newInput(null);
         // KTW.to(this, 1, {}, null, function (): void {
         // });
-        // if (this.field.stageData.star3 <= Status.score) {
-        // this.parent.addChild();
-        // InputManager.newInput(InputClear);
-        InputManager.addChild(new ClearSprite(true));
-        // 	SharedManager.vecPuzzleClear[this.field.stageData.stageNo - 1] = 2;
-        // }
-        // else {
-        // 	parent.addChild(new ClearSprite(false));
-        // 	if (SharedManager.vecPuzzleClear[this.field.stageData.stageNo - 1] != 2) {
-        // 		SharedManager.vecPuzzleClear[this.field.stageData.stageNo - 1] = 1;
-        // 	}
-        // }
+        if (this.field.stageData.star3 <= Status.score) {
+            InputManager.addChild(new ClearSprite(true));
+            // 	SharedManager.vecPuzzleClear[this.field.stageData.stageNo - 1] = 2;
+        }
+        else {
+            InputManager.addChild(new ClearSprite(false));
+            // 	if (SharedManager.vecPuzzleClear[this.field.stageData.stageNo - 1] != 2) {
+            // 		SharedManager.vecPuzzleClear[this.field.stageData.stageNo - 1] = 1;
+            // 	}
+        }
         // SharedManager.saveVecPuzzleClear();
         return true;
     };

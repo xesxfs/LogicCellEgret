@@ -29,7 +29,7 @@ var Block = (function (_super) {
         var length = ~~(rest.length);
         i = 0;
         while (i < length) {
-            this.vecLayer.push(rest[i]);
+            this.vecLayer.push(~~rest[i]);
             i++;
         }
     };

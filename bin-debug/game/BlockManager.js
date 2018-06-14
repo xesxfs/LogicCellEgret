@@ -78,7 +78,7 @@ var BlockManagerClass = (function (_super) {
                 this.addInventoryBlock(block, yGrid);
             }
             else {
-                this.field.getGrid(xGrid, yGrid).setBlock(block);
+                this.field.getGrid(yGrid, xGrid).setBlock(block);
                 this.vecBlock.push(block);
             }
             block.draw();
@@ -188,7 +188,7 @@ var BlockManagerClass = (function (_super) {
         i = 0;
         while (i < this.vecBlock.length) {
             block = this.vecBlock[i];
-            str = "" + block.gridX + block.gridY;
+            str = "" + block.gridY + block.gridX;
             j = 0;
             while (j < block.vecLayer.length) {
                 str = str + block.vecLayer[j];
@@ -228,15 +228,16 @@ var BlockManagerClass = (function (_super) {
         }
     };
     BlockManagerClass.prototype.clearCheck = function () {
-        console.log("clearCheck");
         var i = 0;
         var length = this.vecInventoryBlock.length;
         if (this.vecBlock.length != 0) {
+            console.log("clearCheck false length", this.vecBlock);
             return false;
         }
         i = 0;
         while (i < length) {
             if (this.vecInventoryBlock[i] != null) {
+                console.log("clearCheck false");
                 return false;
             }
             i++;
@@ -246,26 +247,47 @@ var BlockManagerClass = (function (_super) {
         // });
         if (this.field.stageData.star3 <= Status.score) {
             InputManager.addChild(new ClearSprite(true));
-            // 	SharedManager.vecPuzzleClear[this.field.stageData.stageNo - 1] = 2;
+            SharedManager.vecPuzzleClear[this.field.stageData.stageNo - 1] = 2;
         }
         else {
             InputManager.addChild(new ClearSprite(false));
-            // 	if (SharedManager.vecPuzzleClear[this.field.stageData.stageNo - 1] != 2) {
-            // 		SharedManager.vecPuzzleClear[this.field.stageData.stageNo - 1] = 1;
-            // 	}
+            if (SharedManager.vecPuzzleClear[this.field.stageData.stageNo - 1] != 2) {
+                SharedManager.vecPuzzleClear[this.field.stageData.stageNo - 1] = 1;
+            }
         }
-        // SharedManager.saveVecPuzzleClear();
+        SharedManager.saveVecPuzzleClear();
         return true;
     };
-    BlockManagerClass.prototype.finishCheck = function (param1) {
-        var length = this.vecInventoryBlock.length;
+    BlockManagerClass.prototype.finishCheck = function (cls) {
+        console.log("finishCheck:", this.vecBlock.length);
         if (this.vecBlock.length != 9) {
             return false;
         }
-        this.finish(param1);
+        this.finish(cls);
         return true;
     };
-    BlockManagerClass.prototype.finish = function (param1) {
+    BlockManagerClass.prototype.finish = function (cls) {
+        Status.finishTime = new Date().getTime();
+        var score = Status.score;
+        switch (Status.mode) {
+            case 1:
+                SharedManager.saveScore(score);
+                break;
+            case 2:
+                SharedManager.saveScore30(score);
+                SetScore30Scene.isFinish = true;
+                break;
+            case 3:
+                SharedManager.saveScore1min(score);
+                SetScore1minScene.isFinish = true;
+                break;
+            case 4:
+                SharedManager.saveScore1combo(score);
+                SetScore1minScene.isFinish = true;
+        }
+        var f = new ClearSprite(true, true);
+        f.retryScene = cls;
+        InputManager.addChild(f);
     };
     return BlockManagerClass;
 }(eui.Group));

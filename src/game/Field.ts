@@ -26,6 +26,9 @@ class Field extends eui.Group {
 		this.stageData = stageData;
 		layout.requestedColumnCount = this.fieldW = stageData.fieldW;
 		layout.requestedRowCount = this.fieldH = stageData.fieldH;
+		if (layout.requestedColumnCount >= 5) {
+			layout.horizontalGap = 2;
+		}
 		Field.fieldX = this.x;
 		Field.fieldY = this.y;
 		this.vec2Grid = [];
@@ -41,7 +44,6 @@ class Field extends eui.Group {
 					grid.drawBroderRect();
 				}
 				this.addChild(grid);
-
 				w++;
 			}
 			h++;
@@ -125,14 +127,12 @@ class Field extends eui.Group {
 		}
 
 		var length = BlockManager.vecBlock.length;
-		i = 0;
-		while (i < length) {
+		i = length - 1;
+		while (i >= 0) {
 			block = BlockManager.vecBlock[i];
 			if (block.removeFlag && block.removeLayer()) {
-				i--;
-				length--;
 			}
-			i++;
+			i--;
 		}
 		if (nestFlag) {
 			if (Status.combo < 8) {

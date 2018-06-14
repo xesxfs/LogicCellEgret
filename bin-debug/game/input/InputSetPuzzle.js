@@ -43,8 +43,8 @@ var InputSetPuzzleClass = (function (_super) {
         InputSetPuzzle.fieldRect = new egret.Rectangle(this.field.x, this.field.y, this.field.width, this.field.height);
         if (this.fieldRect.containsPoint(egret.Point.create(e.stageX, e.stageY))) {
             console.log("containsPoint");
-            var gx = ~~(e.stageX - this.field.x) / (120 + 22);
-            var gy = ~~(e.stageY - this.field.y) / (120 + 18);
+            var gx = ~~(e.stageX - this.field.x) / (120);
+            var gy = ~~(e.stageY - this.field.y) / (120);
             /**这里需要反过来，对于数组坐标系 */
             this.field.mouseUpField(~~gy, ~~gx);
         }

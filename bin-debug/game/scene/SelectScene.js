@@ -17,6 +17,10 @@ var SelectScene = (function (_super) {
     }
     SelectScene.prototype.childrenCreated = function () {
         InputManager.newInput(InputSelect);
+        this.score1mLab.text = SharedManager.score1min.toString();
+        this.scoreLab.text = SharedManager.score.toString();
+        this.score30Lab.text = SharedManager.score30.toString();
+        this.scoreComboLab.text = SharedManager.score1combo.toString();
     };
     return SelectScene;
 }(Scene));

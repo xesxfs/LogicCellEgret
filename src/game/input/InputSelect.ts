@@ -20,10 +20,10 @@ class InputSelectClass extends Input {
 				SceneManager.newScene(new SetScore1minScene());
 			
 			} else if (scene.rankGroup.getTransformedBounds(this).containsPoint(p)) {
-				SceneManager.newScene(new RankingScene());
+				// SceneManager.newScene(new RankingScene());
 			
 			} else if (scene.optionGroup.getTransformedBounds(this).containsPoint(p)) {
-				SceneManager.newScene(new OptionScene());
+				// SceneManager.newScene(new OptionScene());
 			
 			} else if (scene.comboGroup.getTransformedBounds(this).containsPoint(p)) {
 				SceneManager.newScene(new SetScore1comboScene());

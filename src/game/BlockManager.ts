@@ -86,7 +86,7 @@ class BlockManagerClass extends eui.Group {
 				this.addInventoryBlock(block, yGrid);
 			}
 			else {
-				this.field.getGrid(xGrid, yGrid).setBlock(block);
+				this.field.getGrid(yGrid, xGrid).setBlock(block);
 				this.vecBlock.push(block);
 			}
 			block.draw();
@@ -202,7 +202,7 @@ class BlockManagerClass extends eui.Group {
 
 		while (i < this.vecBlock.length) {
 			block = this.vecBlock[i];
-			str = "" + block.gridX + block.gridY;
+			str = "" + block.gridY + block.gridX;
 			j = 0;
 			while (j < block.vecLayer.length) {
 				str = str + block.vecLayer[j];
@@ -247,50 +247,72 @@ class BlockManagerClass extends eui.Group {
 	}
 
 	public clearCheck(): boolean {
-		console.log("clearCheck");
+
 		var i = 0;
 		var length = this.vecInventoryBlock.length;
 		if (this.vecBlock.length != 0) {
+			console.log("clearCheck false length", this.vecBlock);
 			return false;
 		}
 		i = 0;
 		while (i < length) {
 			if (this.vecInventoryBlock[i] != null) {
+				console.log("clearCheck false");
 				return false;
 			}
 			i++;
 		}
 		InputManager.newInput(null);
 		// KTW.to(this, 1, {}, null, function (): void {
-
 		// });
 		if (this.field.stageData.star3 <= Status.score) {
 
 			InputManager.addChild(new ClearSprite(true))
-			// 	SharedManager.vecPuzzleClear[this.field.stageData.stageNo - 1] = 2;
+			SharedManager.vecPuzzleClear[this.field.stageData.stageNo - 1] = 2;
 		}
 		else {
 			InputManager.addChild(new ClearSprite(false))
-			// 	if (SharedManager.vecPuzzleClear[this.field.stageData.stageNo - 1] != 2) {
-			// 		SharedManager.vecPuzzleClear[this.field.stageData.stageNo - 1] = 1;
-			// 	}
+			if (SharedManager.vecPuzzleClear[this.field.stageData.stageNo - 1] != 2) {
+				SharedManager.vecPuzzleClear[this.field.stageData.stageNo - 1] = 1;
+			}
 		}
-		// SharedManager.saveVecPuzzleClear();
+		SharedManager.saveVecPuzzleClear();
 		return true;
 	}
 
-	public finishCheck(param1: any): boolean {
-		var length = this.vecInventoryBlock.length;
+	public finishCheck(cls: any): boolean {		
+		console.log("finishCheck:",this.vecBlock.length)
 		if (this.vecBlock.length != 9) {
 			return false;
 		}
-		this.finish(param1);
+		this.finish(cls);
 		return true;
 	}
 
-	public finish(param1: any): void {
+	public finish(cls: any): void {
 
+		Status.finishTime = new Date().getTime();
+		var score = Status.score;
+		switch (Status.mode) {
+			case 1:
+				SharedManager.saveScore(score);
+				break;
+			case 2:
+				SharedManager.saveScore30(score);
+				SetScore30Scene.isFinish = true;
+				break;
+			case 3:
+				SharedManager.saveScore1min(score);
+				SetScore1minScene.isFinish = true;
+				break;
+			case 4:
+				SharedManager.saveScore1combo(score);
+				SetScore1minScene.isFinish = true;
+		}
 
+		let f = new ClearSprite(true, true);
+		f.retryScene = cls;
+		InputManager.addChild(f);
 	}
 
 }

@@ -17,6 +17,7 @@ var StatusClass = (function () {
         this.combo = 0;
         this.maxCombo = this.vecComboScore.length;
         this.score = 0;
+        this.drawScore = 0;
         this.startTime = new Date().getDate();
         this.finishTime = 0;
     };
@@ -28,6 +29,11 @@ var StatusClass = (function () {
     StatusClass.prototype.getPlayTime = function () {
         var offTime = this.finishTime - this.startTime;
         return;
+    };
+    StatusClass.prototype.update = function () {
+        if (this.drawScore != this.score) {
+            this.drawScore = this.drawScore + (~~((this.score - this.drawScore) / 5) + 1);
+        }
     };
     return StatusClass;
 }());

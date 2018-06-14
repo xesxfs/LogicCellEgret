@@ -36,6 +36,7 @@ class SetPuzzleScene extends Scene {
 		BlockManager.update();
 		EffectManager.update();
 		App.BackMenu.update();
+		Status.update();
 		this.hudManager.update();
 	}
 }

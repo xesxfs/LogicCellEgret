@@ -15,6 +15,7 @@ class StatusClass {
 		this.combo = 0;
 		this.maxCombo = this.vecComboScore.length;
 		this.score = 0;
+		this.drawScore = 0;
 		this.startTime = new Date().getDate();
 		this.finishTime = 0;
 	}
@@ -28,6 +29,12 @@ class StatusClass {
 	public getPlayTime(): string {
 		let offTime = this.finishTime - this.startTime;
 		return;
+	}
+
+	public update() {
+		if (this.drawScore != this.score) {
+			this.drawScore = this.drawScore + (~~((this.score - this.drawScore) / 5) + 1);
+		}
 	}
 }
 var Status: StatusClass = new StatusClass();

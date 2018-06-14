@@ -4,21 +4,44 @@
 	<e:Image source="TitleLogo_png" x="15.15" y="236.64" height="88" width="616" visible="false"/>
 	<e:Image source="Icon48_png" x="389.45" y="101.76" width="96" height="96" visible="false"/>
 	<e:Image source="Chip_png" x="-408.55" y="280.64" height="1056" width="3696" visible="false"/>
-	<e:Group horizontalCenter="0" bottom="110">
-		<e:Image source="Chip_01_20_png" x="-40" y="138" width="120" height="120" scaleX="1" scaleY="1"/>
-		<e:Image source="Chip_01_20_png" x="335" y="138" width="120" height="120" scaleX="1" scaleY="1"/>
-		<e:Image source="Chip_01_20_png" x="85" y="138" width="120" height="120" scaleX="1" scaleY="1"/>
-		<e:Image source="Chip_01_20_png" x="460" y="138" width="120" height="120" scaleX="1" scaleY="1"/>
+	<e:Group horizontalCenter="0" bottom="130" height="120" width="100%">
+		<e:Image source="Chip_01_20_png" x="0" y="0" width="120" height="120" scaleX="1" scaleY="1"/>
+		<e:Image source="Chip_01_20_png" x="130" y="0" width="120" height="120" scaleX="1" scaleY="1"/>
+		<e:Image source="Chip_01_20_png" x="260" y="0" width="120" height="120" scaleX="1" scaleY="1"/>
+		<e:Image source="Chip_01_20_png" x="390" y="0" width="120" height="120" scaleX="1" scaleY="1"/>
+		<e:Image source="Chip_01_20_png" y="0" width="120" height="120" scaleX="1" scaleY="1" right="0"/>
 		<e:layout>
-			<e:HorizontalLayout horizontalAlign="center"/>
+			<e:BasicLayout/>
 		</e:layout>
 	</e:Group>
-	<e:Group x="47" verticalCenter="0">
+	<e:Group verticalCenter="-80" horizontalCenter="0">
 		<e:Image source="Chip_01_20_png" x="530" y="208" width="120" height="120" scaleX="1" scaleY="1"/>
 		<e:Image source="Chip_01_20_png" x="540" y="218" width="120" height="120" scaleX="1" scaleY="1"/>
 		<e:Image source="Chip_01_20_png" x="560" y="238" width="120" height="120" scaleX="1" scaleY="1"/>
+		<e:Image source="Chip_01_20_png" x="570" y="248" width="120" height="120" scaleX="1" scaleY="1"/>
+		<e:Image source="Chip_01_20_png" x="580" y="258" width="120" height="120" scaleX="1" scaleY="1"/>
+		<e:Image source="Chip_01_20_png" x="540" y="218" width="120" height="120" scaleX="1" scaleY="1"/>
+		<e:Image source="Chip_01_20_png" x="550" y="228" width="120" height="120" scaleX="1" scaleY="1"/>
+		<e:Image source="Chip_01_20_png" x="570" y="248" width="120" height="120" scaleX="1" scaleY="1"/>
+		<e:Image source="Chip_01_20_png" x="580" y="258" width="120" height="120" scaleX="1" scaleY="1"/>
+		<e:Image source="Chip_01_20_png" x="590" y="268" width="120" height="120" scaleX="1" scaleY="1"/>
+		<e:Image source="Chip_01_20_png" x="550" y="228" width="120" height="120" scaleX="1" scaleY="1"/>
+		<e:Image source="Chip_01_20_png" x="560" y="238" width="120" height="120" scaleX="1" scaleY="1"/>
+		<e:Image source="Chip_01_20_png" x="580" y="258" width="120" height="120" scaleX="1" scaleY="1"/>
+		<e:Image source="Chip_01_20_png" x="590" y="268" width="120" height="120" scaleX="1" scaleY="1"/>
+		<e:Image source="Chip_01_20_png" x="600" y="278" width="120" height="120" scaleX="1" scaleY="1"/>
+		<e:Image source="Chip_01_20_png" x="560" y="238" width="120" height="120" scaleX="1" scaleY="1"/>
+		<e:Image source="Chip_01_20_png" x="570" y="248" width="120" height="120" scaleX="1" scaleY="1"/>
+		<e:Image source="Chip_01_20_png" x="590" y="268" width="120" height="120" scaleX="1" scaleY="1"/>
+		<e:Image source="Chip_01_20_png" x="600" y="278" width="120" height="120" scaleX="1" scaleY="1"/>
+		<e:Image source="Chip_01_20_png" x="610" y="288" width="120" height="120" scaleX="1" scaleY="1"/>
+		<e:Image source="Chip_01_20_png" x="570" y="248" width="120" height="120" scaleX="1" scaleY="1"/>
+		<e:Image source="Chip_01_20_png" x="580" y="258" width="120" height="120" scaleX="1" scaleY="1"/>
+		<e:Image source="Chip_01_20_png" x="600" y="278" width="120" height="120" scaleX="1" scaleY="1"/>
+		<e:Image source="Chip_01_20_png" x="610" y="288" width="120" height="120" scaleX="1" scaleY="1"/>
+		<e:Image source="Chip_01_20_png" x="620" y="298" width="120" height="120" scaleX="1" scaleY="1"/>
 		<e:layout>
-			<e:TileLayout requestedRowCount="5" requestedColumnCount="4" horizontalGap="22" verticalGap="18" orientation="rows" verticalAlign="bottom" horizontalAlign="center"/>
+			<e:TileLayout requestedRowCount="5" requestedColumnCount="5" verticalGap="18" orientation="rows" verticalAlign="bottom" horizontalAlign="center" horizontalGap="2"/>
 		</e:layout>
 	</e:Group>
 	<e:Image source="Chip_106_02_png" y="1008" width="110" height="110" x="265"/>

@@ -42,6 +42,7 @@ var SetPuzzleScene = (function (_super) {
         BlockManager.update();
         EffectManager.update();
         App.BackMenu.update();
+        Status.update();
         this.hudManager.update();
     };
     return SetPuzzleScene;

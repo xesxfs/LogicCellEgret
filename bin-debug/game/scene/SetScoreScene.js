@@ -20,9 +20,9 @@ var SetScoreScene = (function (_super) {
         backBitmap.x = 265;
         backBitmap.y = 1000;
         _this.addChild(backBitmap);
+        BlockManager.addRandomInventoryBlock(0);
         BlockManager.addRandomInventoryBlock(1);
         BlockManager.addRandomInventoryBlock(2);
-        BlockManager.addRandomInventoryBlock(3);
         _this.addChild(BlockManager);
         _this.addChild(_this.hudManager = new HudManagerScore());
         _this.addChild(App.BackMenu);
@@ -35,6 +35,7 @@ var SetScoreScene = (function (_super) {
         BlockManager.update();
         EffectManager.update();
         App.BackMenu.update();
+        Status.update();
         this.hudManager.update();
     };
     return SetScoreScene;

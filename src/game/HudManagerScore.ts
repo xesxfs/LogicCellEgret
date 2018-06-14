@@ -1,7 +1,6 @@
 class HudManagerScore extends eui.Component {
 	public stageNOLab: eui.Label;
 	public scoreLab: eui.Label;
-	private drawScore: number = 0;
 	public timeLab: eui.Label;
 	public stageLab: eui.Label;
 
@@ -36,11 +35,7 @@ class HudManagerScore extends eui.Component {
 
 	public update() {
 
-		if (this.drawScore != Status.score) {
-			this.drawScore = this.drawScore + 1;//+(Status.score-this.drawScore)
-			this.scoreLab.text = this.drawScore.toString();
-		}
-
+		this.scoreLab.text = Status.drawScore.toString();
 		if (Status.mode === GameMode.Score1M) {
 			var timeStr;
 			var h = 0;

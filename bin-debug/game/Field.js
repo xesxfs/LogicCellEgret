@@ -29,6 +29,9 @@ var Field = (function (_super) {
         _this.stageData = stageData;
         layout.requestedColumnCount = _this.fieldW = stageData.fieldW;
         layout.requestedRowCount = _this.fieldH = stageData.fieldH;
+        if (layout.requestedColumnCount >= 5) {
+            layout.horizontalGap = 2;
+        }
         Field.fieldX = _this.x;
         Field.fieldY = _this.y;
         _this.vec2Grid = [];
@@ -122,14 +125,12 @@ var Field = (function (_super) {
             i++;
         }
         var length = BlockManager.vecBlock.length;
-        i = 0;
-        while (i < length) {
+        i = length - 1;
+        while (i >= 0) {
             block = BlockManager.vecBlock[i];
             if (block.removeFlag && block.removeLayer()) {
-                i--;
-                length--;
             }
-            i++;
+            i--;
         }
         if (nestFlag) {
             if (Status.combo < 8) {

@@ -13,9 +13,9 @@ class SetScoreScene extends Scene {
 		backBitmap.x = 265;
 		backBitmap.y = 1000;
 		this.addChild(backBitmap);
+		BlockManager.addRandomInventoryBlock(0);
 		BlockManager.addRandomInventoryBlock(1);
 		BlockManager.addRandomInventoryBlock(2);
-		BlockManager.addRandomInventoryBlock(3);
 		this.addChild(BlockManager);
 		this.addChild(this.hudManager = new HudManagerScore());
 		this.addChild(App.BackMenu);
@@ -28,6 +28,7 @@ class SetScoreScene extends Scene {
 		BlockManager.update();
 		EffectManager.update();
 		App.BackMenu.update();
+		Status.update();
 		this.hudManager.update();
 	}
 }

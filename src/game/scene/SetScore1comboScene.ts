@@ -31,6 +31,7 @@ class SetScore1comboScene extends Scene{
 		BlockManager.update();
 		EffectManager.update();
 		App.BackMenu.update();
+		Status.update();
 		this.hudManager.update();
 	}
 }

@@ -42,8 +42,8 @@ class InputSetPuzzleClass extends Input {
 		InputSetPuzzle.fieldRect = new egret.Rectangle(this.field.x, this.field.y, this.field.width, this.field.height);
 		if (this.fieldRect.containsPoint(egret.Point.create(e.stageX, e.stageY))) {
 			console.log("containsPoint")
-			let gx = ~~(e.stageX - this.field.x) / (120 + 22);
-			let gy = ~~(e.stageY - this.field.y) / (120 + 18);
+			let gx = ~~(e.stageX - this.field.x) / (120);
+			let gy = ~~(e.stageY - this.field.y) / (120);
 			/**这里需要反过来，对于数组坐标系 */
 			this.field.mouseUpField(~~gy, ~~gx);
 		}

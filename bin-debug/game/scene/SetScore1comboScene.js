@@ -37,6 +37,7 @@ var SetScore1comboScene = (function (_super) {
         BlockManager.update();
         EffectManager.update();
         App.BackMenu.update();
+        Status.update();
         this.hudManager.update();
     };
     SetScore1comboScene.isFinish = false;

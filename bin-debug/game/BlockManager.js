@@ -152,7 +152,7 @@ var BlockManagerClass = (function (_super) {
     BlockManagerClass.prototype.mouseUp = function () {
         if (this.mouseDownBlock != null) {
             var p = this.globalToLocal(this.mouseDownBlock.x, this.mouseDownBlock.y);
-            this.addBlock(this.mouseDownBlock);
+            this.addChildAt(this.mouseDownBlock, this.mouseDownBlock.inventoryNumber);
             this.mouseDownBlock.x = p.x;
             this.mouseDownBlock.y = p.y;
             egret.Tween.get(this.mouseDownBlock).to({ x: this.mouseDownBlock.inventoryNumber * 125, y: 0 }, 100);
@@ -259,7 +259,7 @@ var BlockManagerClass = (function (_super) {
         return true;
     };
     BlockManagerClass.prototype.finishCheck = function (cls) {
-        console.log("finishCheck:", this.vecBlock.length);
+        console.log("finishCheck:", this.vecBlock.length, this.vecBlock);
         if (this.vecBlock.length != 9) {
             return false;
         }

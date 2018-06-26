@@ -155,7 +155,6 @@ class BlockManagerClass extends eui.Group {
 		var down: Block = this.vecInventoryBlock[idx];
 		if (down != null) {
 			this.mouseDownBlock = down;
-			// this.setChildIndex(down, this.numChildren - 1);
 			let p = this.localToGlobal(down.x, down.y);
 			down.x = p.x;
 			down.y = p.y;
@@ -166,7 +165,7 @@ class BlockManagerClass extends eui.Group {
 	public mouseUp(): void {
 		if (this.mouseDownBlock != null) {
 			let p = this.globalToLocal(this.mouseDownBlock.x, this.mouseDownBlock.y);
-			this.addBlock(this.mouseDownBlock);
+			this.addChildAt(this.mouseDownBlock, this.mouseDownBlock.inventoryNumber);
 			this.mouseDownBlock.x = p.x;
 			this.mouseDownBlock.y = p.y;
 			egret.Tween.get(this.mouseDownBlock).to({ x: this.mouseDownBlock.inventoryNumber * 125, y: 0 }, 100);
@@ -247,7 +246,6 @@ class BlockManagerClass extends eui.Group {
 	}
 
 	public clearCheck(): boolean {
-
 		var i = 0;
 		var length = this.vecInventoryBlock.length;
 		if (this.vecBlock.length != 0) {
@@ -263,8 +261,6 @@ class BlockManagerClass extends eui.Group {
 			i++;
 		}
 		InputManager.newInput(null);
-		// KTW.to(this, 1, {}, null, function (): void {
-		// });
 		if (this.field.stageData.star3 <= Status.score) {
 
 			InputManager.addChild(new ClearSprite(true))
@@ -280,8 +276,8 @@ class BlockManagerClass extends eui.Group {
 		return true;
 	}
 
-	public finishCheck(cls: any): boolean {		
-		console.log("finishCheck:",this.vecBlock.length)
+	public finishCheck(cls: any): boolean {
+		console.log("finishCheck:", this.vecBlock.length, this.vecBlock);
 		if (this.vecBlock.length != 9) {
 			return false;
 		}
@@ -290,7 +286,6 @@ class BlockManagerClass extends eui.Group {
 	}
 
 	public finish(cls: any): void {
-
 		Status.finishTime = new Date().getTime();
 		var score = Status.score;
 		switch (Status.mode) {
@@ -314,7 +309,6 @@ class BlockManagerClass extends eui.Group {
 		f.retryScene = cls;
 		InputManager.addChild(f);
 	}
-
 }
 
 var BlockManager: BlockManagerClass = new BlockManagerClass();

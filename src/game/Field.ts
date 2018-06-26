@@ -194,7 +194,7 @@ class Field extends eui.Group {
 		var gridY = gy;
 		var grid: Grid = this.getGrid(gridX, gridY);
 		var mouseDownBlock: Block = BlockManager.mouseDownBlock;
-		if (grid != null && grid.block == null && grid.type == 1) {
+		if (!this.matchingJob && grid != null && grid.block == null && grid.type == 1) {
 			grid.setBlock(mouseDownBlock);
 			BlockManager.vecInventoryBlock[mouseDownBlock.inventoryNumber] = null;
 			BlockManager.vecBlock.push(mouseDownBlock);

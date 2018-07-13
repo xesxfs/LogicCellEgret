@@ -142,7 +142,6 @@ var BlockManagerClass = (function (_super) {
         var down = this.vecInventoryBlock[idx];
         if (down != null) {
             this.mouseDownBlock = down;
-            // this.setChildIndex(down, this.numChildren - 1);
             var p = this.localToGlobal(down.x, down.y);
             down.x = p.x;
             down.y = p.y;
@@ -243,8 +242,6 @@ var BlockManagerClass = (function (_super) {
             i++;
         }
         InputManager.newInput(null);
-        // KTW.to(this, 1, {}, null, function (): void {
-        // });
         if (this.field.stageData.star3 <= Status.score) {
             InputManager.addChild(new ClearSprite(true));
             SharedManager.vecPuzzleClear[this.field.stageData.stageNo - 1] = 2;

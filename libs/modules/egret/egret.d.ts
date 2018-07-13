@@ -3234,7 +3234,6 @@ declare namespace egret {
          * @default <code>BitmapFillMode.SCALE</code>
          *
          * @version Egret 2.4
-         * @version eui 1.0
          * @platform Web
          * @language en_US
          */
@@ -3246,7 +3245,6 @@ declare namespace egret {
          * @default <code>BitmapFillMode.SCALE</code>
          *
          * @version Egret 2.4
-         * @version eui 1.0
          * @platform Web
          * @language zh_CN
          */
@@ -3617,6 +3615,8 @@ declare namespace egret_native {
     function nrGlobalToLocal(id: number, globalX: number, globalY: number): string;
     function nrGetTextFieldWidth(id: number): number;
     function nrGetTextFieldHeight(id: number): number;
+    function nrGetTextWidth(id: number): number;
+    function nrGetTextHeight(id: number): number;
     function nrResize(width: number, height: number): void;
     function nrSetCanvasScaleFactor(factor: number, scalex: number, scaley: number): void;
     function nrUpdate(): void;
@@ -8319,7 +8319,7 @@ declare namespace egret {
      * @platform Web,Native
      * @language zh_CN
      */
-    class HttpMethod {
+    namespace HttpMethod {
         /**
          * Specifies that the HttpRequest object is a GET.
          * @version Egret 2.4
@@ -8332,7 +8332,7 @@ declare namespace egret {
          * @platform Web,Native
          * @language zh_CN
          */
-        static GET: string;
+        const GET = "GET";
         /**
          * Specifies that the HttpRequest object is a POST.
          * @version Egret 2.4
@@ -8345,7 +8345,7 @@ declare namespace egret {
          * @platform Web,Native
          * @language zh_CN
          */
-        static POST: string;
+        const POST = "POST";
     }
 }
 declare namespace egret {
@@ -14584,8 +14584,8 @@ declare namespace egret {
      */
     /**
      * 调用父类的setter属性，代替其他语言的写法，如 super.alpha = 1;
-     * @param thisObj 当前对象。永远都this
      * @param currentClass 当前 class 类名，非字符串
+     * @param thisObj 当前对象。永远都this
      * @param type 需要调用的setter属性名称
      * @param values 传给父类的值
      *
@@ -14605,9 +14605,9 @@ declare namespace egret {
      */
     /**
      * 获取父类的getter属性值。代替其他语言的写法，如 super.alpha;
-     * @param thisObj 当前对象。永远都this
      * @param currentClass 当前 class 类名，非字符串
-     * @param type 需要调用的setter属性名称
+     * @param thisObj 当前对象。永远都this
+     * @param type 需要调用的getter属性名称
      * @returns {any} 父类返回的值
      *
      * @exmaple egret.superGetter(egret.Sprite, this, "alpha");

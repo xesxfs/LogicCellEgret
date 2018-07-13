@@ -2503,6 +2503,7 @@ var egret;
                         this._inputElement.blur();
                     }
                 }
+                this._needShow = false;
             };
             /**
              * @private
@@ -4226,10 +4227,12 @@ var egret;
                     canvasScaleX = Math.ceil(canvasScaleX);
                     canvasScaleY = Math.ceil(canvasScaleY);
                 }
-                var m = new egret.Matrix();
+                var m = egret.Matrix.create();
+                m.identity();
                 m.scale(scalex / canvasScaleX, scaley / canvasScaleY);
                 m.rotate(rotation * Math.PI / 180);
                 var transform = "matrix(" + m.a + "," + m.b + "," + m.c + "," + m.d + "," + m.tx + "," + m.ty + ")";
+                egret.Matrix.release(m);
                 canvas.style[egret.web.getPrefixStyleName("transform")] = transform;
                 egret.sys.DisplayList.$setCanvasScale(canvasScaleX, canvasScaleY);
                 this.webTouchHandler.updateScaleMode(scalex, scaley, rotation);
@@ -4391,6 +4394,21 @@ var egret;
         function getPixels(x, y, width, height) {
             if (width === void 0) { width = 1; }
             if (height === void 0) { height = 1; }
+            //webgl环境下不需要转换成canvas获取像素信息
+            if (egret.Capabilities.renderMode == "webgl") {
+                var renderTexture = void 0;
+                //webgl下非RenderTexture纹理先画到RenderTexture
+                if (!this.$renderBuffer) {
+                    renderTexture = new egret.RenderTexture();
+                    renderTexture.drawToTexture(new egret.Bitmap(this));
+                }
+                else {
+                    renderTexture = this;
+                }
+                //从RenderTexture中读取像素数据
+                var pixels = renderTexture.$renderBuffer.getPixels(x, y, width, height);
+                return pixels;
+            }
             try {
                 var surface = convertImageToCanvas(this);
                 var result = sharedContext.getImageData(x, y, width, height).data;
@@ -5643,14 +5661,14 @@ var egret;
             /**
              * 启用RenderBuffer
              */
-            WebGLRenderContext.prototype.activateBuffer = function (buffer) {
+            WebGLRenderContext.prototype.activateBuffer = function (buffer, width, height) {
                 buffer.rootRenderTarget.activate();
                 if (!this.bindIndices) {
                     this.uploadIndicesArray(this.vao.getIndices());
                 }
                 buffer.restoreStencil();
                 buffer.restoreScissor();
-                this.onResize(buffer.width, buffer.height);
+                this.onResize(width, height);
             };
             /**
              * 上传顶点数据
@@ -5842,8 +5860,10 @@ var egret;
                     if (bitmapData.$deleteSource && bitmapData.webGLTexture) {
                         bitmapData.source = null;
                     }
-                    //todo 默认值
-                    bitmapData.webGLTexture["smoothing"] = true;
+                    if (bitmapData.webGLTexture) {
+                        //todo 默认值
+                        bitmapData.webGLTexture["smoothing"] = true;
+                    }
                 }
                 return bitmapData.webGLTexture;
             };
@@ -6155,7 +6175,7 @@ var egret;
                         }
                         break;
                     case 7 /* ACT_BUFFER */:
-                        this.activateBuffer(data.buffer);
+                        this.activateBuffer(data.buffer, data.width, data.height);
                         break;
                     case 8 /* ENABLE_SCISSOR */:
                         var buffer = this.activatedBuffer;
@@ -6593,7 +6613,6 @@ var egret;
                     this.surface.resize(width, height);
                     return;
                 }
-                this.context.pushBuffer(this);
                 // render target 尺寸重置
                 if (width != this.rootRenderTarget.width || height != this.rootRenderTarget.height) {
                     this.context.drawCmdManager.pushResize(this, width, height);
@@ -6605,6 +6624,7 @@ var egret;
                 if (this.root) {
                     this.context.resize(width, height, useMaxSize);
                 }
+                this.context.pushBuffer(this);
                 this.context.clear();
                 this.context.popBuffer();
             };
@@ -7199,6 +7219,7 @@ var egret;
                         displayBuffer.context.drawTexture(maskBuffer.rootRenderTarget.texture, 0, 0, maskBufferWidth, maskBufferHeight, 0, 0, maskBufferWidth, maskBufferHeight, maskBufferWidth, maskBufferHeight);
                         displayBuffer.setTransform(1, 0, 0, 1, 0, 0);
                         displayBuffer.context.setGlobalCompositeOperation("source-over");
+                        maskBuffer.setTransform(1, 0, 0, 1, 0, 0);
                         renderBufferPool.push(maskBuffer);
                     }
                     displayBuffer.context.setGlobalCompositeOperation(defaultCompositeOp);

@@ -30,7 +30,7 @@ var InputSelectClass = (function (_super) {
                 SceneManager.newScene(new SetScore1minScene());
             }
             else if (scene.rankGroup.getTransformedBounds(this).containsPoint(p)) {
-                // SceneManager.newScene(new RankingScene());
+                SceneManager.newScene(new RankingScene());
             }
             else if (scene.optionGroup.getTransformedBounds(this).containsPoint(p)) {
                 // SceneManager.newScene(new OptionScene());

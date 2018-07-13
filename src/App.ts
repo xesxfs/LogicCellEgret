@@ -3,6 +3,7 @@ class App {
 	}
 	public static BackMenu: BackMenuBitmapClass;
 	public static startUp(mainCotent: eui.UILayer) {
+		console.log("startUp");
 		let back = new eui.Rect();
 		back.fillColor = 0x888888;
 		back.percentWidth = 100;

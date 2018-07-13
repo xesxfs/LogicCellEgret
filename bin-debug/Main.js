@@ -98,12 +98,20 @@ var Main = (function (_super) {
     };
     Main.prototype.runGame = function () {
         return __awaiter(this, void 0, void 0, function () {
+            var userInfo;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.loadResource()];
                     case 1:
                         _a.sent();
                         this.createGameScene();
+                        return [4 /*yield*/, platform.login()];
+                    case 2:
+                        _a.sent();
+                        return [4 /*yield*/, platform.getUserInfo()];
+                    case 3:
+                        userInfo = _a.sent();
+                        console.log(userInfo);
                         return [2 /*return*/];
                 }
             });
@@ -115,25 +123,28 @@ var Main = (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 4, , 5]);
+                        console.log("loadResource");
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 5, , 6]);
                         loadingView = new LoadingUI();
                         this.stage.addChild(loadingView);
                         return [4 /*yield*/, RES.loadConfig("resource/default.res.json", "resource/")];
-                    case 1:
-                        _a.sent();
-                        return [4 /*yield*/, this.loadTheme()];
                     case 2:
                         _a.sent();
-                        return [4 /*yield*/, RES.loadGroup("preload", 0, loadingView)];
+                        return [4 /*yield*/, this.loadTheme()];
                     case 3:
                         _a.sent();
-                        this.stage.removeChild(loadingView);
-                        return [3 /*break*/, 5];
+                        return [4 /*yield*/, RES.loadGroup("preload", 0, loadingView)];
                     case 4:
+                        _a.sent();
+                        this.stage.removeChild(loadingView);
+                        return [3 /*break*/, 6];
+                    case 5:
                         e_1 = _a.sent();
                         console.error(e_1);
-                        return [3 /*break*/, 5];
-                    case 5: return [2 /*return*/];
+                        return [3 /*break*/, 6];
+                    case 6: return [2 /*return*/];
                 }
             });
         });
@@ -154,16 +165,7 @@ var Main = (function (_super) {
      * Create scene interface
      */
     Main.prototype.createGameScene = function () {
-        // let skey = new eui.Image("bg_jpg");
-        // skey.width = this.width;
-        // skey.height = this.height;
-        // this.addChild(skey);        
-        // this.touchThrough = true;
-        // this.touchChildren = true;
-        // this.addChild(new Game());
         App.startUp(this);
-    };
-    Main.prototype.onclick = function () {
     };
     return Main;
 }(eui.UILayer));

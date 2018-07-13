@@ -32,30 +32,30 @@ var SharedManagerClass = (function () {
     SharedManagerClass.prototype.saveScore = function (score) {
         if (this.score < score) {
             this.score = score;
-            this.setItem("score", score.toString());
+            this.setItem("score", score);
         }
     };
     SharedManagerClass.prototype.saveScore30 = function (score) {
         if (this.score30 < score) {
             this.score30 = score;
-            this.setItem("score30", score.toString());
+            this.setItem("score30", score);
         }
     };
     SharedManagerClass.prototype.saveScore1min = function (score) {
         if (this.score1min < score) {
             this.score1min = score;
-            this.setItem("score1min", score.toString());
+            this.setItem("score1min", score);
         }
     };
     SharedManagerClass.prototype.saveScore1combo = function (score) {
         if (this.score1combo < score) {
             this.score1combo = score;
-            this.setItem("score1combo", score.toString());
+            this.setItem("score1combo", score);
         }
     };
     SharedManagerClass.prototype.saveUserName = function (uname) {
         this.userName = uname;
-        this.setItem("userName", uname);
+        // this.setItem("userName", uname);
     };
     SharedManagerClass.prototype.soundChange = function () {
         this.sound = !this.sound;
@@ -73,10 +73,13 @@ var SharedManagerClass = (function () {
     SharedManagerClass.prototype.parseItem2Bool = function () {
     };
     SharedManagerClass.prototype.getItem = function (key) {
-        return egret.localStorage.getItem(key);
+        platform.getStorage(key); //egret.localStorage.getItem(key);
+        return;
     };
     SharedManagerClass.prototype.setItem = function (key, value) {
-        egret.localStorage.setItem(key, value);
+        egret.localStorage.setItem(key, value.toString());
+        platform.uploadWXData(key, value);
+        platform.setStorage(key, value);
     };
     return SharedManagerClass;
 }());

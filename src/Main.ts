@@ -60,9 +60,13 @@ class Main extends eui.UILayer {
     private async runGame() {
         await this.loadResource()
         this.createGameScene();
+        await platform.login();
+        const userInfo = await platform.getUserInfo();
+        console.log(userInfo);
     }
 
     private async loadResource() {
+        console.log("loadResource");
         try {
             const loadingView = new LoadingUI();
             this.stage.addChild(loadingView);
@@ -94,20 +98,7 @@ class Main extends eui.UILayer {
      * Create scene interface
      */
     protected createGameScene(): void {
-        // let skey = new eui.Image("bg_jpg");
-        // skey.width = this.width;
-        // skey.height = this.height;
-        // this.addChild(skey);        
-        // this.touchThrough = true;
-        // this.touchChildren = true;
-        // this.addChild(new Game());
         App.startUp(this);
-
-
-    }
-
-    private onclick() {
-
     }
 
 }

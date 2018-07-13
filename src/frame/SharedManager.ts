@@ -61,34 +61,34 @@ class SharedManagerClass {
 	public saveScore(score: number) {
 		if (this.score < score) {
 			this.score = score;
-			this.setItem("score", score.toString());
+			this.setItem("score", score);
 		}
 	}
 
 	public saveScore30(score: number) {
 		if (this.score30 < score) {
 			this.score30 = score;
-			this.setItem("score30", score.toString());
+			this.setItem("score30", score);
 		}
 	}
 
 	public saveScore1min(score: number) {
 		if (this.score1min < score) {
 			this.score1min = score;
-			this.setItem("score1min", score.toString());
+			this.setItem("score1min", score);
 		}
 	}
 
 	public saveScore1combo(score: number) {
 		if (this.score1combo < score) {
 			this.score1combo = score;
-			this.setItem("score1combo", score.toString());
+			this.setItem("score1combo", score);
 		}
 	}
 
 	public saveUserName(uname: string) {
 		this.userName = uname;
-		this.setItem("userName", uname)
+		// this.setItem("userName", uname);
 	}
 
 	public soundChange() {
@@ -113,11 +113,14 @@ class SharedManagerClass {
 	}
 
 	public getItem(key: string): string {
-		return egret.localStorage.getItem(key);
+		platform.getStorage(key);//egret.localStorage.getItem(key);
+		return;
 	}
 
-	public setItem(key: string, value: string) {
-		egret.localStorage.setItem(key, value);
+	public setItem(key: string, value: number) {
+		egret.localStorage.setItem(key, value.toString());
+		platform.uploadWXData(key, value);
+		platform.setStorage(key, value);
 	}
 
 }

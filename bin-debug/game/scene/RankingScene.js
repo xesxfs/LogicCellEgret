@@ -11,8 +11,25 @@ r.prototype = e.prototype, t.prototype = new r();
 var RankingScene = (function (_super) {
     __extends(RankingScene, _super);
     function RankingScene() {
-        return _super.call(this) || this;
+        var _this = _super.call(this) || this;
+        _this.isdisplay = false;
+        return _this;
     }
+    ;
+    RankingScene.prototype.childrenCreated = function () {
+        this.init();
+    };
+    RankingScene.prototype.init = function () {
+        var platform = window.platform;
+        this.bitmap = platform.openDataContext.createDisplayObject(null, this.stage.stageWidth, this.stage.stageHeight);
+        this.addChild(this.bitmap);
+        platform.openDataContext.postMessage({
+            isDisplay: this.isdisplay,
+            keys: ['score'],
+            year: (new Date()).getFullYear(),
+            command: "getFriendCloudStorage"
+        });
+    };
     return RankingScene;
 }(Scene));
 __reflect(RankingScene.prototype, "RankingScene");

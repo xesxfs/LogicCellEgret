@@ -8,7 +8,16 @@ declare interface Platform {
 
     getUserInfo(): Promise<any>;
 
-    login(): Promise<any>
+    login(): Promise<any>;
+
+    shareAppMessage(): Promise<any>;
+
+    uploadWXData(key, value);
+
+    setStorage(key, value): Promise<any>;
+
+    getStorage(key): Promise<any>;
+
 
 }
 
@@ -17,7 +26,14 @@ class DebugPlatform implements Platform {
         return { nickName: "username" }
     }
     async login() {
-
+    }
+    async shareAppMessage() {
+    }
+    async uploadWXData(key, value) {
+    }
+    async setStorage(key, value) {
+    }
+    async getStorage(key) {
     }
 }
 

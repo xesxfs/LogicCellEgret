@@ -1982,7 +1982,7 @@ var egret;
                 var self = this;
                 var filters = self.$filters;
                 if (!filters && !value) {
-                    self.$filters = null;
+                    self.$filters = value;
                     if (egret.nativeRender) {
                         self.$nativeDisplayObject.setFilters(null);
                     }
@@ -1999,13 +1999,23 @@ var egret;
                     }
                 }
                 else {
-                    self.$filters = null;
+                    self.$filters = value;
                     if (egret.nativeRender) {
                         self.$nativeDisplayObject.setFilters(null);
                     }
                 }
                 if (!egret.nativeRender) {
                     self.$updateRenderMode();
+                    var p = self.$parent;
+                    if (p && !p.$cacheDirty) {
+                        p.$cacheDirty = true;
+                        p.$cacheDirtyUp();
+                    }
+                    var maskedObject = self.$maskedObject;
+                    if (maskedObject && !maskedObject.$cacheDirty) {
+                        maskedObject.$cacheDirty = true;
+                        maskedObject.$cacheDirtyUp();
+                    }
                 }
             },
             enumerable: true,
@@ -5618,7 +5628,6 @@ var egret;
              * @default <code>BitmapFillMode.SCALE</code>
              *
              * @version Egret 2.4
-             * @version eui 1.0
              * @platform Web
              * @language en_US
              */
@@ -5630,7 +5639,6 @@ var egret;
              * @default <code>BitmapFillMode.SCALE</code>
              *
              * @version Egret 2.4
-             * @version eui 1.0
              * @platform Web
              * @language zh_CN
              */
@@ -9166,6 +9174,7 @@ var egret;
                     j++;
                 }
             }
+            this.onPropertyChange();
         };
         /**
          * @private
@@ -10278,6 +10287,20 @@ var egret;
         Graphics.prototype.dirty = function () {
             var self = this;
             self.$renderNode.dirtyRender = true;
+            if (!egret.nativeRender) {
+                var target = self.$targetDisplay;
+                target.$cacheDirty = true;
+                var p = target.$parent;
+                if (p && !p.$cacheDirty) {
+                    p.$cacheDirty = true;
+                    p.$cacheDirtyUp();
+                }
+                var maskedObject = target.$maskedObject;
+                if (maskedObject && !maskedObject.$cacheDirty) {
+                    maskedObject.$cacheDirty = true;
+                    maskedObject.$cacheDirtyUp();
+                }
+            }
         };
         /**
          * @private
@@ -12396,9 +12419,8 @@ var egret;
      * @platform Web,Native
      * @language zh_CN
      */
-    var HttpMethod = (function () {
-        function HttpMethod() {
-        }
+    var HttpMethod;
+    (function (HttpMethod) {
         /**
          * Specifies that the HttpRequest object is a GET.
          * @version Egret 2.4
@@ -12425,10 +12447,7 @@ var egret;
          * @language zh_CN
          */
         HttpMethod.POST = "POST";
-        return HttpMethod;
-    }());
-    egret.HttpMethod = HttpMethod;
-    __reflect(HttpMethod.prototype, "egret.HttpMethod");
+    })(HttpMethod = egret.HttpMethod || (egret.HttpMethod = {}));
 })(egret || (egret = {}));
 //////////////////////////////////////////////////////////////////////////////////////
 //
@@ -13220,10 +13239,10 @@ var egret;
     if (egret.nativeRender) {
         var nrABIVersion = egret_native.nrABIVersion;
         var nrMinEgretVersion = egret_native.nrMinEgretVersion;
-        var requiredNrABIVersion = 3;
+        var requiredNrABIVersion = 4;
         if (nrABIVersion < requiredNrABIVersion) {
             egret.nativeRender = false;
-            var msg = "需要升级微端版本到 0.1.6 才可以开启原生渲染加速";
+            var msg = "需要升级微端版本到 0.1.8 才可以开启原生渲染加速";
             egret.sys.$warnToFPS(msg);
             egret.warn(msg);
         }
@@ -15350,11 +15369,11 @@ var egret;
             else {
                 var matrix = egret.Matrix.create();
                 matrix.identity();
+                matrix.scale(scale, scale);
                 //应用裁切
                 if (clipBounds) {
                     matrix.translate(-clipBounds.x, -clipBounds.y);
                 }
-                matrix.scale(scale, scale);
                 egret.sys.systemRenderer.render(displayObject, renderBuffer, matrix, true);
                 egret.Matrix.release(matrix);
             }
@@ -16896,7 +16915,7 @@ var egret;
          * @platform Web,Native
          * @language zh_CN
          */
-        Capabilities.engineVersion = "5.1.11";
+        Capabilities.engineVersion = "5.2.4";
         /***
          * current render mode.
          * @type {string}
@@ -20482,7 +20501,7 @@ var egret;
             get: function () {
                 this.$getLinesArr();
                 if (egret.nativeRender) {
-                    return egret_native.nrGetTextFieldWidth(this.$nativeDisplayObject.id);
+                    return egret_native.nrGetTextWidth(this.$nativeDisplayObject.id);
                 }
                 return this.$TextField[5 /* textWidth */];
             },
@@ -20505,7 +20524,7 @@ var egret;
             get: function () {
                 this.$getLinesArr();
                 if (egret.nativeRender) {
-                    return egret_native.nrGetTextFieldHeight(this.$nativeDisplayObject.id);
+                    return egret_native.nrGetTextHeight(this.$nativeDisplayObject.id);
                 }
                 return egret.TextFieldUtils.$getTextHeight(this);
             },
@@ -24087,8 +24106,8 @@ var egret;
      */
     /**
      * 调用父类的setter属性，代替其他语言的写法，如 super.alpha = 1;
-     * @param thisObj 当前对象。永远都this
      * @param currentClass 当前 class 类名，非字符串
+     * @param thisObj 当前对象。永远都this
      * @param type 需要调用的setter属性名称
      * @param values 传给父类的值
      *
@@ -24137,9 +24156,9 @@ var egret;
      */
     /**
      * 获取父类的getter属性值。代替其他语言的写法，如 super.alpha;
-     * @param thisObj 当前对象。永远都this
      * @param currentClass 当前 class 类名，非字符串
-     * @param type 需要调用的setter属性名称
+     * @param thisObj 当前对象。永远都this
+     * @param type 需要调用的getter属性名称
      * @returns {any} 父类返回的值
      *
      * @exmaple egret.superGetter(egret.Sprite, this, "alpha");

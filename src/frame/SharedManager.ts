@@ -29,25 +29,74 @@ class SharedManagerClass {
 	public dayScore1min: number;
 
 	public dayScore1combo: number;
+	private static instance: SharedManagerClass;
 
-	public constructor() {
-		this.init();
+	public static getInstance() {
+		!this.instance && (this.instance = new SharedManagerClass())
+		return this.instance;
 	}
 
-	public init() {
-		let i = 0;
-		while (i < 25) {
-			this.vecPuzzleClear.push(0);
-			i++;
+	public constructor() {
+
+	}
+
+	public async init() {
+		try {
+
+			let i = 0;
+			while (i < 25) {
+				this.vecPuzzleClear.push(0);
+				i++;
+			}
+			// this.score = this.parseItem2Number("score");
+			// this.score1min = this.parseItem2Number("score30");
+			// this.score30 = this.parseItem2Number("score1min");
+			// this.score1combo = this.parseItem2Number("score1combo");
+			// this.getScore();
+			// this.getScore30();
+			// this.getScore1combo();
+			// this.getScore1min();
+			let resultData = await platform.getStorage("score");
+			this.score = resultData;
+
+			resultData = await platform.getStorage("score30")
+			this.score30 = resultData;
+
+			resultData = await platform.getStorage("score1min")
+			this.score1min = resultData;
+
+			resultData = await platform.getStorage("score1combo")
+			this.score1combo = resultData;
+
+			console.log("init:", this.score, this.score30, this.score1min, this.score1combo);
+
+		} catch (e) {
+			console.error(e);
 		}
-		this.score = this.parseItem2Number("score");
-		this.score1min = this.parseItem2Number("score");
-		this.score30 = this.parseItem2Number("score");
-		this.score1combo = this.parseItem2Number("score");
 	}
 
 	public getPuzzleClearNum() {
 		return
+	}
+
+	private async getScore() {
+		let resultData = await platform.getStorage("score");
+		this.score = resultData;
+	}
+
+	private async getScore30() {
+		let resultData = await platform.getStorage("score30")
+		this.score30 = resultData;
+	}
+
+	private async getScore1min() {
+		let resultData = await platform.getStorage("score1min")
+		this.score1min = resultData;
+	}
+
+	private async getScore1combo() {
+		let resultData = await platform.getStorage("score1combo")
+		this.score1combo = resultData;
 	}
 
 	public getPerfect() {
@@ -113,8 +162,20 @@ class SharedManagerClass {
 	}
 
 	public getItem(key: string): string {
-		platform.getStorage(key);//egret.localStorage.getItem(key);
-		return;
+		// let resultData = platform.getStorage(key).then((result) => {
+		// 	console.log("getItem:", result);
+		// });
+		//egret.localStorage.getItem(key);	
+		// console.log("getItem:", resultData);
+		// return resultData['data'];
+
+		// let resultData =await platform.getStorage(key)
+		return
+
+	}
+
+	private async getItem2(key: string) {
+		let resultData = await platform.getStorage(key)
 	}
 
 	public setItem(key: string, value: number) {

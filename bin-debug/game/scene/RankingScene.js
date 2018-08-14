@@ -13,6 +13,7 @@ var RankingScene = (function (_super) {
     function RankingScene() {
         var _this = _super.call(this) || this;
         _this.isdisplay = false;
+        InputManager.newInput(InputRanking);
         return _this;
     }
     ;
@@ -25,7 +26,7 @@ var RankingScene = (function (_super) {
         this.addChild(this.bitmap);
         platform.openDataContext.postMessage({
             isDisplay: this.isdisplay,
-            keys: ['score'],
+            keys: ['score', 'score30', 'score1min', 'score1combo'],
             year: (new Date()).getFullYear(),
             command: "getFriendCloudStorage"
         });

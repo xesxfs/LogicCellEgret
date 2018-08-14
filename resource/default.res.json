@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,selected_png,border_png,header_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,button_down_png,button_up_png,thumb_pb_png,track_pb_png,track_sb_png,bg_jpg,egret_icon_png,description_json,SoundD_mp3,SoundE_mp3,SoundF_mp3,SoundG_mp3,SoundA_mp3,SoundB_mp3,SoundC_mp3,SoundCC_mp3,Chip_png,Icon48_png,LogicalCell_png,TitleLogo_png,Chip_01_20_png,Chip_106_04_png,Chip_106_01_png,Chip_106_02_png,Chip_106_03_png",
+			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,selected_png,border_png,header_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,button_down_png,button_up_png,thumb_pb_png,track_pb_png,track_sb_png,bg_jpg,egret_icon_png,description_json,SoundD_mp3,SoundE_mp3,SoundF_mp3,SoundG_mp3,SoundA_mp3,SoundB_mp3,SoundC_mp3,SoundCC_mp3,Chip_png,Icon48_png,LogicalCell_png,TitleLogo_png,Chip_01_20_png,Chip_106_04_png,Chip_106_01_png,Chip_106_02_png,Chip_106_03_png,box_png,button_png,icon_png,panel_png,rankingtitle_png,panel_shop_01_png,bth_general_receive_1_png,egret_icon2_png,panel_bg_png,panel_shop_012_png,rankingtitle2_png,box2_png,bth_general_receive_12_png,button2_png,icon2_png,panel2_png,panel_bg2_png",
 			"name": "preload"
 		}
 	],
@@ -220,6 +220,91 @@
 			"name": "Chip_106_03_png",
 			"type": "image",
 			"url": "assets/images/Chip_106_03.png"
+		},
+		{
+			"name": "box_png",
+			"type": "image",
+			"url": "assets/rank/box.png"
+		},
+		{
+			"name": "button_png",
+			"type": "image",
+			"url": "assets/rank/button.png"
+		},
+		{
+			"name": "icon_png",
+			"type": "image",
+			"url": "assets/rank/icon.png"
+		},
+		{
+			"name": "panel_png",
+			"type": "image",
+			"url": "assets/rank/panel.png"
+		},
+		{
+			"name": "rankingtitle_png",
+			"type": "image",
+			"url": "assets/rank/rankingtitle.png"
+		},
+		{
+			"name": "panel_shop_01_png",
+			"type": "image",
+			"url": "assets/rank/panel_shop_01.png"
+		},
+		{
+			"name": "bth_general_receive_1_png",
+			"type": "image",
+			"url": "assets/rank/bth_general_receive_1.png"
+		},
+		{
+			"name": "egret_icon2_png",
+			"type": "image",
+			"url": "assets/rank/egret_icon.png"
+		},
+		{
+			"name": "panel_bg_png",
+			"type": "image",
+			"url": "assets/rank/panel_bg.png"
+		},
+		{
+			"name": "panel_shop_012_png",
+			"type": "image",
+			"url": "assets/panel_shop_01.png"
+		},
+		{
+			"name": "rankingtitle2_png",
+			"type": "image",
+			"url": "assets/rankingtitle.png"
+		},
+		{
+			"name": "box2_png",
+			"type": "image",
+			"url": "assets/box.png"
+		},
+		{
+			"name": "bth_general_receive_12_png",
+			"type": "image",
+			"url": "assets/bth_general_receive_1.png"
+		},
+		{
+			"name": "button2_png",
+			"type": "image",
+			"url": "assets/button.png"
+		},
+		{
+			"name": "icon2_png",
+			"type": "image",
+			"url": "assets/icon.png"
+		},
+		{
+			"name": "panel2_png",
+			"type": "image",
+			"url": "assets/panel.png"
+		},
+		{
+			"name": "panel_bg2_png",
+			"type": "image",
+			"url": "assets/panel_bg.png"
 		}
 	]
 }

@@ -8,11 +8,12 @@ var __extends = this && this.__extends || function __extends(t, e) {
 for (var i in e) e.hasOwnProperty(i) && (t[i] = e[i]);
 r.prototype = e.prototype, t.prototype = new r();
 };
-var InputRanking = (function (_super) {
-    __extends(InputRanking, _super);
-    function InputRanking() {
+var InputRankingClass = (function (_super) {
+    __extends(InputRankingClass, _super);
+    function InputRankingClass() {
         return _super.call(this) || this;
     }
-    return InputRanking;
+    return InputRankingClass;
 }(Input));
-__reflect(InputRanking.prototype, "InputRanking");
+__reflect(InputRankingClass.prototype, "InputRankingClass");
+var InputRanking = new InputRankingClass();

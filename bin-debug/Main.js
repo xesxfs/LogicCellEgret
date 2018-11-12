@@ -104,7 +104,6 @@ var Main = (function (_super) {
                     case 0: return [4 /*yield*/, this.loadResource()];
                     case 1:
                         _a.sent();
-                        this.createGameScene();
                         return [4 /*yield*/, platform.login()];
                     case 2:
                         _a.sent();
@@ -112,6 +111,10 @@ var Main = (function (_super) {
                     case 3:
                         userInfo = _a.sent();
                         console.log(userInfo);
+                        return [4 /*yield*/, SharedManager.init()];
+                    case 4:
+                        _a.sent();
+                        this.createGameScene();
                         return [2 /*return*/];
                 }
             });
@@ -119,7 +122,7 @@ var Main = (function (_super) {
     };
     Main.prototype.loadResource = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var loadingView, e_1;
+            var e_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -127,18 +130,19 @@ var Main = (function (_super) {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 5, , 6]);
-                        loadingView = new LoadingUI();
-                        this.stage.addChild(loadingView);
+                        // const loadingView = new LoadingUI();
+                        // this.stage.addChild(loadingView);
                         return [4 /*yield*/, RES.loadConfig("resource/default.res.json", "resource/")];
                     case 2:
+                        // const loadingView = new LoadingUI();
+                        // this.stage.addChild(loadingView);
                         _a.sent();
                         return [4 /*yield*/, this.loadTheme()];
                     case 3:
                         _a.sent();
-                        return [4 /*yield*/, RES.loadGroup("preload", 0, loadingView)];
+                        return [4 /*yield*/, RES.loadGroup("preload", 0)];
                     case 4:
                         _a.sent();
-                        this.stage.removeChild(loadingView);
                         return [3 /*break*/, 6];
                     case 5:
                         e_1 = _a.sent();

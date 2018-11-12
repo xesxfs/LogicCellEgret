@@ -12,13 +12,19 @@ var RankingScene = (function (_super) {
     __extends(RankingScene, _super);
     function RankingScene() {
         var _this = _super.call(this) || this;
-        _this.isdisplay = false;
+        _this.isdisplay = true;
         InputManager.newInput(InputRanking);
         return _this;
     }
-    ;
     RankingScene.prototype.childrenCreated = function () {
         this.init();
+        var backBitmap = Resource.getBlockChips(22, 220, 22, 22);
+        backBitmap.width = 110;
+        backBitmap.height = 110;
+        backBitmap.x = 265;
+        backBitmap.y = 1000;
+        this.addChild(backBitmap);
+        this.addChild(App.BackMenu);
     };
     RankingScene.prototype.init = function () {
         var platform = window.platform;
@@ -30,6 +36,9 @@ var RankingScene = (function (_super) {
             year: (new Date()).getFullYear(),
             command: "getFriendCloudStorage"
         });
+    };
+    RankingScene.prototype.update = function () {
+        App.BackMenu.update();
     };
     return RankingScene;
 }(Scene));

@@ -13,6 +13,14 @@ var InputRankingClass = (function (_super) {
     function InputRankingClass() {
         return _super.call(this) || this;
     }
+    InputRankingClass.prototype.mouseDownEvent = function (e) {
+        if (e.stageY >= 1000 && e.stageX >= 256 && e.stageX <= (256 + 110)) {
+            App.BackMenu.updateStart();
+        }
+    };
+    InputRankingClass.prototype.mouseUpEvent = function (e) {
+        App.BackMenu.updateFinish();
+    };
     return InputRankingClass;
 }(Input));
 __reflect(InputRankingClass.prototype, "InputRankingClass");

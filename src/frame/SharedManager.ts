@@ -2,15 +2,15 @@ class SharedManagerClass {
 
 	public vecPuzzleClear: Array<number> = [];
 
-	public score: number;
+	public score: number = 0;
 
-	public score1min: number;
+	public score1min: number = 0;
 
-	public score30: number;
+	public score30: number = 0;
 
-	public score1combo: number;
+	public score1combo: number = 0;
 
-	public userName: string;
+	public userName: string = 'usercc';
 
 	public sound: boolean = true;
 
@@ -22,13 +22,13 @@ class SharedManagerClass {
 
 	public sendScore1comboTime: number = 0;
 
-	public dayScore: number;
+	public dayScore: number = 0;
 
-	public dayScore30: number;
+	public dayScore30: number = 0;
 
-	public dayScore1min: number;
+	public dayScore1min: number = 0;
 
-	public dayScore1combo: number;
+	public dayScore1combo: number = 0;
 	private static instance: SharedManagerClass;
 
 	public static getInstance() {
@@ -56,17 +56,17 @@ class SharedManagerClass {
 			// this.getScore30();
 			// this.getScore1combo();
 			// this.getScore1min();
-			let resultData = await platform.getStorage("score");
-			this.score = resultData;
+			// let resultData = await platform.getStorage("score");
+			// this.score = resultData;
 
-			resultData = await platform.getStorage("score30")
-			this.score30 = resultData;
+			// resultData = await platform.getStorage("score30")
+			// this.score30 = resultData;
 
-			resultData = await platform.getStorage("score1min")
-			this.score1min = resultData;
+			// resultData = await platform.getStorage("score1min")
+			// this.score1min = resultData;
 
-			resultData = await platform.getStorage("score1combo")
-			this.score1combo = resultData;
+			// resultData = await platform.getStorage("score1combo")
+			// this.score1combo = resultData;
 
 			console.log("init:", this.score, this.score30, this.score1min, this.score1combo);
 
@@ -80,23 +80,23 @@ class SharedManagerClass {
 	}
 
 	private async getScore() {
-		let resultData = await platform.getStorage("score");
-		this.score = resultData;
+		// let resultData = await platform.getStorage("score");
+		// this.score = resultData;
 	}
 
 	private async getScore30() {
-		let resultData = await platform.getStorage("score30")
-		this.score30 = resultData;
+		// let resultData = await platform.getStorage("score30")
+		// this.score30 = resultData;
 	}
 
 	private async getScore1min() {
-		let resultData = await platform.getStorage("score1min")
-		this.score1min = resultData;
+		// let resultData = await platform.getStorage("score1min")
+		// this.score1min = resultData;
 	}
 
 	private async getScore1combo() {
-		let resultData = await platform.getStorage("score1combo")
-		this.score1combo = resultData;
+		// let resultData = await platform.getStorage("score1combo")
+		// this.score1combo = resultData;
 	}
 
 	public getPerfect() {
@@ -145,7 +145,7 @@ class SharedManagerClass {
 	}
 
 
-	public erase() {
+	public erase() { 
 		egret.localStorage.clear();
 	}
 
@@ -165,23 +165,23 @@ class SharedManagerClass {
 		// let resultData = platform.getStorage(key).then((result) => {
 		// 	console.log("getItem:", result);
 		// });
-		//egret.localStorage.getItem(key);	
+		let resultData = egret.localStorage.getItem(key);
 		// console.log("getItem:", resultData);
 		// return resultData['data'];
 
 		// let resultData =await platform.getStorage(key)
-		return
+		return resultData;
 
 	}
 
 	private async getItem2(key: string) {
-		let resultData = await platform.getStorage(key)
+		// let resultData = await platform.getStorage(key)
 	}
 
 	public setItem(key: string, value: number) {
 		egret.localStorage.setItem(key, value.toString());
-		platform.uploadWXData(key, value);
-		platform.setStorage(key, value);
+		// platform.uploadWXData(key, value);
+		// platform.setStorage(key, value);
 	}
 
 }

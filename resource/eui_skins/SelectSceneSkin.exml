@@ -3,27 +3,27 @@
 	<e:Group width="100%" height="860" anchorOffsetX="0" anchorOffsetY="0" x="0" bottom="16">
 		<e:Group id="puzzleGroup" width="300" height="200" y="60" x="8">
 			<e:Rect width="100%" height="100%" fillColor="0xd1cccc" strokeWeight="20"/>
-			<e:Label text="Puzzle" y="52" textColor="0x000000" bold="true" horizontalCenter="0.5" size="42"/>
+			<e:Label text="解谜模式" y="52" textColor="0x000000" horizontalCenter="0.5" size="42" bold="true"/>
 			<e:Label id="puzzleLab" text="0/25" y="114" bold="true" textColor="0x242fe5" horizontalCenter="0" size="42"/>
 		</e:Group>
 		<e:Group id="scoreGroup" width="300" height="200" x="332" y="60">
 			<e:Rect width="100%" height="100%" fillColor="0xD1CCCC" strokeWeight="20"/>
-			<e:Label text="Score" y="52" textColor="0x000000" bold="true" horizontalCenter="0.5" size="42"/>
+			<e:Label text="得分模式" y="52" textColor="0x000000" bold="true" horizontalCenter="0.5" size="42"/>
 			<e:Label id="scoreLab" text="0" y="114" textColor="0x242FE5" bold="true" horizontalCenter="0" size="42"/>
 		</e:Group>
 		<e:Group id="score30Group" width="300" height="200" x="8" y="277">
 			<e:Rect width="100%" height="100%" fillColor="0xD1CCCC" strokeWeight="20"/>
-			<e:Label text="Score 30" y="52" textColor="0x000000" bold="true" horizontalCenter="0.5" size="42"/>
+			<e:Label text="限次模式" y="52" textColor="0x000000" bold="true" horizontalCenter="0.5" size="42"/>
 			<e:Label id="score30Lab" text="0" y="114" textColor="0x242FE5" bold="true" horizontalCenter="0" size="42"/>
 		</e:Group>
 		<e:Group id="score1m" width="300" height="200" x="332" y="278">
 			<e:Rect width="100%" height="100%" fillColor="0xD1CCCC" strokeWeight="20"/>
-			<e:Label text="Score 1min" y="52" textColor="0x000000" bold="true" horizontalCenter="0.5" size="42"/>
+			<e:Label text="竞速模式" y="52" textColor="0x000000" bold="true" horizontalCenter="0.5" size="42"/>
 			<e:Label id="score1mLab" text="0" y="114" textColor="0x242FE5" bold="true" horizontalCenter="0" size="42"/>
 		</e:Group>
 		<e:Group id="comboGroup" width="300" height="200" x="168" y="535">
 			<e:Rect width="100%" height="100%" fillColor="0xD1CCCC" strokeWeight="20"/>
-			<e:Label text="Combo" y="52" textColor="0x000000" bold="true" horizontalCenter="0.5" size="42"/>
+			<e:Label text="连击模式" y="52" textColor="0x000000" bold="true" horizontalCenter="0.5" size="42"/>
 			<e:Label id="scoreComboLab" text="0" y="114" textColor="0x242FE5" bold="true" horizontalCenter="0" size="42"/>
 		</e:Group>
 		<e:Group id="rankGroup" width="300" height="200" x="332" y="435" visible="false">
@@ -40,5 +40,7 @@
 	</e:Group>
 	<e:Image source="LogicalCell_png" x="164" y="32" width="96" height="96"/>
 	<e:Image source="Icon48_png" x="340" y="32" width="96" height="96"/>
-	<e:Image source="TitleLogo_png" y="152" horizontalCenter="0" width="616" height="88"/>
+	<e:Image source="TitleLogo_png" y="152" horizontalCenter="0" width="616" height="88" visible="false"/>
+	<e:Label text="逻辑框" x="240" y="178" size="60" bold="true" textColor="0x000000"/>
+	<e:Label text="逻辑框" x="238" y="174" size="60" bold="true"/>
 </e:Skin>

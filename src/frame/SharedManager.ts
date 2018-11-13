@@ -145,7 +145,7 @@ class SharedManagerClass {
 	}
 
 
-	public erase() { 
+	public erase() {
 		egret.localStorage.clear();
 	}
 
@@ -182,6 +182,32 @@ class SharedManagerClass {
 		egret.localStorage.setItem(key, value.toString());
 		// platform.uploadWXData(key, value);
 		// platform.setStorage(key, value);
+	}
+
+	public showShareMenu() {
+		platform.showShareMenu({ withShareTicket: false });
+	}
+
+	/**
+	 * 微信小游戏更新管理
+	 */
+	public getUpdateManager() {
+		const updateManager = platform.getUpdateManager();
+		if (updateManager) {
+			updateManager.onCheckForUpdate(function (res) {
+				// 请求完新版本信息的回调
+				console.log("是否有版本更新：", res.hasUpdate)
+			})
+
+			updateManager.onUpdateReady(function () {
+				// 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+				updateManager.applyUpdate()
+			})
+
+			updateManager.onUpdateFailed(function () {
+				// 新的版本下载失败
+			})
+		}
 	}
 
 }

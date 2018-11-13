@@ -28,10 +28,15 @@
 //////////////////////////////////////////////////////////////////////////////////////
 
 class Main extends eui.UILayer {
-
+    public constructor() {
+        super();
+        SharedManager.showShareMenu();
+        SharedManager.getUpdateManager();
+    }
 
     protected createChildren(): void {
         super.createChildren();
+
         console.log("createChildren");
         egret.lifecycle.addLifecycleListener((context) => {
             // custom lifecycle plugin
@@ -40,8 +45,6 @@ class Main extends eui.UILayer {
         egret.lifecycle.onPause = () => {
             egret.ticker.pause();
         }
-
-
 
         egret.lifecycle.onResume = () => {
             egret.ticker.resume();
@@ -65,7 +68,6 @@ class Main extends eui.UILayer {
         // await platform.login();
         // const userInfo = await platform.getUserInfo();
         // console.log(userInfo);
-        // await SharedManager.init();
         this.createGameScene();
 
     }

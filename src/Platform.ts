@@ -10,7 +10,9 @@ declare interface Platform {
 
     login(): Promise<any>;
 
-    shareAppMessage(): Promise<any>;
+    shareAppMessage(object: any);
+
+    showShareMenu(object: any);
 
     uploadWXData(key, value);
 
@@ -18,6 +20,9 @@ declare interface Platform {
 
     getStorage(key): Promise<any>;
 
+    getUpdateManager();
+
+    onShareAppMessage(callback: any);
 
 }
 
@@ -27,7 +32,11 @@ class DebugPlatform implements Platform {
     }
     async login() {
     }
-    async shareAppMessage() {
+    shareAppMessage(object: any) {
+    }
+    showShareMenu(object: any) {
+    }
+    onShareAppMessage(callback: any) {
     }
     async uploadWXData(key, value) {
     }
@@ -35,6 +44,9 @@ class DebugPlatform implements Platform {
     }
     async getStorage(key) {
     }
+
+    getUpdateManager() { }
+
 }
 
 

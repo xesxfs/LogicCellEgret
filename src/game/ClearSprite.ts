@@ -20,10 +20,10 @@ class ClearSprite extends eui.Component {
 
 	protected childrenCreated() {
 		console.log("clearCheck ClearSprite");
-		if (!this.isPerfect) this.statusLab.text = "Clear";
+		if (!this.isPerfect) this.statusLab.text = "清除";
 		if (this.isFinish) {
-			this.statusLab.text = "Finish";
-			this.nextLab.text = "Share";
+			this.statusLab.text = "完成";
+			this.nextLab.text = "分享";
 		}
 
 		egret.Tween.get(this.clearGroup).to({ y: this.toY }, 500, egret.Ease.quintOut).wait(100).to({ x: 66 }, 500, egret.Ease.quintOut);

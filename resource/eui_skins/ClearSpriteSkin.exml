@@ -2,18 +2,18 @@
 <e:Skin class="ClearSpriteSkin" width="640" height="1136" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 	<e:Group id="clearGroup" anchorOffsetY="0" height="88" anchorOffsetX="0" width="190" y="-100" x="262" touchChildren="false">
 		<e:Rect width="100%" height="100%" fillColor="0xb0b0af" anchorOffsetX="0" anchorOffsetY="0" scaleX="1" scaleY="1"/>
-		<e:Label id="statusLab" text="Perfect" verticalCenter="0" horizontalCenter="0" textColor="0x000000" bold="true"/>
+		<e:Label id="statusLab" text="完美" verticalCenter="0" horizontalCenter="0" textColor="0x000000" bold="true"/>
 	</e:Group>
 	<e:Group id="menuGroup" x="262" y="-100" height="88" width="100" touchChildren="false">
 		<e:Rect width="100%" height="100%" fillColor="0xB0B0AF" anchorOffsetX="0" anchorOffsetY="0" scaleX="1" scaleY="1"/>
-		<e:Label text="Menu" verticalCenter="0" horizontalCenter="0" textColor="0x000000" bold="true"/>
+		<e:Label text="菜单" verticalCenter="0" horizontalCenter="0" textColor="0x000000" bold="true"/>
 	</e:Group>
 	<e:Group id="retryGroup" x="368" y="-100" height="88" width="100" touchChildren="false">
 		<e:Rect width="100%" height="100%" fillColor="0xB0B0AF" anchorOffsetX="0" anchorOffsetY="0" scaleX="1" scaleY="1"/>
-		<e:Label text="Retry" verticalCenter="0" horizontalCenter="0" textColor="0x000000" bold="true"/>
+		<e:Label text="重试" verticalCenter="0" horizontalCenter="0" textColor="0x000000" bold="true"/>
 	</e:Group>
 	<e:Group id="nextGroup" y="-100" height="88" width="100" x="474" touchChildren="false">
 		<e:Rect width="100%" height="100%" fillColor="0xB0B0AF" anchorOffsetX="0" anchorOffsetY="0" scaleX="1" scaleY="1"/>
-		<e:Label id="nextLab" text="Next" verticalCenter="0" horizontalCenter="0" textColor="0x000000" bold="true"/>
+		<e:Label id="nextLab" text="下一关" verticalCenter="0" horizontalCenter="0" textColor="0x000000" bold="true"/>
 	</e:Group>
 </e:Skin>

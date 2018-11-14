@@ -50,7 +50,7 @@ class ClearSprite extends eui.Component {
 				break;
 			case this.nextGroup:
 				if (this.isFinish) {
-
+					SharedManager.shareAppMessage();
 				} else {
 					let stageData = StageManager.getStage(-1);
 					if (stageData != null) {

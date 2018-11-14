@@ -29,6 +29,9 @@ class SharedManagerClass {
 	public dayScore1min: number = 0;
 
 	public dayScore1combo: number = 0;
+
+	private titles: Array<Array<string>>;
+
 	private static instance: SharedManagerClass;
 
 	public static getInstance() {
@@ -37,36 +40,33 @@ class SharedManagerClass {
 	}
 
 	public constructor() {
+		this.titles = [
+			["[有人@我]：智商超200的快来玩这游戏！", 'resource/assets/images/Icon48.png'],
+			["凭智商玩的得好，为什么要停下来", 'resource/assets/images/Icon48.png'],
+			["这游戏也太虐了，我为什么要点进来…", 'resource/assets/images/Icon48.png'],
+			["300分（分值），我不是针对谁，在座的各位都玩不过我~", 'resource/assets/images/Icon48.png'],
+			["据说只有1%的人能上300分（分值），需要超强逻辑", 'resource/assets/images/Icon48.png'],
+			["战五渣们，来看看你们的逻辑分数吧", 'resource/assets/images/Icon48.png']
 
+		];
 	}
 
-	public async init() {
+	public init() {
 		try {
 
+
+			this.showShareMenu();
+			this.getUpdateManager();
 			let i = 0;
 			while (i < 25) {
 				this.vecPuzzleClear.push(0);
 				i++;
 			}
-			// this.score = this.parseItem2Number("score");
-			// this.score1min = this.parseItem2Number("score30");
-			// this.score30 = this.parseItem2Number("score1min");
-			// this.score1combo = this.parseItem2Number("score1combo");
-			// this.getScore();
-			// this.getScore30();
-			// this.getScore1combo();
-			// this.getScore1min();
-			// let resultData = await platform.getStorage("score");
-			// this.score = resultData;
 
-			// resultData = await platform.getStorage("score30")
-			// this.score30 = resultData;
-
-			// resultData = await platform.getStorage("score1min")
-			// this.score1min = resultData;
-
-			// resultData = await platform.getStorage("score1combo")
-			// this.score1combo = resultData;
+			this.getScore();
+			this.getScore30();
+			this.getScore1combo();
+			this.getScore1min();
 
 			console.log("init:", this.score, this.score30, this.score1min, this.score1combo);
 
@@ -79,24 +79,53 @@ class SharedManagerClass {
 		return
 	}
 
-	private async getScore() {
-		// let resultData = await platform.getStorage("score");
-		// this.score = resultData;
+	private getScore() {
+		let resultData = this.getItem('score');
+		if (!resultData || resultData == '') {
+			resultData = '0';
+		}
+		try {
+			this.score = parseInt(resultData, 10);
+		} catch (e) {
+
+		}
 	}
 
-	private async getScore30() {
-		// let resultData = await platform.getStorage("score30")
-		// this.score30 = resultData;
+	private getScore30() {
+		let resultData = this.getItem('score30');
+		if (!resultData || resultData == '') {
+			resultData = '0';
+		}
+		try {
+			this.score30 = parseInt(resultData, 10);
+		} catch (e) {
+
+		}
 	}
 
-	private async getScore1min() {
-		// let resultData = await platform.getStorage("score1min")
-		// this.score1min = resultData;
+	private getScore1min() {
+		let resultData = this.getItem('score1min');
+		if (!resultData || resultData == '') {
+			resultData = '0';
+		}
+		try {
+			this.score1min = parseInt(resultData, 10);
+		} catch (e) {
+
+		}
 	}
 
-	private async getScore1combo() {
-		// let resultData = await platform.getStorage("score1combo")
-		// this.score1combo = resultData;
+	private getScore1combo() {
+		let resultData = this.getItem('score1combo');
+		if (!resultData || resultData == '') {
+			resultData = '0';
+		}
+		try {
+			this.score1combo = parseInt(resultData, 10);
+		} catch (e) {
+
+		}
+
 	}
 
 	public getPerfect() {
@@ -137,7 +166,7 @@ class SharedManagerClass {
 
 	public saveUserName(uname: string) {
 		this.userName = uname;
-		// this.setItem("userName", uname);
+		this.setItem("userName", uname);
 	}
 
 	public soundChange() {
@@ -157,35 +186,43 @@ class SharedManagerClass {
 		return score;
 	}
 
-	public parseItem2Bool() {
-
-	}
 
 	public getItem(key: string): string {
-		// let resultData = platform.getStorage(key).then((result) => {
-		// 	console.log("getItem:", result);
-		// });
 		let resultData = egret.localStorage.getItem(key);
-		// console.log("getItem:", resultData);
-		// return resultData['data'];
-
-		// let resultData =await platform.getStorage(key)
 		return resultData;
-
 	}
 
-	private async getItem2(key: string) {
-		// let resultData = await platform.getStorage(key)
-	}
 
-	public setItem(key: string, value: number) {
-		egret.localStorage.setItem(key, value.toString());
-		// platform.uploadWXData(key, value);
-		// platform.setStorage(key, value);
+	public setItem(key: string, value: number | string) {
+		if (typeof (value) == 'number') {
+			value = value.toString();
+		}
+		egret.localStorage.setItem(key, value);
 	}
 
 	public showShareMenu() {
 		platform.showShareMenu({ withShareTicket: false });
+		platform.onShareAppMessage(() => {
+			let shareIndex = ~~(Math.random() * (this.titles.length - 1));
+			return {
+				title: this.titles[shareIndex][0],
+				imageUrl: this.titles[shareIndex][1],
+				query: ""
+			}
+		})
+
+	}
+
+	public shareAppMessage() {
+		let shareIndex = ~~(Math.random() * (this.titles.length - 1));
+		platform.shareAppMessage(
+			{
+				title: this.titles[shareIndex][0],
+				imageUrl: this.titles[shareIndex][1],
+				query: '',
+			}
+		);
+
 	}
 
 	/**

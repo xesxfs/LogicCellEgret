@@ -30,8 +30,7 @@
 class Main extends eui.UILayer {
     public constructor() {
         super();
-        SharedManager.showShareMenu();
-        SharedManager.getUpdateManager();
+        SharedManager.init();
     }
 
     protected createChildren(): void {

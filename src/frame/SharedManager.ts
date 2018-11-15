@@ -247,5 +247,9 @@ class SharedManagerClass {
 		}
 	}
 
+	public postMessage(data: any) {
+		platform.openDataContext.postMessage(data);
+	}
+
 }
 var SharedManager: SharedManagerClass = new SharedManagerClass();

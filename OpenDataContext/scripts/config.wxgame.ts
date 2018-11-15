@@ -12,7 +12,7 @@ const config: ResourceManagerConfig = {
     buildConfig: (params) => {
 
         const { target, command, projectName, version } = params;
-        const outputDir = `./${projectName}_wxgame`;
+        const outputDir = `../LogicCellEgret_wxgame/openDataContext`;
         if (command == 'build') {
             return {
                 outputDir,

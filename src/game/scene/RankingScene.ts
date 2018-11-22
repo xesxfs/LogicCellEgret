@@ -3,6 +3,7 @@ class RankingScene extends Scene {
 	private isdisplay = true;
 	public constructor() {
 		super();
+		this.addEventListener(egret.Event.REMOVED_FROM_STAGE, this.disable, this);
 		InputManager.newInput(InputRanking);
 	}
 
@@ -25,12 +26,22 @@ class RankingScene extends Scene {
 			isDisplay: this.isdisplay,
 			keys: ['score', 'score30', 'score1min', 'score1combo'],
 			year: (new Date()).getFullYear(),
-			// command: "getFriendCloudStorage"
+			command: "getFriendCloudStorage"
 		});
 	}
 
 	public update() {
 		App.BackMenu.update();
+	}
+
+	public disable() {
+
+		platform.openDataContext.postMessage({
+			isDisplay: false,
+			keys: ['score', 'score30', 'score1min', 'score1combo'],
+			year: (new Date()).getFullYear(),
+			// command: "getFriendCloudStorage"
+		});
 	}
 
 }

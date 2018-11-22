@@ -6,7 +6,7 @@ class InputPuzzleSelectClass extends Input {
 	protected mouseDownEvent(e: egret.TouchEvent): void {
 
 		// SceneManager.newScene(new SetPuzzleScene(StageManager.getStage(0)));
-
+		let curStage = SharedManager.getCurPuzzle();
 		if (SceneManager.scene instanceof PuzzleSelectScene) {
 			let scene = SceneManager.scene as PuzzleSelectScene;
 			let p = egret.Point.create(e.stageX, e.stageY);
@@ -17,7 +17,9 @@ class InputPuzzleSelectClass extends Input {
 				offy /= (100 + 40);
 				let sid = 5 * ~~offy + ~~offx;
 				if (sid > 24 || sid < 0) sid = 0;
-				SceneManager.newScene(new SetPuzzleScene(StageManager.getStage(sid)));
+				if (sid <= curStage) {
+					SceneManager.newScene(new SetPuzzleScene(StageManager.getStage(sid)));
+				}
 			} else if (scene.backImg.getTransformedBounds(this).containsPoint(p)) {
 				SceneManager.newScene(new SelectScene());
 

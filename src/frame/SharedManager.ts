@@ -57,11 +57,12 @@ class SharedManagerClass {
 
 			this.showShareMenu();
 			this.getUpdateManager();
-			let i = 0;
-			while (i < 25) {
-				this.vecPuzzleClear.push(0);
-				i++;
-			}
+			this.getPuzzleClearNum();
+			// let i = 0;
+			// while (i < 25) {
+			// 	this.vecPuzzleClear.push(0);
+			// 	i++;
+			// }
 
 			this.getScore();
 			this.getScore30();
@@ -76,7 +77,32 @@ class SharedManagerClass {
 	}
 
 	public getPuzzleClearNum() {
-		return
+		let vecStr = this.getItem('puzzle');
+
+		let i = 0;
+		while (i < 25) {
+			this.vecPuzzleClear.push(0);
+			i++;
+		}
+
+		if (vecStr) {
+			let vecArr = vecStr.split(',');
+			for (let i = 0; i < vecArr.length; i++) {
+				this.vecPuzzleClear[i] = parseInt(vecArr[i], 10);
+			}
+		}
+		this.setItem('puzzle', this.vecPuzzleClear.toString());
+	}
+
+	public getCurPuzzle(): number {
+		let cur = 0;
+		for (let i = 0; i < this.vecPuzzleClear.length; i++) {
+			if (this.vecPuzzleClear[i] === 0) {
+				cur = i;
+				break;
+			}
+		}
+		return cur;
 	}
 
 	private getScore() {
@@ -133,7 +159,7 @@ class SharedManagerClass {
 	}
 
 	public saveVecPuzzleClear() {
-
+		this.setItem('puzzle', this.vecPuzzleClear.toString());
 	}
 
 	public saveScore(score: number) {

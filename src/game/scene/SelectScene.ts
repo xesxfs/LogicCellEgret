@@ -23,5 +23,6 @@ class SelectScene extends Scene {
 		this.scoreLab.text = SharedManager.score.toString();
 		this.score30Lab.text = SharedManager.score30.toString();
 		this.scoreComboLab.text = SharedManager.score1combo.toString();
+		this.puzzleLab.text = SharedManager.getCurPuzzle().toString() + '/25';
 	}
 }

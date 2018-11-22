@@ -76,6 +76,7 @@ class Main extends egret.DisplayObjectContainer {
     ]
 
     private runGame() {
+        console.log('runGame opendata');
         let bitmap = new egret.Bitmap(this.panel_01);
         bitmap.x = (640 - 480) >> 1;
         bitmap.y = (1136 - 800) >> 1;

@@ -25,7 +25,7 @@ class RankingScene extends Scene {
 			isDisplay: this.isdisplay,
 			keys: ['score', 'score30', 'score1min', 'score1combo'],
 			year: (new Date()).getFullYear(),
-			command: "getFriendCloudStorage"
+			// command: "getFriendCloudStorage"
 		});
 	}
 

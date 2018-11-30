@@ -3,7 +3,8 @@
 		"libs/modules/egret/egret.js",
 		"libs/modules/egret/egret.web.js",
 		"libs/modules/game/game.js",
-		"libs/modules/promise/promise.js"
+		"libs/modules/promise/promise.js",
+		"libs/modules/eui/eui.js"
 	],
 	"game": [
 		"bin-debug/Main.js"

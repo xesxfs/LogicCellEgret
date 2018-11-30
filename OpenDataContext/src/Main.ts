@@ -1,23 +1,21 @@
 class Main extends egret.DisplayObjectContainer {
-
     constructor() {
         super();
-
         wx.onMessage(data => {
             console.log(data);
             if (data.isDisplay) {
                 //获取小游戏开放数据接口 --- 开始
                 wx.getFriendCloudStorage({
-                    keyList: [],
-                    success: res => {
+                    keyList: data.keys,
+                    success: (res) => {
                         console.log(res);
+                        this.gameData = res.data;
                         this.runGame();
                     },
-                    fail: err => {
+                    fail: (err) => {
                         console.log(err);
                     },
                     complete: () => {
-
                     }
                 });
                 //监听消息 isDisplay
@@ -43,7 +41,6 @@ class Main extends egret.DisplayObjectContainer {
             this.panel_01._setBitmapData(imageLoader.data);
         }, this);
         imageLoader1.load("resource/assets/panel_bg.png");
-
         //测试点击
         this.addEventListener(egret.TouchEvent.TOUCH_TAP, (evt: egret.TouchEvent) => {
             console.log('子域输出点击');
@@ -58,57 +55,62 @@ class Main extends egret.DisplayObjectContainer {
      * 便于演示数据，这里使用家数据
      * 有关获取还有的接口参考：https://mp.weixin.qq.com/debug/wxagame/dev/tutorial/open-ability/open-data.html?t=2018323
      */
-    private readonly gameData = [
-        { openId: '', avatarUrl: '', nickName: 'peony', data: [{ score: 100, time: 1000 }] },
-        { openId: '', avatarUrl: '', nickName: 'peony', data: [{ score: 101, time: 100 }] },
-        { openId: '', avatarUrl: '', nickName: 'peony', data: [{ score: 102, time: 1700 }] },
-        { openId: '', avatarUrl: '', nickName: 'peony', data: [{ score: 103, time: 1800 }] },
-        { openId: '', avatarUrl: '', nickName: 'peony', data: [{ score: 104, time: 1900 }] },
-        { openId: '', avatarUrl: '', nickName: 'peony', data: [{ score: 105, time: 1070 }] },
-        { openId: '', avatarUrl: '', nickName: 'peony', data: [{ score: 106, time: 1030 }] },
-        { openId: '', avatarUrl: '', nickName: 'peony', data: [{ score: 107, time: 1010 }] },
-        { openId: '', avatarUrl: '', nickName: 'peony', data: [{ score: 108, time: 1020 }] },
-        { openId: '', avatarUrl: '', nickName: 'peony', data: [{ score: 109, time: 1030 }] },
-        { openId: '', avatarUrl: '', nickName: 'peony', data: [{ score: 111, time: 1040 }] },
-        { openId: '', avatarUrl: '', nickName: 'peony', data: [{ score: 112, time: 1050 }] },
-        { openId: '', avatarUrl: '', nickName: 'peony', data: [{ score: 123, time: 1060 }] },
-        { openId: '', avatarUrl: '', nickName: 'peony', data: [{ score: 167, time: 1080 }] }
+    private gameData = [
     ]
 
     private runGame() {
         console.log('runGame opendata');
-        let bitmap = new egret.Bitmap(this.panel_01);
-        bitmap.x = (640 - 480) >> 1;
-        bitmap.y = (1136 - 800) >> 1;
-        this.addChild(bitmap);
-
+        let bg = new Button();
+        bg.drawRect(0x0, 600, 1000);
+        bg.x = (640 - bg.width) >> 1;
+        // bitmap.y = (1136 - 800) >> 1;
+        this.addChild(bg);
+        // for (let i = 0; i > 5; i++) {
+        //     let b = new Button();
+        //     b.drawRect(0x0FFFFF, 100, 50);
+        //     b.setText('标准模式');
+        //     b.x = i * 110;
+        //     this.addChild(b);
+        // }
         const listContainer = new egret.DisplayObjectContainer();
         this.scrollView.setContent(listContainer);
-        this.scrollView.x = bitmap.x;
-        this.scrollView.y = bitmap.y;
-        this.scrollView.width = bitmap.width;
-        this.scrollView.height = bitmap.height;
+        this.scrollView.x = bg.x;
+        this.scrollView.y = bg.y + 100;
+        this.scrollView.width = bg.width;
+        this.scrollView.height = bg.height - 100;
         this.addChild(this.scrollView);
 
         this.gameData.forEach(
             (value, index) => {
                 let item = new egret.DisplayObjectContainer();
                 item.y = index * 130;
+                item.x = 10;
                 listContainer.addChild(item);
 
-                let bitmap = new egret.Bitmap(this.bgtexture);
-                bitmap.width = 460;
+                let bitmap = new Button();
+                bitmap.drawRect(0x0F0F0F, 580, 113);
                 item.addChild(bitmap);
 
+                let head = new MyImage()
+                head.y = 20;
+                head.x = 20;
+                head.setSrc(value.avatarUrl);
+                head.scaleX = 0.6;
+                head.scaleY = 0.6;
+                item.addChild(head)
+
                 let nicktxt = new egret.TextField();
+                nicktxt.size = 26;
                 nicktxt.y = 50;
-                nicktxt.text = '名字:' + value.nickName;
+                nicktxt.x = 120;
+                nicktxt.text = '名字: ' + value.nickname;
                 item.addChild(nicktxt);
 
                 let numtxt = new egret.TextField();
-                numtxt.x = 260;
+                numtxt.size = 26;
+                numtxt.x = 400;
                 numtxt.y = 50;
-                numtxt.text = '得分:' + value.data[0].score;
+                numtxt.text = '当前第: ' + value.KVDataList[0].value + '关';
                 item.addChild(numtxt);
             }, this);
     }

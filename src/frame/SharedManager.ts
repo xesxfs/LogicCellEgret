@@ -58,11 +58,6 @@ class SharedManagerClass {
 			this.showShareMenu();
 			this.getUpdateManager();
 			this.getPuzzleClearNum();
-			// let i = 0;
-			// while (i < 25) {
-			// 	this.vecPuzzleClear.push(0);
-			// 	i++;
-			// }
 
 			this.getScore();
 			this.getScore30();
@@ -199,7 +194,6 @@ class SharedManagerClass {
 		this.sound = !this.sound;
 	}
 
-
 	public erase() {
 		egret.localStorage.clear();
 	}
@@ -212,18 +206,21 @@ class SharedManagerClass {
 		return score;
 	}
 
-
 	public getItem(key: string): string {
 		let resultData = egret.localStorage.getItem(key);
 		return resultData;
 	}
-
 
 	public setItem(key: string, value: number | string) {
 		if (typeof (value) == 'number') {
 			value = value.toString();
 		}
 		egret.localStorage.setItem(key, value);
+		if (key === 'puzzle') {
+			value = this.getCurPuzzle().toString();
+		}
+		platform.uploadWXData(key, value);
+
 	}
 
 	public showShareMenu() {

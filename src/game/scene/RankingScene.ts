@@ -24,7 +24,7 @@ class RankingScene extends Scene {
 		this.addChild(this.bitmap);
 		platform.openDataContext.postMessage({
 			isDisplay: this.isdisplay,
-			keys: ['score', 'score30', 'score1min', 'score1combo'],
+			keys: ['puzzle', 'score', 'score30', 'score1min', 'score1combo'],
 			year: (new Date()).getFullYear(),
 			command: "getFriendCloudStorage"
 		});

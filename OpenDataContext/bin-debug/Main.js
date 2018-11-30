@@ -17,30 +17,16 @@ var Main = (function (_super) {
          * 便于演示数据，这里使用家数据
          * 有关获取还有的接口参考：https://mp.weixin.qq.com/debug/wxagame/dev/tutorial/open-ability/open-data.html?t=2018323
          */
-        _this.gameData = [
-            { openId: '', avatarUrl: '', nickName: 'peony', data: [{ score: 100, time: 1000 }] },
-            { openId: '', avatarUrl: '', nickName: 'peony', data: [{ score: 101, time: 100 }] },
-            { openId: '', avatarUrl: '', nickName: 'peony', data: [{ score: 102, time: 1700 }] },
-            { openId: '', avatarUrl: '', nickName: 'peony', data: [{ score: 103, time: 1800 }] },
-            { openId: '', avatarUrl: '', nickName: 'peony', data: [{ score: 104, time: 1900 }] },
-            { openId: '', avatarUrl: '', nickName: 'peony', data: [{ score: 105, time: 1070 }] },
-            { openId: '', avatarUrl: '', nickName: 'peony', data: [{ score: 106, time: 1030 }] },
-            { openId: '', avatarUrl: '', nickName: 'peony', data: [{ score: 107, time: 1010 }] },
-            { openId: '', avatarUrl: '', nickName: 'peony', data: [{ score: 108, time: 1020 }] },
-            { openId: '', avatarUrl: '', nickName: 'peony', data: [{ score: 109, time: 1030 }] },
-            { openId: '', avatarUrl: '', nickName: 'peony', data: [{ score: 111, time: 1040 }] },
-            { openId: '', avatarUrl: '', nickName: 'peony', data: [{ score: 112, time: 1050 }] },
-            { openId: '', avatarUrl: '', nickName: 'peony', data: [{ score: 123, time: 1060 }] },
-            { openId: '', avatarUrl: '', nickName: 'peony', data: [{ score: 167, time: 1080 }] }
-        ];
+        _this.gameData = [];
         wx.onMessage(function (data) {
             console.log(data);
             if (data.isDisplay) {
                 //获取小游戏开放数据接口 --- 开始
                 wx.getFriendCloudStorage({
-                    keyList: [],
+                    keyList: data.keys,
                     success: function (res) {
                         console.log(res);
+                        _this.gameData = res.data;
                         _this.runGame();
                     },
                     fail: function (err) {
@@ -78,6 +64,7 @@ var Main = (function (_super) {
     }
     Main.prototype.runGame = function () {
         var _this = this;
+        console.log('runGame opendata');
         var bitmap = new egret.Bitmap(this.panel_01);
         bitmap.x = (640 - 480) >> 1;
         bitmap.y = (1136 - 800) >> 1;
@@ -98,12 +85,12 @@ var Main = (function (_super) {
             item.addChild(bitmap);
             var nicktxt = new egret.TextField();
             nicktxt.y = 50;
-            nicktxt.text = '名字:' + value.nickName;
+            nicktxt.text = '名字:' + value.nickname;
             item.addChild(nicktxt);
             var numtxt = new egret.TextField();
             numtxt.x = 260;
             numtxt.y = 50;
-            numtxt.text = '得分:' + value.data[0].score;
+            numtxt.text = '得分:' + value.KVDataList[0].value;
             item.addChild(numtxt);
         }, this);
     };

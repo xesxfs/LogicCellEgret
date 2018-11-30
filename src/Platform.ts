@@ -7,7 +7,9 @@
 declare interface Platform {
     openDataContext: any;
 
-    getUserInfo(): Promise<any>;
+    // getUserInfo(): Promise<any>;
+
+    // getUserInfo2();
 
     login(): Promise<any>;
 
@@ -30,9 +32,11 @@ declare interface Platform {
 class DebugPlatform implements Platform {
     openDataContext: any;
 
-    async getUserInfo() {
-        return { nickName: "username" }
-    }
+    // async getUserInfo() {
+    //     return { nickName: "username" }
+    // }
+    // getUserInfo2() {
+    // }
     async login() {
     }
     shareAppMessage(object: any) {
@@ -47,8 +51,8 @@ class DebugPlatform implements Platform {
     }
     async getStorage(key) {
     }
-
-    getUpdateManager() { }
+    getUpdateManager() {
+    }
 
 }
 

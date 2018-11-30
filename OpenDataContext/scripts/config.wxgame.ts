@@ -8,9 +8,7 @@ import { CustomPlugin } from './myplugin';
 import * as defaultConfig from './config';
 
 const config: ResourceManagerConfig = {
-
     buildConfig: (params) => {
-
         const { target, command, projectName, version } = params;
         const outputDir = `../LogicCellEgret_wxgame/openDataContext`;
         if (command == 'build') {

@@ -1,4 +1,4 @@
-var egret = window.egret;var __reflect = (this && this.__reflect) || function (p, c, t) {
+var __reflect = (this && this.__reflect) || function (p, c, t) {
     p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
 };
 var __extends = this && this.__extends || function __extends(t, e) { 
@@ -6664,9 +6664,6 @@ var eui;
          * @language zh_CN
          */
         ListBase.prototype.onRendererTouchBegin = function (event) {
-            if (!this.$stage) {
-                return;
-            }
             var values = this.$ListBase;
             if (event.$isDefaultPrevented)
                 return;
@@ -10994,9 +10991,6 @@ var eui;
          * @language zh_CN
          */
         ItemRenderer.prototype.onTouchBegin = function (event) {
-            if (!this.$stage) {
-                return;
-            }
             this.$stage.addEventListener(egret.TouchEvent.TOUCH_CANCEL, this.onTouchCancle, this);
             this.$stage.addEventListener(egret.TouchEvent.TOUCH_END, this.onStageTouchEnd, this);
             this.touchCaptured = true;
@@ -14377,9 +14371,6 @@ var eui;
          * @param event
          */
         Scroller.prototype.onTouchBeginCapture = function (event) {
-            if (!this.$stage) {
-                return;
-            }
             this.$Scroller[12 /* touchCancle */] = false;
             var canScroll = this.checkScrollPolicy();
             if (!canScroll) {
@@ -18995,9 +18986,8 @@ var eui;
             }
             var paths = data.paths;
             for (var path in paths) {
-                EXML.update(path, paths[path]);
+                window[path] = EXML.update(path, paths[path]);
             }
-            //commonjs|commonjs2
             if (!data.exmls || data.exmls.length == 0) {
                 this.onLoaded();
             }
@@ -25615,4 +25605,3 @@ var eui;
         }
     })(sys = eui.sys || (eui.sys = {}));
 })(eui || (eui = {}));
-;window.eui = eui;

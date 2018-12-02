@@ -298,11 +298,11 @@ class BlockManagerClass extends eui.Group {
 				break;
 			case 3:
 				SharedManager.saveScore1min(score);
-				SetScore1minScene.isFinish = true;
+				// SetScore1minScene.isFinish = false;
 				break;
 			case 4:
 				SharedManager.saveScore1combo(score);
-				SetScore1minScene.isFinish = true;
+				// SetScore1cinboScene.isFinish = true;
 		}
 
 		let f = new ClearSprite(true, true);

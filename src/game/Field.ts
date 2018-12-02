@@ -175,13 +175,15 @@ class Field extends eui.Group {
 			else if (mode == GameMode.Score30) {
 				if (SetScore30Scene.cnt == 0) {
 					BlockManager.finish(SetScore30Scene);
+				} else {
+					BlockManager.finishCheck(SetScore30Scene);
 				}
-				BlockManager.finishCheck(SetScore30Scene);
+
 			}
 			else if (Status.mode == GameMode.Score1M) {
-				BlockManager.finishCheck(SetScore1minScene);
+				SetScore1minScene.isFinish = BlockManager.finishCheck(SetScore1minScene);
 			}
-			else if (Status.mode == GameMode.ScoreCombo && (Status.score != 0 || BlockManager.vecBlock.length == 20)) {
+			else if (Status.mode == GameMode.ScoreCombo && BlockManager.vecBlock.length == 20) {
 				BlockManager.finish(SetScore1comboScene);
 			}
 		}

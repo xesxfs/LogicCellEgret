@@ -42,7 +42,7 @@ var SceneManagerClass = (function (_super) {
             sceneId = 2;
         }
         else if (this.scene instanceof SetScore1minScene) {
-            SetScore1minScene.cnt = -95;
+            SetScore1minScene.cnt = -248;
             SetScore1minScene.isFinish = false;
             sceneId = 3;
         }

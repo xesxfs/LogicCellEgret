@@ -15,6 +15,7 @@ var InputPuzzleSelectClass = (function (_super) {
     }
     InputPuzzleSelectClass.prototype.mouseDownEvent = function (e) {
         // SceneManager.newScene(new SetPuzzleScene(StageManager.getStage(0)));
+        var curStage = SharedManager.getCurPuzzle();
         if (SceneManager.scene instanceof PuzzleSelectScene) {
             var scene = SceneManager.scene;
             var p = egret.Point.create(e.stageX, e.stageY);
@@ -26,7 +27,9 @@ var InputPuzzleSelectClass = (function (_super) {
                 var sid = 5 * ~~offy + ~~offx;
                 if (sid > 24 || sid < 0)
                     sid = 0;
-                SceneManager.newScene(new SetPuzzleScene(StageManager.getStage(sid)));
+                if (sid <= curStage) {
+                    SceneManager.newScene(new SetPuzzleScene(StageManager.getStage(sid)));
+                }
             }
             else if (scene.backImg.getTransformedBounds(this).containsPoint(p)) {
                 SceneManager.newScene(new SelectScene());

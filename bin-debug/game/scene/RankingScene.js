@@ -13,6 +13,7 @@ var RankingScene = (function (_super) {
     function RankingScene() {
         var _this = _super.call(this) || this;
         _this.isdisplay = true;
+        _this.addEventListener(egret.Event.REMOVED_FROM_STAGE, _this.disable, _this);
         InputManager.newInput(InputRanking);
         return _this;
     }
@@ -32,13 +33,20 @@ var RankingScene = (function (_super) {
         this.addChild(this.bitmap);
         platform.openDataContext.postMessage({
             isDisplay: this.isdisplay,
-            keys: ['score', 'score30', 'score1min', 'score1combo'],
+            keys: ['puzzle', 'score', 'score30', 'score1min', 'score1combo'],
             year: (new Date()).getFullYear(),
             command: "getFriendCloudStorage"
         });
     };
     RankingScene.prototype.update = function () {
         App.BackMenu.update();
+    };
+    RankingScene.prototype.disable = function () {
+        platform.openDataContext.postMessage({
+            isDisplay: false,
+            keys: ['score', 'score30', 'score1min', 'score1combo'],
+            year: (new Date()).getFullYear(),
+        });
     };
     return RankingScene;
 }(Scene));

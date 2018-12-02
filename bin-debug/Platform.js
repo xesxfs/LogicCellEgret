@@ -39,13 +39,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var DebugPlatform = (function () {
     function DebugPlatform() {
     }
-    DebugPlatform.prototype.getUserInfo = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/, { nickName: "username" }];
-            });
-        });
-    };
+    // async getUserInfo() {
+    //     return { nickName: "username" }
+    // }
+    // getUserInfo2() {
+    // }
     DebugPlatform.prototype.login = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
@@ -53,12 +51,11 @@ var DebugPlatform = (function () {
             });
         });
     };
-    DebugPlatform.prototype.shareAppMessage = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/];
-            });
-        });
+    DebugPlatform.prototype.shareAppMessage = function (object) {
+    };
+    DebugPlatform.prototype.showShareMenu = function (object) {
+    };
+    DebugPlatform.prototype.onShareAppMessage = function (callback) {
     };
     DebugPlatform.prototype.uploadWXData = function (key, value) {
         return __awaiter(this, void 0, void 0, function () {
@@ -80,6 +77,8 @@ var DebugPlatform = (function () {
                 return [2 /*return*/];
             });
         });
+    };
+    DebugPlatform.prototype.getUpdateManager = function () {
     };
     return DebugPlatform;
 }());

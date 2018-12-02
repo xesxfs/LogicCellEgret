@@ -49,11 +49,11 @@ var HudManagerScore = (function (_super) {
             var s = 0;
             var cnt = SetScore1minScene.cnt;
             if (cnt >= 0) {
-                if (cnt > 1800) {
-                    cnt = 1800;
+                if (cnt > 3600) {
+                    cnt = 3600;
                 }
                 timeStr = "";
-                h = (1800 - cnt) / 30;
+                h = (3600 - cnt) / 60;
                 min = h % 60;
                 s = ~~((h * 100) % 100);
                 if (min < 10) {

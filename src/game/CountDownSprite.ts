@@ -16,6 +16,7 @@ class CountDownSprite extends eui.Group {
 		rect.verticalCenter = 0;
 
 		this.cdLab = new eui.Label();
+		this.cdLab.size = 55;
 		this.cdLab.text = "3";
 		this.cdLab.textColor = 0;
 		this.cdLab.horizontalCenter = 0;
@@ -24,9 +25,14 @@ class CountDownSprite extends eui.Group {
 		this.addChild(rect);
 		this.addChild(this.cdLab);
 
-		egret.Tween.get(this).wait(1500).call(() => { this.cdLab.text = "2"; }).wait(1000)
-			.call(() => { this.cdLab.text = "1"; }).wait(1000).call(() => { this.cdLab.text = "start"; })
-			.to({ alpha: 0 }, 1000, egret.Ease.elasticIn).call(() => { this.parent && (this.parent.removeChild(this)) });
+		egret.Tween.get(this)
+			.wait(1500)
+			.call(() => { this.cdLab.text = "2"; })
+			.wait(1000)
+			.call(() => { this.cdLab.text = "1"; }).wait(1000)
+			.call(() => { this.cdLab.text = "start"; })
+			.to({ alpha: 0 }, 1000, egret.Ease.elasticIn)
+			.call(() => { this.parent && (this.parent.removeChild(this)) });
 
 	}
 }

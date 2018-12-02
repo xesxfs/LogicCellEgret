@@ -17,6 +17,24 @@ var PuzzleSelectScene = (function (_super) {
     }
     PuzzleSelectScene.prototype.childrenCreated = function () {
         InputManager.newInput(InputPuzzleSelect);
+        this.setStageShow();
+    };
+    PuzzleSelectScene.prototype.setStageShow = function () {
+        var curStage = SharedManager.getCurPuzzle();
+        for (var i = 0; i < this.stageGroup.numChildren; i++) {
+            var stage = this.stageGroup.getChildAt(i);
+            var color = 0x000000;
+            if (i === curStage) {
+                color = 0xBA9B4A;
+            }
+            // if (i > curStage) {
+            // 	color = 0xD1CCCC;
+            // }
+            if (i < curStage) {
+                color = 0xD1CCCC;
+            }
+            stage.fillColor = color;
+        }
     };
     return PuzzleSelectScene;
 }(Scene));

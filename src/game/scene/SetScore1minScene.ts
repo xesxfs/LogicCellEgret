@@ -30,7 +30,7 @@ class SetScore1minScene extends Scene {
 		if (!SetScore1minScene.isFinish) {
 			SetScore1minScene.cnt++;
 		}
-		if (SetScore1minScene.isFinish && this.field.matchingJob == null && SetScore1minScene.cnt >= 1800) {
+		if (!SetScore1minScene.isFinish && this.field.matchingJob == null && SetScore1minScene.cnt >= 3600) {
 			SetScore1minScene.isFinish = true;
 			BlockManager.finish(SetScore1minScene);
 		}

@@ -74,10 +74,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var Main = (function (_super) {
     __extends(Main, _super);
     function Main() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super.call(this) || this;
+        SharedManager.init();
+        return _this;
     }
     Main.prototype.createChildren = function () {
         _super.prototype.createChildren.call(this);
+        console.log("createChildren");
         egret.lifecycle.addLifecycleListener(function (context) {
             // custom lifecycle plugin
         });
@@ -98,22 +101,16 @@ var Main = (function (_super) {
     };
     Main.prototype.runGame = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var userInfo;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.loadResource()];
+                    case 0:
+                        console.log("runGame");
+                        return [4 /*yield*/, this.loadResource()];
                     case 1:
                         _a.sent();
-                        return [4 /*yield*/, platform.login()];
-                    case 2:
-                        _a.sent();
-                        return [4 /*yield*/, platform.getUserInfo()];
-                    case 3:
-                        userInfo = _a.sent();
-                        console.log(userInfo);
-                        return [4 /*yield*/, SharedManager.init()];
-                    case 4:
-                        _a.sent();
+                        // await platform.login();
+                        // const userInfo = await platform.getUserInfo();
+                        // console.log(userInfo);
                         this.createGameScene();
                         return [2 /*return*/];
                 }
@@ -169,6 +166,7 @@ var Main = (function (_super) {
      * Create scene interface
      */
     Main.prototype.createGameScene = function () {
+        console.log("createGameScene");
         App.startUp(this);
     };
     return Main;

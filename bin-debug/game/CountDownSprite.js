@@ -27,15 +27,21 @@ var CountDownSprite = (function (_super) {
         rect.horizontalCenter = 0;
         rect.verticalCenter = 0;
         this.cdLab = new eui.Label();
+        this.cdLab.size = 55;
         this.cdLab.text = "3";
         this.cdLab.textColor = 0;
         this.cdLab.horizontalCenter = 0;
         this.cdLab.verticalCenter = 0;
         this.addChild(rect);
         this.addChild(this.cdLab);
-        egret.Tween.get(this).wait(1500).call(function () { _this.cdLab.text = "2"; }).wait(1000)
-            .call(function () { _this.cdLab.text = "1"; }).wait(1000).call(function () { _this.cdLab.text = "start"; })
-            .to({ alpha: 0 }, 1000, egret.Ease.elasticIn).call(function () { _this.parent && (_this.parent.removeChild(_this)); });
+        egret.Tween.get(this)
+            .wait(1500)
+            .call(function () { _this.cdLab.text = "2"; })
+            .wait(1000)
+            .call(function () { _this.cdLab.text = "1"; }).wait(1000)
+            .call(function () { _this.cdLab.text = "start"; })
+            .to({ alpha: 0 }, 1000, egret.Ease.elasticIn)
+            .call(function () { _this.parent && (_this.parent.removeChild(_this)); });
     };
     return CountDownSprite;
 }(eui.Group));

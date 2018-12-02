@@ -22,10 +22,10 @@ var ClearSprite = (function (_super) {
     ClearSprite.prototype.childrenCreated = function () {
         console.log("clearCheck ClearSprite");
         if (!this.isPerfect)
-            this.statusLab.text = "Clear";
+            this.statusLab.text = "清除";
         if (this.isFinish) {
-            this.statusLab.text = "Finish";
-            this.nextLab.text = "Share";
+            this.statusLab.text = "完成";
+            this.nextLab.text = "分享";
         }
         egret.Tween.get(this.clearGroup).to({ y: this.toY }, 500, egret.Ease.quintOut).wait(100).to({ x: 66 }, 500, egret.Ease.quintOut);
         egret.Tween.get(this.menuGroup).wait(600).to({ y: this.toY }, 500, egret.Ease.quintOut);
@@ -50,6 +50,7 @@ var ClearSprite = (function (_super) {
                 break;
             case this.nextGroup:
                 if (this.isFinish) {
+                    SharedManager.shareAppMessage();
                 }
                 else {
                     var stageData = StageManager.getStage(-1);

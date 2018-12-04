@@ -1,3 +1,3 @@
-require("js/egret.min.js")
-require("js/game.min.js")
-require("js/main.min.js")
+require("js/egret.js")
+require("js/game.js")
+require("js/main.js")

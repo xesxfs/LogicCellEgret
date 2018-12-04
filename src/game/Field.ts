@@ -183,7 +183,7 @@ class Field extends eui.Group {
 			else if (Status.mode == GameMode.Score1M) {
 				SetScore1minScene.isFinish = BlockManager.finishCheck(SetScore1minScene);
 			}
-			else if (Status.mode == GameMode.ScoreCombo && BlockManager.vecBlock.length == 20) {
+			else if (Status.mode == GameMode.ScoreCombo && (Status.score != 0 || BlockManager.vecBlock.length == 20)) {
 				BlockManager.finish(SetScore1comboScene);
 			}
 		}

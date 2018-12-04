@@ -1,4 +1,5 @@
 class Button extends egret.Sprite {
+	public mode: number = 0;
 	public constructor() {
 		super();
 	}
@@ -10,12 +11,12 @@ class Button extends egret.Sprite {
 		this.graphics.endFill();
 	}
 
-	public setText(txt: string) {
+	public setText(txt: string, size: number = 26) {
 		let tf = new egret.TextField();
-		tf.size = 26;
+		tf.size = size;
 		tf.text = txt;
-		// tf.x = this.width >> 1;
-		// tf.y = this.height >> 1;
+		tf.x = (this.width - tf.width) >> 1;
+		tf.y = (this.height - tf.height) >> 1;
 		this.addChild(tf);
 	}
 

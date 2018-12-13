@@ -64,7 +64,7 @@ class SharedManagerClass {
 			this.getScore1combo();
 			this.getScore1min();
 
-			console.log("init:", this.score, this.score30, this.score1min, this.score1combo);
+			// console.log("init:", this.score, this.score30, this.score1min, this.score1combo);
 
 		} catch (e) {
 			console.error(e);

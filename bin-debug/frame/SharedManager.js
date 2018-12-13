@@ -221,3 +221,4 @@ var SharedManagerClass = (function () {
 }());
 __reflect(SharedManagerClass.prototype, "SharedManagerClass");
 var SharedManager = new SharedManagerClass();
+//# sourceMappingURL=SharedManager.js.map

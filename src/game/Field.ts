@@ -48,7 +48,7 @@ class Field extends eui.Group {
 			}
 			h++;
 		}
-		console.log(this.vec2Grid)
+		// console.log(this.vec2Grid)
 		/****!!放到这里代码可读性和逻辑性变差，但是省去了在多个场景调用!!****/
 		BlockManager.reset(this);
 		BlockManager.AddAllBlock(stageData.vecBlockData, false);
@@ -86,7 +86,7 @@ class Field extends eui.Group {
 		var mode = 0;
 		Status.combo++;
 		this.matchingJob = null;
-		var nestFlag: Boolean = false;
+		var nextFlag: Boolean = false;
 		i = 0;
 		while (i < this.fieldH) {
 			j = 0;
@@ -112,13 +112,13 @@ class Field extends eui.Group {
 					if (checkBlock1 != null && checkBlock1.vecLayer[0] == blockColor) {
 						checkBlock1.removeFlag = true;
 						block.removeFlag = true;
-						nestFlag = true;
+						nextFlag = true;
 					}
 
 					if (checkBlock2 != null && checkBlock2.vecLayer[0] == blockColor) {
 						checkBlock2.removeFlag = true;
 						block.removeFlag = true;
-						nestFlag = true;
+						nextFlag = true;
 					}
 				}
 				j++;
@@ -130,11 +130,15 @@ class Field extends eui.Group {
 		i = length - 1;
 		while (i >= 0) {
 			block = BlockManager.vecBlock[i];
-			if (block.removeFlag && block.removeLayer()) {
+			if (block.removeFlag) {
+				let resultPoint = block.localToGlobal(block.x, block.y);
+				EffectManager.addEffect(new EffectScore(resultPoint.x + 10, resultPoint.y + 20, Status.addScore()));
+				block.removeLayer()
 			}
 			i--;
 		}
-		if (nestFlag) {
+
+		if (nextFlag) {
 			if (Status.combo < 8) {
 				this.vecSound[Status.combo - 1].play(0, 1);
 			}
@@ -150,21 +154,21 @@ class Field extends eui.Group {
 				Status.maxCombo = combo;
 			}
 			mode = Status.mode;
-			if (combo > 0) {
-				Status.combo = Status.combo - 1;
-				Status.addScore();
-				i = 0;
-				while (i < 9) {
-					if (i != 4) {
-						//  EffectManager.addEffect(new EffectScore("" + Status.addScore(),i / 3,i % 3));
+			// if (combo > 0) {
+			// Status.combo = Status.combo - 1;
+			// Status.addScore();
+			// i = 0;
+			// while (i < 9) {
+			// 	if (i != 4) {
+			// 		//  EffectManager.addEffect(new EffectScore("" + Status.addScore(),i / 3,i % 3));
 
-					}
-					else {
-						//  EffectManager.addEffect(new EffectScore("Bonus!",i / 3,i % 3));
-					}
-					i++;
-				}
-			}
+			// 	}
+			// 	else {
+			// 		//  EffectManager.addEffect(new EffectScore("Bonus!",i / 3,i % 3));
+			// 	}
+			// 	i++;
+			// }
+			// }
 			Status.combo = 0;
 			if (mode == GameMode.Puzzle && !BlockManager.clearCheck()) {
 				BlockManager.addUndoString();

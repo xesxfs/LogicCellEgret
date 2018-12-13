@@ -51,3 +51,4 @@ var RankingScene = (function (_super) {
     return RankingScene;
 }(Scene));
 __reflect(RankingScene.prototype, "RankingScene");
+//# sourceMappingURL=RankingScene.js.map

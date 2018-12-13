@@ -74,3 +74,4 @@ var Block = (function (_super) {
     return Block;
 }(eui.Component));
 __reflect(Block.prototype, "Block");
+//# sourceMappingURL=Block.js.map

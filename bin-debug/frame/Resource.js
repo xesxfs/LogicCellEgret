@@ -32,3 +32,4 @@ var Resource = (function () {
     return Resource;
 }());
 __reflect(Resource.prototype, "Resource");
+//# sourceMappingURL=Resource.js.map

@@ -29,3 +29,4 @@ var Effect = (function (_super) {
     return Effect;
 }(egret.Sprite));
 __reflect(Effect.prototype, "Effect");
+//# sourceMappingURL=Effect.js.map

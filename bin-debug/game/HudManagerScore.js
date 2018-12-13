@@ -77,3 +77,4 @@ var HudManagerScore = (function (_super) {
     return HudManagerScore;
 }(eui.Component));
 __reflect(HudManagerScore.prototype, "HudManagerScore");
+//# sourceMappingURL=HudManagerScore.js.map

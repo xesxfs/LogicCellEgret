@@ -2,7 +2,7 @@ class EffectLayerErase extends Effect {
 	private onComPlete: boolean = false;
 	public constructor(x: number, y: number, color: number) {
 		super();
-		this.endCnt = 25;
+		this.endCnt = 40;
 		this.x = x;
 		this.y = y;
 		this.color = color;

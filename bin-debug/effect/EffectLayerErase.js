@@ -13,7 +13,7 @@ var EffectLayerErase = (function (_super) {
     function EffectLayerErase(x, y, color) {
         var _this = _super.call(this) || this;
         _this.onComPlete = false;
-        _this.endCnt = 25;
+        _this.endCnt = 40;
         _this.x = x;
         _this.y = y;
         _this.color = color;
@@ -36,3 +36,4 @@ var EffectLayerErase = (function (_super) {
     return EffectLayerErase;
 }(Effect));
 __reflect(EffectLayerErase.prototype, "EffectLayerErase");
+//# sourceMappingURL=EffectLayerErase.js.map

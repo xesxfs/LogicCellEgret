@@ -19,7 +19,7 @@ class ClearSprite extends eui.Component {
 	}
 
 	protected childrenCreated() {
-		console.log("clearCheck ClearSprite");
+		// console.log("clearCheck ClearSprite");
 		if (!this.isPerfect) this.statusLab.text = "清除";
 		if (this.isFinish) {
 			this.statusLab.text = "完成";

@@ -29,3 +29,4 @@ var InputManagerClass = (function (_super) {
 }(eui.Component));
 __reflect(InputManagerClass.prototype, "InputManagerClass");
 var InputManager = new InputManagerClass();
+//# sourceMappingURL=InputManagerClass.js.map

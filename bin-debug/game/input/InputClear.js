@@ -17,3 +17,4 @@ var InputClearClass = (function (_super) {
 }(Input));
 __reflect(InputClearClass.prototype, "InputClearClass");
 var InputClear = new InputClearClass();
+//# sourceMappingURL=InputClear.js.map

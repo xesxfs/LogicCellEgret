@@ -86,7 +86,7 @@ var Field = (function (_super) {
         var mode = 0;
         Status.combo++;
         this.matchingJob = null;
-        var nestFlag = false;
+        var nextFlag = false;
         i = 0;
         while (i < this.fieldH) {
             j = 0;
@@ -112,12 +112,12 @@ var Field = (function (_super) {
                     if (checkBlock1 != null && checkBlock1.vecLayer[0] == blockColor) {
                         checkBlock1.removeFlag = true;
                         block.removeFlag = true;
-                        nestFlag = true;
+                        nextFlag = true;
                     }
                     if (checkBlock2 != null && checkBlock2.vecLayer[0] == blockColor) {
                         checkBlock2.removeFlag = true;
                         block.removeFlag = true;
-                        nestFlag = true;
+                        nextFlag = true;
                     }
                 }
                 j++;
@@ -128,11 +128,14 @@ var Field = (function (_super) {
         i = length - 1;
         while (i >= 0) {
             block = BlockManager.vecBlock[i];
-            if (block.removeFlag && block.removeLayer()) {
+            if (block.removeFlag) {
+                var resultPoint = block.localToGlobal(block.x, block.y);
+                EffectManager.addEffect(new EffectScore(resultPoint.x + 10, resultPoint.y + 20, Status.addScore()));
+                block.removeLayer();
             }
             i--;
         }
-        if (nestFlag) {
+        if (nextFlag) {
             if (Status.combo < 8) {
                 this.vecSound[Status.combo - 1].play(0, 1);
             }
@@ -148,20 +151,20 @@ var Field = (function (_super) {
                 Status.maxCombo = combo;
             }
             mode = Status.mode;
-            if (combo > 0) {
-                Status.combo = Status.combo - 1;
-                Status.addScore();
-                i = 0;
-                while (i < 9) {
-                    if (i != 4) {
-                        //  EffectManager.addEffect(new EffectScore("" + Status.addScore(),i / 3,i % 3));
-                    }
-                    else {
-                        //  EffectManager.addEffect(new EffectScore("Bonus!",i / 3,i % 3));
-                    }
-                    i++;
-                }
-            }
+            // if (combo > 0) {
+            // Status.combo = Status.combo - 1;
+            // Status.addScore();
+            // i = 0;
+            // while (i < 9) {
+            // 	if (i != 4) {
+            // 		//  EffectManager.addEffect(new EffectScore("" + Status.addScore(),i / 3,i % 3));
+            // 	}
+            // 	else {
+            // 		//  EffectManager.addEffect(new EffectScore("Bonus!",i / 3,i % 3));
+            // 	}
+            // 	i++;
+            // }
+            // }
             Status.combo = 0;
             if (mode == GameMode.Puzzle && !BlockManager.clearCheck()) {
                 BlockManager.addUndoString();
@@ -180,7 +183,7 @@ var Field = (function (_super) {
             else if (Status.mode == GameMode.Score1M) {
                 SetScore1minScene.isFinish = BlockManager.finishCheck(SetScore1minScene);
             }
-            else if (Status.mode == GameMode.ScoreCombo && BlockManager.vecBlock.length == 20) {
+            else if (Status.mode == GameMode.ScoreCombo && (Status.score != 0 || BlockManager.vecBlock.length == 20)) {
                 BlockManager.finish(SetScore1comboScene);
             }
         }
@@ -228,3 +231,4 @@ var Field = (function (_super) {
     return Field;
 }(eui.Group));
 __reflect(Field.prototype, "Field");
+//# sourceMappingURL=Field.js.map

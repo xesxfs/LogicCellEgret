@@ -64,3 +64,4 @@ var ClearSprite = (function (_super) {
     return ClearSprite;
 }(eui.Component));
 __reflect(ClearSprite.prototype, "ClearSprite");
+//# sourceMappingURL=ClearSprite.js.map

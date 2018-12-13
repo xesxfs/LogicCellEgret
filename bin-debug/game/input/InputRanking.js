@@ -25,3 +25,4 @@ var InputRankingClass = (function (_super) {
 }(Input));
 __reflect(InputRankingClass.prototype, "InputRankingClass");
 var InputRanking = new InputRankingClass();
+//# sourceMappingURL=InputRanking.js.map

@@ -62,3 +62,4 @@ var InputSetScoreClass = (function (_super) {
 }(Input));
 __reflect(InputSetScoreClass.prototype, "InputSetScoreClass");
 var InputSetScore = new InputSetScoreClass();
+//# sourceMappingURL=InputSetScore.js.map

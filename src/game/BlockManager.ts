@@ -249,13 +249,13 @@ class BlockManagerClass extends eui.Group {
 		var i = 0;
 		var length = this.vecInventoryBlock.length;
 		if (this.vecBlock.length != 0) {
-			console.log("clearCheck false length", this.vecBlock);
+			// console.log("clearCheck false length", this.vecBlock);
 			return false;
 		}
 		i = 0;
 		while (i < length) {
 			if (this.vecInventoryBlock[i] != null) {
-				console.log("clearCheck false");
+				// console.log("clearCheck false");
 				return false;
 			}
 			i++;
@@ -277,7 +277,7 @@ class BlockManagerClass extends eui.Group {
 	}
 
 	public finishCheck(cls: any): boolean {
-		console.log("finishCheck:", this.vecBlock.length, this.vecBlock);
+		// console.log("finishCheck:", this.vecBlock.length, this.vecBlock);
 		if (this.vecBlock.length != 9) {
 			return false;
 		}

@@ -49,3 +49,4 @@ var StageManagerClass = (function () {
 }());
 __reflect(StageManagerClass.prototype, "StageManagerClass");
 var StageManager = new StageManagerClass();
+//# sourceMappingURL=StageManager.js.map

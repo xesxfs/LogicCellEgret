@@ -53,3 +53,4 @@ var EffectManagerClass = (function (_super) {
 }(egret.Sprite));
 __reflect(EffectManagerClass.prototype, "EffectManagerClass");
 var EffectManager = new EffectManagerClass();
+//# sourceMappingURL=EffectManager.js.map

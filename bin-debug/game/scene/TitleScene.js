@@ -20,3 +20,4 @@ var TitleScene = (function (_super) {
     return TitleScene;
 }(Scene));
 __reflect(TitleScene.prototype, "TitleScene");
+//# sourceMappingURL=TitleScene.js.map

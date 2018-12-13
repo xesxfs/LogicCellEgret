@@ -32,3 +32,4 @@ var StageData = (function () {
     return StageData;
 }());
 __reflect(StageData.prototype, "StageData");
+//# sourceMappingURL=StageData.js.map

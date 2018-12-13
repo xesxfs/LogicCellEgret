@@ -41,3 +41,4 @@ var SetScoreScene = (function (_super) {
     return SetScoreScene;
 }(Scene));
 __reflect(SetScoreScene.prototype, "SetScoreScene");
+//# sourceMappingURL=SetScoreScene.js.map

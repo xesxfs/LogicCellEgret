@@ -51,3 +51,4 @@ var BackMenuBitmapClass = (function (_super) {
     return BackMenuBitmapClass;
 }(eui.Component));
 __reflect(BackMenuBitmapClass.prototype, "BackMenuBitmapClass");
+//# sourceMappingURL=BackMenuBitmap.js.map

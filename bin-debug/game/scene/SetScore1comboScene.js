@@ -44,3 +44,4 @@ var SetScore1comboScene = (function (_super) {
     return SetScore1comboScene;
 }(Scene));
 __reflect(SetScore1comboScene.prototype, "SetScore1comboScene");
+//# sourceMappingURL=SetScore1comboScene.js.map

@@ -36,7 +36,7 @@ class Main extends eui.UILayer {
     protected createChildren(): void {
         super.createChildren();
 
-        console.log("createChildren");
+        // console.log("createChildren");
         egret.lifecycle.addLifecycleListener((context) => {
             // custom lifecycle plugin
         })
@@ -62,7 +62,7 @@ class Main extends eui.UILayer {
     }
 
     private async runGame() {
-        console.log("runGame");
+        // console.log("runGame");
         await this.loadResource();
         // await platform.login();
         // const userInfo = await platform.getUserInfo();
@@ -72,7 +72,7 @@ class Main extends eui.UILayer {
     }
 
     private async loadResource() {
-        console.log("loadResource");
+        // console.log("loadResource");
         try {
             // const loadingView = new LoadingUI();
             // this.stage.addChild(loadingView);
@@ -104,7 +104,7 @@ class Main extends eui.UILayer {
      * Create scene interface
      */
     protected createGameScene(): void {
-        console.log("createGameScene");
+        // console.log("createGameScene");
         App.startUp(this);
     }
 

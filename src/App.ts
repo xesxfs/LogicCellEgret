@@ -3,7 +3,7 @@ class App {
 	}
 	public static BackMenu: BackMenuBitmapClass;
 	public static startUp(mainCotent: eui.UILayer) {
-		console.log("startUp");
+		// console.log("startUp");
 		// SharedManager = new SharedManagerClass();
 		let back = new eui.Rect();
 		back.fillColor = 0x888888;

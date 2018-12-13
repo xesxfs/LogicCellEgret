@@ -67,3 +67,4 @@ var InputSetPuzzleClass = (function (_super) {
 }(Input));
 __reflect(InputSetPuzzleClass.prototype, "InputSetPuzzleClass");
 var InputSetPuzzle = new InputSetPuzzleClass();
+//# sourceMappingURL=InputSetPuzzle.js.map

@@ -47,3 +47,4 @@ var GameMode;
     GameMode[GameMode["Score1M"] = 3] = "Score1M";
     GameMode[GameMode["ScoreCombo"] = 4] = "ScoreCombo";
 })(GameMode || (GameMode = {}));
+//# sourceMappingURL=StatusClass.js.map

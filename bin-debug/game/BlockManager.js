@@ -289,3 +289,4 @@ var BlockManagerClass = (function (_super) {
 }(eui.Group));
 __reflect(BlockManagerClass.prototype, "BlockManagerClass");
 var BlockManager = new BlockManagerClass();
+//# sourceMappingURL=BlockManager.js.map

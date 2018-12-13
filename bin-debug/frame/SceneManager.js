@@ -59,3 +59,4 @@ var SceneManagerClass = (function (_super) {
 }(eui.Component));
 __reflect(SceneManagerClass.prototype, "SceneManagerClass");
 var SceneManager = new SceneManagerClass();
+//# sourceMappingURL=SceneManager.js.map

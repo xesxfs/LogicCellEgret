@@ -12,12 +12,13 @@ var Main = (function (_super) {
     __extends(Main, _super);
     function Main() {
         var _this = _super.call(this) || this;
-        _this.scrollView = new egret.ScrollView();
+        _this.btnName = ['解谜榜', '得分榜', '限次榜', '竞速榜', '连击榜'];
         /**
          * 便于演示数据，这里使用家数据
          * 有关获取还有的接口参考：https://mp.weixin.qq.com/debug/wxagame/dev/tutorial/open-ability/open-data.html?t=2018323
          */
         _this.gameData = [];
+        console.log('Main open data content');
         wx.onMessage(function (data) {
             console.log(data);
             if (data.isDisplay) {
@@ -56,43 +57,102 @@ var Main = (function (_super) {
             _this.panel_01._setBitmapData(imageLoader.data);
         }, _this);
         imageLoader1.load("resource/assets/panel_bg.png");
-        //测试点击
-        _this.addEventListener(egret.TouchEvent.TOUCH_TAP, function (evt) {
-            console.log('子域输出点击');
-        }, _this);
         return _this;
+        //测试点击
+        // this.addEventListener(egret.TouchEvent.TOUCH_TAP, (evt: egret.TouchEvent) => {
+        //     console.log('子域输出点击', evt);
+        // }, this);
     }
+    Main.prototype.onModeBtnClick = function (e) {
+        console.log("mode click ", e);
+    };
     Main.prototype.runGame = function () {
         var _this = this;
-        console.log('runGame opendata');
-        var bitmap = new egret.Bitmap(this.panel_01);
-        bitmap.x = (640 - 480) >> 1;
-        bitmap.y = (1136 - 800) >> 1;
-        this.addChild(bitmap);
-        var listContainer = new egret.DisplayObjectContainer();
-        this.scrollView.setContent(listContainer);
-        this.scrollView.x = bitmap.x;
-        this.scrollView.y = bitmap.y;
-        this.scrollView.width = bitmap.width;
-        this.scrollView.height = bitmap.height;
+        this.scrollView = new egret.ScrollView();
+        // console.log('runGame opendata');
+        this.bg = new Button();
+        this.bg.drawRect(0x0, 600, 1000);
+        this.bg.x = (640 - this.bg.width) >> 1;
+        this.addChild(this.bg);
+        this.listContainers = [];
+        // const listContainer = new egret.DisplayObjectContainer();
+        this.scrollView.x = this.bg.x;
+        this.scrollView.y = this.bg.y + 134;
+        this.scrollView.width = this.bg.width;
+        this.scrollView.height = this.bg.height - 225;
         this.addChild(this.scrollView);
+        var _loop_1 = function (i) {
+            var b = new Button();
+            b.mode = i;
+            b.touchEnabled = true;
+            b.addEventListener('touchTap', function () {
+                // console.log("mode click ", i);                
+                _this.scrollView.setContent(_this.listContainers[i]);
+                _this.scrollView.scrollTop = 0;
+            }, this_1);
+            b.drawRect(0x0, 105, 80);
+            b.setText(this_1.btnName[i]);
+            b.x = i * 120 + this_1.bg.x + 7;
+            b.y = this_1.bg.height - 90;
+            this_1.addChild(b);
+            this_1.listContainers.push(new egret.DisplayObjectContainer());
+        };
+        var this_1 = this;
+        for (var i = 0; i < 5; i++) {
+            _loop_1(i);
+        }
+        this.scrollView.setContent(this.listContainers[0]);
+        var listScore = {
+            'puzzle': [],
+            'score': [],
+            'score30': [],
+            'score1min': [],
+            'score1combo': [],
+        };
         this.gameData.forEach(function (value, index) {
-            var item = new egret.DisplayObjectContainer();
-            item.y = index * 130;
-            listContainer.addChild(item);
-            var bitmap = new egret.Bitmap(_this.bgtexture);
-            bitmap.width = 460;
-            item.addChild(bitmap);
-            var nicktxt = new egret.TextField();
-            nicktxt.y = 50;
-            nicktxt.text = '名字:' + value.nickname;
-            item.addChild(nicktxt);
-            var numtxt = new egret.TextField();
-            numtxt.x = 260;
-            numtxt.y = 50;
-            numtxt.text = '得分:' + value.KVDataList[0].value;
-            item.addChild(numtxt);
+            value.KVDataList.forEach(function (data, index) {
+                var rankData = {
+                    avatarUrl: value.avatarUrl,
+                    nickname: value.nickname,
+                    value: parseInt(data.value, 10)
+                };
+                // rankData['value'] = parseInt(data.value, 10);
+                listScore[data.key] && listScore[data.key].push(rankData);
+                // console.log("++++++++++++>>", data.key);
+            });
         }, this);
+        var lindex = 0;
+        var _loop_2 = function (key) {
+            listScore[key].sort(function (a, b) {
+                return b.value - a.value;
+            });
+            listScore[key].forEach(function (v, index) {
+                var item = new RankItem(0x0F0F0F, 580, 113);
+                item.y = index * 130;
+                item.x = 10;
+                _this.listContainers[lindex].addChild(item);
+                item.setHead(v.avatarUrl);
+                var nickname = v.nickname + "";
+                if (nickname.length >= 10) {
+                    // console.log(nickname);
+                    nickname = nickname.substring(0, 9);
+                }
+                item.setNickName('名字: ' + nickname);
+                var rankStr = '';
+                if (key == 'puzzle') {
+                    rankStr = '当前第: ' + v.value + '关';
+                }
+                else {
+                    rankStr = '得分: ' + v.value;
+                }
+                item.setNumRank(rankStr);
+            });
+            lindex++;
+            // console.log(key, listScore[key]);
+        };
+        for (var key in listScore) {
+            _loop_2(key);
+        }
     };
     Main.prototype.cancelGame = function () {
         for (var i = 0, l = this.numChildren; i < l; i++) {
@@ -104,60 +164,3 @@ var Main = (function (_super) {
     return Main;
 }(egret.DisplayObjectContainer));
 __reflect(Main.prototype, "Main");
-// // 微信关系数据的获取
-// // 上传方法类似、开发者自行填写
-// declare namespace wx {
-//     /**
-//      * 监听消息
-//      */
-//     const onMessage: (callback: (data: { [key: string]: any }) => void) => void;
-//     /**
-//      * 拉取当前用户所有同玩好友的托管数据。该接口只可在开放数据域下使用
-//      * @param keyList 要拉取的 key 列表
-//      * @param success 接口调用成功的回调函数
-//      * @param fail 	接口调用失败的回调函数
-//      * @param complete 接口调用结束的回调函数（调用成功、失败都会执行）
-//      */
-//     const getFriendCloudStorage: (Object: {
-//         keyList?: string[],
-//         success?: (res: {
-//             data: UserGameData[]
-//         }) => void,
-//         fail?: (err: any) => void,
-//         complete?: () => void,
-//     }) => void;
-//     /**
-//      * 在小游戏是通过群分享卡片打开的情况下，可以通过调用该接口获取群同玩成员的游戏数据。该接口只可在开放数据域下使用。
-//      * @param shareTicket 群分享对应的 shareTicket
-//      * @param keyList 要拉取的 key 列表
-//      * @param success 接口调用成功的回调函数
-//      * @param fail 接口调用失败的回调函数
-//      * @param complete 接口调用结束的回调函数（调用成功、失败都会执行）
-//      */
-//     const getGroupCloudStorage: (Object: {
-//         shareTicket: string,
-//         keyList: string[],
-//         success?: (res: {
-//             data: UserGameData[]
-//         }) => void,
-//         fail?: (err?: any) => void,
-//         complete?: () => void,
-//     }) => void;
-//     /**
-//      * 用户数据
-//      */
-//     type UserGameData = {
-//         /** 用户的微信头像 url */
-//         avatarUrl: string,
-//         /** 用户的微信昵称 */
-//         nickName: string,
-//         /** 用户的 openId */
-//         openId: string,
-//         /**用户自定义数据 */
-//         KVList: KVData[]
-//     }
-//     type KVData = {
-//         key: string,
-//         value: string
-//     }
-// } 

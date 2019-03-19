@@ -23,6 +23,8 @@ var SelectScene = (function (_super) {
         this.scoreComboLab.text = SharedManager.score1combo.toString();
         this.puzzleLab.text = SharedManager.getCurPuzzle().toString() + '/25';
     };
+    SelectScene.prototype.addBannerBottom = function () {
+    };
     return SelectScene;
 }(Scene));
 __reflect(SelectScene.prototype, "SelectScene");

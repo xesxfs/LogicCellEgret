@@ -2,6 +2,9 @@ class App {
 	public constructor() {
 	}
 	public static BackMenu: BackMenuBitmapClass;
+	public static BackButton: eui.Image;
+	public static undoBitmap: eui.Image;
+
 	public static startUp(mainCotent: eui.UILayer) {
 		// console.log("startUp");
 		// SharedManager = new SharedManagerClass();
@@ -11,6 +14,7 @@ class App {
 		back.percentHeight = 100;
 		mainCotent.addChild(back);
 		App.BackMenu = new BackMenuBitmapClass();
+
 		mainCotent.addChild(new Game());
 
 	}

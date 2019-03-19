@@ -20,9 +20,9 @@ var InputSetScoreClass = (function (_super) {
             BlockManager.mouseX = e.stageX;
             BlockManager.mouseY = e.stageY;
             BlockManager.mouseDownInventory(selectBlock);
-            console.log(selectBlock);
+            // console.log(selectBlock)
         }
-        else if (e.stageY >= 1000 && e.stageX >= 256 && e.stageX <= (256 + 110)) {
+        else if (App.BackButton && App.BackButton.hitTestPoint(e.stageX, e.stageY)) {
             App.BackMenu.updateStart();
         }
     };
@@ -37,7 +37,7 @@ var InputSetScoreClass = (function (_super) {
         }
         this.fieldRect = new egret.Rectangle(this.field.x, this.field.y, this.field.width, this.field.height);
         if (this.fieldRect.containsPoint(egret.Point.create(e.stageX, e.stageY))) {
-            console.log("containsPoint");
+            // console.log("containsPoint")
             var gx = ~~(e.stageX - this.field.x) / (120);
             var gy = ~~(e.stageY - this.field.y) / (120);
             /**这里需要反过来，对于数组坐标系 */

@@ -190,6 +190,66 @@ class WxgamePlatform {
     })
   }
 
+  createBannerAd() {
+
+    var phone = wx.getSystemInfoSync();
+    // console.log(phone);
+    var w = phone.screenWidth / 2;
+    var h = phone.screenHeight;
+
+    let bannerAd = wx.createBannerAd({
+      adUnitId: 'adunit-33ab8f59f82e4372',
+      style: {
+        left: 0,
+        top: 0,
+        width: 300
+      }
+    });
+
+    bannerAd.onResize(function() {
+      bannerAd.style.left = w - bannerAd.style.realWidth / 2 + 0.1;
+      bannerAd.style.top = h - bannerAd.style.realHeight + 0.1;
+      // console.log(bannerAd);
+    });
+
+    bannerAd.onError(err => {
+      console.log(err)
+    });
+
+    bannerAd.show().catch(err => {
+      console.log(err);
+    });
+  }
+
+  initRewardedVideoAd(errorCallBack, onCloseCallBack) {
+
+    let videoAd = wx.createRewardedVideoAd({
+      adUnitId: 'adunit-fb60c08c9ed4fb71'
+    });
+
+    videoAd.onError(err => {
+      console.log(err);
+      errorCallBack(err);
+    });
+
+    videoAd.onClose(res => {
+      onCloseCallBack(res);
+    })
+
+  }
+
+  showRewardedVideoAd() {
+
+    let videoAd = wx.createRewardedVideoAd({
+      adUnitId: 'adunit-fb60c08c9ed4fb71'
+    });
+
+    videoAd.load()
+      .then(() => videoAd.show())
+      .catch(err => console.log(err.errMsg));
+
+  }
+
   getUpdateManager() {
     if (wx.getUpdateManager) {
       return wx.getUpdateManager();

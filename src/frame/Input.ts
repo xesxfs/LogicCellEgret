@@ -5,13 +5,23 @@ class Input extends eui.Group {
 		// this.graphics.drawRect(0, 0, 480, 762);
 		this.percentWidth = 100;
 		this.percentHeight = 100;
-		this.addEventListener("touchBegin", this.mouseDownEvent, this);
-		this.addEventListener("touchEnd", this.mouseUpEvent, this);
-		this.addEventListener("touchMove", this.mouseMoveEvent, this);
-		this.addEventListener("touchReleaseOutside", this.mouseOutEvent, this);
 		// this.touchEnabled = true;
 		// this.touchThrough = true;
-		
+
+	}
+
+	public setToucheEnble(isEnble: boolean = true) {
+		if (isEnble) {
+			this.addEventListener("touchBegin", this.mouseDownEvent, this);
+			this.addEventListener("touchEnd", this.mouseUpEvent, this);
+			this.addEventListener("touchMove", this.mouseMoveEvent, this);
+			this.addEventListener("touchReleaseOutside", this.mouseOutEvent, this);
+		}else{
+			this.removeEventListener("touchBegin", this.mouseDownEvent, this);
+			this.addEventListener("touchEnd", this.mouseUpEvent, this);
+			this.addEventListener("touchMove", this.mouseMoveEvent, this);
+			this.addEventListener("touchReleaseOutside", this.mouseOutEvent, this);
+		}
 	}
 
 	protected mouseDownEvent(param1: egret.TouchEvent): void {

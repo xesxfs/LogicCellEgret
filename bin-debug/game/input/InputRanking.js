@@ -14,7 +14,7 @@ var InputRankingClass = (function (_super) {
         return _super.call(this) || this;
     }
     InputRankingClass.prototype.mouseDownEvent = function (e) {
-        if (e.stageY >= 1000 && e.stageX >= 256 && e.stageX <= (256 + 110)) {
+        if (e.stageY >= 44 && e.stageY < 44 + 88 && e.stageX >= 44 && e.stageX <= (44 + 88)) {
             App.BackMenu.updateStart();
         }
     };

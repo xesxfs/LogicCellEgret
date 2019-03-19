@@ -18,7 +18,7 @@ class InputSetScoreClass extends Input {
 			BlockManager.mouseY = e.stageY;
 			BlockManager.mouseDownInventory(selectBlock);
 			// console.log(selectBlock)
-		} else if (e.stageY >= 1000 && e.stageX >= 256 && e.stageX <= (256 + 110)) {
+		} else if (App.BackButton && App.BackButton.hitTestPoint(e.stageX, e.stageY)) {
 			App.BackMenu.updateStart();
 		}
 	}

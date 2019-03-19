@@ -23,7 +23,7 @@ var EffectManagerClass = (function (_super) {
         while (i < length) {
             ef = this.vecEffect[i];
             if (ef.update()) {
-                console.log("removeEffect");
+                // console.log("removeEffect");
                 EffectManager.removeEffect(i);
                 i--;
                 length--;

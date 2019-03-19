@@ -36,7 +36,7 @@ var InputSelectClass = (function (_super) {
                 // SceneManager.newScene(new OptionScene());
             }
             else if (scene.comboGroup.getTransformedBounds(this).containsPoint(p)) {
-                SceneManager.newScene(new SetScore1comboScene());
+                SceneManager.newScene(new SetScore1ComboScene());
             }
         }
     };

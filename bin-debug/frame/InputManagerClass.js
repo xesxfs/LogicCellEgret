@@ -24,6 +24,11 @@ var InputManagerClass = (function (_super) {
         if (input != null) {
             this.addChild(input);
         }
+        this.setTouchEnble();
+    };
+    InputManagerClass.prototype.setTouchEnble = function (isEnble) {
+        if (isEnble === void 0) { isEnble = true; }
+        this.input && this.input.setToucheEnble(isEnble);
     };
     return InputManagerClass;
 }(eui.Component));

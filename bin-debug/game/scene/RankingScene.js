@@ -18,17 +18,18 @@ var RankingScene = (function (_super) {
         return _this;
     }
     RankingScene.prototype.childrenCreated = function () {
-        this.init();
-        var backBitmap = Resource.getBlockChips(22, 220, 22, 22);
-        backBitmap.width = 110;
-        backBitmap.height = 110;
-        backBitmap.x = 265;
-        backBitmap.y = 1000;
+        // this.init();
+        var backBitmap = new eui.Image("Chip_106_03_png");
+        ;
+        backBitmap.width = 88;
+        backBitmap.height = 88;
+        backBitmap.top = 44;
+        backBitmap.left = 50;
         this.addChild(backBitmap);
         this.addChild(App.BackMenu);
     };
     RankingScene.prototype.init = function () {
-        var platform = window.platform;
+        // var platform: any = window.platform;
         this.bitmap = platform.openDataContext.createDisplayObject(null, this.stage.stageWidth, this.stage.stageHeight);
         this.addChild(this.bitmap);
         platform.openDataContext.postMessage({

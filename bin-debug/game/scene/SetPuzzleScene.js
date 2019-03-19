@@ -18,14 +18,15 @@ var SetPuzzleScene = (function (_super) {
         undoBitmap.width = 110;
         undoBitmap.height = 110;
         undoBitmap.x = 410;
-        undoBitmap.y = 1000;
+        App.undoBitmap = undoBitmap;
         _this.addChild(undoBitmap);
         _this.undoBmd = undoBitmap;
         var backBitmap = Resource.getBlockChips(22, 220, 22, 22);
         backBitmap.width = 110;
         backBitmap.height = 110;
         backBitmap.x = 130;
-        backBitmap.y = 1000;
+        App.BackButton = backBitmap;
+        _this.setTopPos();
         _this.addChild(backBitmap);
         _this.addChild(BlockManager);
         _this.addChild(_this.hudManager = new HudManagerScore());
@@ -38,6 +39,13 @@ var SetPuzzleScene = (function (_super) {
         _this.hudManager.stageNOLab.text = stageData.stageNo.toString();
         return _this;
     }
+    SetPuzzleScene.prototype.setTopPos = function () {
+        this.field.top = (4 - this.field.fieldH) * 70 + 130;
+        BlockManager.top = this.field.top + this.field.height + 30;
+        // App.BackButton.horizontalCenter = 0;
+        App.BackButton.top = BlockManager.top + 110 + 30;
+        App.undoBitmap.top = App.BackButton.top;
+    };
     SetPuzzleScene.prototype.update = function () {
         BlockManager.update();
         EffectManager.update();

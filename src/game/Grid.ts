@@ -11,8 +11,6 @@ class Grid extends eui.Rect {
 
 	public block: Block;
 
-	private sprite: egret.Sprite
-
 	public constructor(gx: number, gy: number, ) {
 		super();
 		this.gridX = gx;

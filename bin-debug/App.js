@@ -5,7 +5,7 @@ var App = (function () {
     function App() {
     }
     App.startUp = function (mainCotent) {
-        console.log("startUp");
+        // console.log("startUp");
         // SharedManager = new SharedManagerClass();
         var back = new eui.Rect();
         back.fillColor = 0x888888;

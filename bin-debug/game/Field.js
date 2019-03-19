@@ -21,7 +21,7 @@ var Field = (function (_super) {
         // layout.verticalAlign = egret.VerticalAlign.BOTTOM;
         _this.layout = layout;
         _this.horizontalCenter = 0;
-        _this.verticalCenter = 0;
+        // this.verticalCenter = 0;
         var w = 0;
         var h = 0;
         var grid = null;
@@ -32,8 +32,8 @@ var Field = (function (_super) {
         if (layout.requestedColumnCount >= 5) {
             layout.horizontalGap = 2;
         }
-        Field.fieldX = _this.x;
-        Field.fieldY = _this.y;
+        // Field.fieldX = this.x;
+        // Field.fieldY = this.y;
         _this.vec2Grid = [];
         while (h < _this.fieldH) {
             _this.vec2Grid.push([]);
@@ -50,7 +50,7 @@ var Field = (function (_super) {
             }
             h++;
         }
-        console.log(_this.vec2Grid);
+        // console.log(this.vec2Grid)
         /****!!放到这里代码可读性和逻辑性变差，但是省去了在多个场景调用!!****/
         BlockManager.reset(_this);
         BlockManager.AddAllBlock(stageData.vecBlockData, false);
@@ -151,23 +151,9 @@ var Field = (function (_super) {
                 Status.maxCombo = combo;
             }
             mode = Status.mode;
-            // if (combo > 0) {
-            // Status.combo = Status.combo - 1;
-            // Status.addScore();
-            // i = 0;
-            // while (i < 9) {
-            // 	if (i != 4) {
-            // 		//  EffectManager.addEffect(new EffectScore("" + Status.addScore(),i / 3,i % 3));
-            // 	}
-            // 	else {
-            // 		//  EffectManager.addEffect(new EffectScore("Bonus!",i / 3,i % 3));
-            // 	}
-            // 	i++;
-            // }
-            // }
             Status.combo = 0;
+            BlockManager.addUndoString();
             if (mode == GameMode.Puzzle && !BlockManager.clearCheck()) {
-                BlockManager.addUndoString();
             }
             else if (mode == GameMode.Score) {
                 BlockManager.finishCheck(SetScoreScene);
@@ -183,8 +169,8 @@ var Field = (function (_super) {
             else if (Status.mode == GameMode.Score1M) {
                 SetScore1minScene.isFinish = BlockManager.finishCheck(SetScore1minScene);
             }
-            else if (Status.mode == GameMode.ScoreCombo && (Status.score != 0 || BlockManager.vecBlock.length == 20)) {
-                BlockManager.finish(SetScore1comboScene);
+            else if (Status.mode == GameMode.ScoreCombo) {
+                (SetScore1ComboScene.isFinish = combo > 0) && BlockManager.finish(SetScore1ComboScene);
             }
         }
     };

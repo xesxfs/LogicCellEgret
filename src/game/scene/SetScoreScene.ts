@@ -10,8 +10,8 @@ class SetScoreScene extends Scene {
 		let backBitmap = Resource.getBlockChips(22, 220, 22, 22);
 		backBitmap.width = 110;
 		backBitmap.height = 110;
-		backBitmap.x = 265;
-		backBitmap.y = 1000;
+		App.BackButton = backBitmap;
+		this.setTopPos();
 		this.addChild(backBitmap);
 		BlockManager.addRandomInventoryBlock(0);
 		BlockManager.addRandomInventoryBlock(1);
@@ -22,6 +22,13 @@ class SetScoreScene extends Scene {
 		this.addChild(EffectManager);
 		InputManager.newInput(InputSetScore);
 		InputSetScore.field = this.field;
+	}
+
+	public setTopPos() {
+		this.field.top = 200;
+		BlockManager.top = this.field.top + this.field.height + 30;
+		App.BackButton.horizontalCenter = 0;
+		App.BackButton.top = BlockManager.top + 110 + 30;
 	}
 
 	public update() {

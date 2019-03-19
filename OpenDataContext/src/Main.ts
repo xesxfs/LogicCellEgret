@@ -1,15 +1,13 @@
 class Main extends egret.DisplayObjectContainer {
     constructor() {
         super();
-        console.log('Main open data content');
         wx.onMessage(data => {
-            console.log(data);
+
             if (data.isDisplay) {
                 //获取小游戏开放数据接口 --- 开始
                 wx.getFriendCloudStorage({
                     keyList: data.keys,
                     success: (res) => {
-                        console.log(res);
                         this.gameData = res.data;
                         this.runGame();
                     },
@@ -25,33 +23,10 @@ class Main extends egret.DisplayObjectContainer {
             }
         });
 
-        //获取小游戏开放数据接口 --- 结束        
-
-        let imageLoader = new egret.ImageLoader();
-        imageLoader.addEventListener(egret.Event.COMPLETE, (event: egret.Event) => {
-            let imageLoader = <egret.ImageLoader>event.currentTarget;
-            this.bgtexture = new egret.Texture();
-            this.bgtexture._setBitmapData(imageLoader.data);
-        }, this);
-        imageLoader.load("resource/assets/panel_shop_01.png");
-
-        let imageLoader1 = new egret.ImageLoader();
-        imageLoader1.addEventListener(egret.Event.COMPLETE, (event: egret.Event) => {
-            let imageLoader = <egret.ImageLoader>event.currentTarget;
-            this.panel_01 = new egret.Texture();
-            this.panel_01._setBitmapData(imageLoader.data);
-        }, this);
-        imageLoader1.load("resource/assets/panel_bg.png");
-        //测试点击
-        // this.addEventListener(egret.TouchEvent.TOUCH_TAP, (evt: egret.TouchEvent) => {
-        //     console.log('子域输出点击', evt);
-
-        // }, this);
-
 
     }
 
-    private readonly scrollView = new egret.ScrollView();
+    private scrollView: egret.ScrollView;
     private bgtexture: egret.Texture;
     private panel_01: egret.Texture;
     private bg: Button;
@@ -65,25 +40,25 @@ class Main extends egret.DisplayObjectContainer {
     private gameData = [
     ]
 
-    private onModeBtnClick(e: egret.TouchEvent) {
-        console.log("mode click ", e);
-    }
+
 
     private runGame() {
 
         // console.log('runGame opendata');
+        this.scrollView = new egret.ScrollView();
         this.bg = new Button();
-        this.bg.drawRect(0x0, 600, 1000);
+        this.bg.drawRect(0x0, 600, 800);
         this.bg.x = (640 - this.bg.width) >> 1;
+        this.bg.y = 130;
         this.addChild(this.bg);
 
         this.listContainers = [];
         // const listContainer = new egret.DisplayObjectContainer();
 
         this.scrollView.x = this.bg.x;
-        this.scrollView.y = this.bg.y + 100;
+        this.scrollView.y = this.bg.y + 10;
         this.scrollView.width = this.bg.width;
-        this.scrollView.height = this.bg.height - 200;
+        this.scrollView.height = this.bg.height - 105;
         this.addChild(this.scrollView);
         for (let i = 0; i < 5; i++) {
             let b = new Button();
@@ -98,7 +73,7 @@ class Main extends egret.DisplayObjectContainer {
             b.drawRect(0x0, 105, 80);
             b.setText(this.btnName[i]);
             b.x = i * 120 + this.bg.x + 7;
-            b.y = this.bg.height - 90;
+            b.y = this.bg.y + this.bg.height - 85;
             this.addChild(b);
             this.listContainers.push(new egret.DisplayObjectContainer());
         }
@@ -138,7 +113,12 @@ class Main extends egret.DisplayObjectContainer {
                 item.x = 10;
                 this.listContainers[lindex].addChild(item);
                 item.setHead(v.avatarUrl);
-                item.setNickName('名字: ' + v.nickname);
+                let nickname = v.nickname + "";
+                if (nickname.length >= 10) {
+                    // console.log(nickname);
+                    nickname = nickname.substring(0, 9);
+                }
+                item.setNickName('名字: ' + nickname);
                 let rankStr = '';
                 if (key == 'puzzle') {
                     rankStr = '当前第: ' + v.value + '关'

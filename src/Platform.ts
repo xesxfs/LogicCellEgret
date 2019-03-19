@@ -27,6 +27,15 @@ declare interface Platform {
 
     onShareAppMessage(callback: any);
 
+    createBannerAd();
+
+    initRewardedVideoAd(errorCallBack: Function, onCloseCallBack: Function);
+
+    showRewardedVideoAd();
+
+    
+
+
 }
 
 class DebugPlatform implements Platform {
@@ -53,6 +62,13 @@ class DebugPlatform implements Platform {
     }
     getUpdateManager() {
     }
+
+    createBannerAd() {
+    }
+    initRewardedVideoAd(errorCallBack: Function, onCloseCallBack: Function) {
+
+    }
+    showRewardedVideoAd() { }
 
 }
 

@@ -9,11 +9,16 @@ class InputManagerClass extends eui.Component {
 	private input: Input;
 
 	public newInput(input: Input) {
-		this.removeChildren();
+		this.removeChildren();	
 		this.input = input;
 		if (input != null) {
 			this.addChild(input);
 		}
+		this.setTouchEnble();
+	}
+
+	public setTouchEnble(isEnble: boolean = true) {
+		this.input && this.input.setToucheEnble(isEnble);
 	}
 }
 

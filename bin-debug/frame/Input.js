@@ -16,14 +16,25 @@ var Input = (function (_super) {
         // this.graphics.drawRect(0, 0, 480, 762);
         _this.percentWidth = 100;
         _this.percentHeight = 100;
-        _this.addEventListener("touchBegin", _this.mouseDownEvent, _this);
-        _this.addEventListener("touchEnd", _this.mouseUpEvent, _this);
-        _this.addEventListener("touchMove", _this.mouseMoveEvent, _this);
-        _this.addEventListener("touchReleaseOutside", _this.mouseOutEvent, _this);
         return _this;
         // this.touchEnabled = true;
         // this.touchThrough = true;
     }
+    Input.prototype.setToucheEnble = function (isEnble) {
+        if (isEnble === void 0) { isEnble = true; }
+        if (isEnble) {
+            this.addEventListener("touchBegin", this.mouseDownEvent, this);
+            this.addEventListener("touchEnd", this.mouseUpEvent, this);
+            this.addEventListener("touchMove", this.mouseMoveEvent, this);
+            this.addEventListener("touchReleaseOutside", this.mouseOutEvent, this);
+        }
+        else {
+            this.removeEventListener("touchBegin", this.mouseDownEvent, this);
+            this.addEventListener("touchEnd", this.mouseUpEvent, this);
+            this.addEventListener("touchMove", this.mouseMoveEvent, this);
+            this.addEventListener("touchReleaseOutside", this.mouseOutEvent, this);
+        }
+    };
     Input.prototype.mouseDownEvent = function (param1) {
     };
     Input.prototype.mouseUpEvent = function (param1) {

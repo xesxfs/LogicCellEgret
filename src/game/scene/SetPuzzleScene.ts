@@ -11,7 +11,7 @@ class SetPuzzleScene extends Scene {
 		undoBitmap.width = 110;
 		undoBitmap.height = 110;
 		undoBitmap.x = 410;
-		undoBitmap.y = 1000;
+		App.undoBitmap = undoBitmap;
 		this.addChild(undoBitmap);
 		this.undoBmd = undoBitmap;
 
@@ -19,7 +19,8 @@ class SetPuzzleScene extends Scene {
 		backBitmap.width = 110;
 		backBitmap.height = 110;
 		backBitmap.x = 130;
-		backBitmap.y = 1000;
+		App.BackButton = backBitmap;
+		this.setTopPos();
 		this.addChild(backBitmap);
 
 		this.addChild(BlockManager);
@@ -32,6 +33,21 @@ class SetPuzzleScene extends Scene {
 		this.addChild(App.BackMenu);
 		this.hudManager.stageNOLab.text = stageData.stageNo.toString();
 	}
+
+	public setTopPos() {
+		this.field.top = (4 - this.field.fieldH) * 70 + 130;
+		if (this.field.fieldH === 4) {
+			this.field.top -= 10;
+		}
+		let offY = 0;
+		this.field.fieldH === 4 ? offY = 25 : offY = 30;
+		BlockManager.top = this.field.top + this.field.height + offY;
+		// App.BackButton.horizontalCenter = 0;
+
+		App.BackButton.top = BlockManager.top + 110 + offY;
+		App.undoBitmap.top = App.BackButton.top;
+	}
+
 	public update() {
 		BlockManager.update();
 		EffectManager.update();

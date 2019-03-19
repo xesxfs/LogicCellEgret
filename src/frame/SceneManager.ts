@@ -40,8 +40,8 @@ class SceneManagerClass extends eui.Component {
 			SetScore1minScene.isFinish = false;
 			sceneId = 3;
 		}
-		else if (this.scene instanceof SetScore1comboScene) {
-			SetScore1comboScene.isFinish = false;
+		else if (this.scene instanceof SetScore1ComboScene) {
+			SetScore1ComboScene.isFinish = false;
 			sceneId = 4;
 		}
 		Status.reset(sceneId);

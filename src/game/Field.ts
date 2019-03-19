@@ -17,7 +17,7 @@ class Field extends eui.Group {
 		// layout.verticalAlign = egret.VerticalAlign.BOTTOM;
 		this.layout = layout;
 		this.horizontalCenter = 0;
-		this.verticalCenter = 0;
+		// this.verticalCenter = 0;
 
 		var w = 0;
 		var h = 0;
@@ -29,8 +29,8 @@ class Field extends eui.Group {
 		if (layout.requestedColumnCount >= 5) {
 			layout.horizontalGap = 2;
 		}
-		Field.fieldX = this.x;
-		Field.fieldY = this.y;
+		// Field.fieldX = this.x;
+		// Field.fieldY = this.y;
 		this.vec2Grid = [];
 
 		while (h < this.fieldH) {
@@ -154,24 +154,10 @@ class Field extends eui.Group {
 				Status.maxCombo = combo;
 			}
 			mode = Status.mode;
-			// if (combo > 0) {
-			// Status.combo = Status.combo - 1;
-			// Status.addScore();
-			// i = 0;
-			// while (i < 9) {
-			// 	if (i != 4) {
-			// 		//  EffectManager.addEffect(new EffectScore("" + Status.addScore(),i / 3,i % 3));
-
-			// 	}
-			// 	else {
-			// 		//  EffectManager.addEffect(new EffectScore("Bonus!",i / 3,i % 3));
-			// 	}
-			// 	i++;
-			// }
-			// }
 			Status.combo = 0;
+			BlockManager.addUndoString();
 			if (mode == GameMode.Puzzle && !BlockManager.clearCheck()) {
-				BlockManager.addUndoString();
+
 			}
 			else if (mode == GameMode.Score) {
 				BlockManager.finishCheck(SetScoreScene);
@@ -187,8 +173,9 @@ class Field extends eui.Group {
 			else if (Status.mode == GameMode.Score1M) {
 				SetScore1minScene.isFinish = BlockManager.finishCheck(SetScore1minScene);
 			}
-			else if (Status.mode == GameMode.ScoreCombo && (Status.score != 0 || BlockManager.vecBlock.length == 20)) {
-				BlockManager.finish(SetScore1comboScene);
+			else if (Status.mode == GameMode.ScoreCombo) {
+
+				(SetScore1ComboScene.isFinish = combo > 0) && BlockManager.finish(SetScore1ComboScene);
 			}
 		}
 

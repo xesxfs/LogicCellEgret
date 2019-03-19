@@ -3,10 +3,12 @@
 		"libs/modules/egret/egret.js",
 		"libs/modules/egret/egret.web.js",
 		"libs/modules/game/game.js",
-		"libs/modules/promise/promise.js",
-		"libs/modules/eui/eui.js"
+		"libs/modules/promise/promise.js"
 	],
 	"game": [
-		"bin-debug/Main.js"
+		"bin-debug/Button.js",
+		"bin-debug/Main.js",
+		"bin-debug/MyImage.js",
+		"bin-debug/RankItem.js"
 	]
 }

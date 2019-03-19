@@ -18,21 +18,57 @@ var SharedManagerClass = (function () {
         this.dayScore30 = 0;
         this.dayScore1min = 0;
         this.dayScore1combo = 0;
-        this.titles = [
-            ["[有人@我]：智商超200的快来玩这游戏！", 'resource/assets/images/Icon48.png'],
-            ["凭智商玩的得好，为什么要停下来", 'resource/assets/images/Icon48.png'],
-            ["这游戏也太虐了，我为什么要点进来…", 'resource/assets/images/Icon48.png'],
-            ["300分（分值），我不是针对谁，在座的各位都玩不过我~", 'resource/assets/images/Icon48.png'],
-            ["据说只有1%的人能上300分（分值），需要超强逻辑", 'resource/assets/images/Icon48.png'],
-            ["战五渣们，来看看你们的逻辑分数吧", 'resource/assets/images/Icon48.png']
+        this.shareTitles = [
+            "[有人@我]：让智慧飞扬起来，让科学流行起来",
+            "[有人@我]：我来是寻找脑力界的超级丹!!",
+            "[有人@我]：在这里，你的天赋就是人类的财富",
+            "[有人@我]：中国的最强大脑在哪里?",
+            "[有人@我]：重金悬赏！！！中国最强大脑！!",
+            "你敢来吗,只有强者才能为中国而战",
+            "反正我觉得他用了什么我们不知道的手段",
+            "给你1分就算客气了,可惜这没有0分的按钮",
+            "反正我觉得他用了什么我们不知道的手段",
+            "[有人@我]：很多时候，真理掌握在少数人手中"
+        ];
+        this.shareImgs = [
+            "resource/assets/share/share1.png",
+            "resource/assets/share/share1.png",
+            "resource/assets/share/share2.png",
+            "resource/assets/share/share3.png",
+            "resource/assets/share/share4.png",
+            "resource/assets/share/share5.png",
+            "resource/assets/share/share6.png",
+            "resource/assets/share/share7.png",
+            "resource/assets/share/share8.png",
+            "resource/assets/share/share9.png",
+            "resource/assets/share/share10.png",
         ];
     }
     SharedManagerClass.getInstance = function () {
         !this.instance && (this.instance = new SharedManagerClass());
         return this.instance;
     };
+    SharedManagerClass.prototype.onVideoError = function () {
+        console.log("视频广告初始化失败");
+    };
+    SharedManagerClass.prototype.onVideoAdClose = function (res) {
+        // console.log("initRewardedVideoAd ", res);
+        // 用户点击了【关闭广告】按钮
+        // 小于 2.1.0 的基础库版本，res 是一个 undefined
+        if (res && res.isEnded || res === undefined) {
+            // 正常播放结束，可以下发游戏奖励
+            // console.log(this.videoSuccess);
+            this.videoSuccess && this.videoSuccess();
+        }
+        else {
+            // 播放中途退出，不下发游戏奖励
+            this.videoFailed && this.videoFailed();
+        }
+    };
     SharedManagerClass.prototype.init = function () {
         try {
+            platform.createBannerAd();
+            platform.initRewardedVideoAd(this.onVideoError.bind(this), this.onVideoAdClose.bind(this));
             this.showShareMenu();
             this.getUpdateManager();
             this.getPuzzleClearNum();
@@ -40,7 +76,7 @@ var SharedManagerClass = (function () {
             this.getScore30();
             this.getScore1combo();
             this.getScore1min();
-            console.log("init:", this.score, this.score30, this.score1min, this.score1combo);
+            // console.log("init:", this.score, this.score30, this.score1min, this.score1combo);
         }
         catch (e) {
             console.error(e);
@@ -177,21 +213,25 @@ var SharedManagerClass = (function () {
     };
     SharedManagerClass.prototype.showShareMenu = function () {
         var _this = this;
+        // console.log(shareImgIndex, this.shareImgs.length);
         platform.showShareMenu({ withShareTicket: false });
         platform.onShareAppMessage(function () {
-            var shareIndex = ~~(Math.random() * (_this.titles.length - 1));
+            var shareTitleIndex = Math.round(Math.random() * (_this.shareTitles.length - 1));
+            var shareImgIndex = Math.round(Math.random() * (_this.shareImgs.length - 1));
             return {
-                title: _this.titles[shareIndex][0],
-                imageUrl: _this.titles[shareIndex][1],
+                title: _this.shareTitles[shareTitleIndex],
+                imageUrl: _this.shareImgs[shareImgIndex],
                 query: ""
             };
         });
     };
     SharedManagerClass.prototype.shareAppMessage = function () {
-        var shareIndex = ~~(Math.random() * (this.titles.length - 1));
+        var shareTitleIndex = Math.round(Math.random() * (this.shareTitles.length - 1));
+        var shareImgIndex = Math.round(Math.random() * (this.shareImgs.length - 1));
+        // console.log(shareImgIndex, this.shareImgs.length);
         platform.shareAppMessage({
-            title: this.titles[shareIndex][0],
-            imageUrl: this.titles[shareIndex][1],
+            title: this.shareTitles[shareTitleIndex],
+            imageUrl: this.shareImgs[shareImgIndex],
             query: '',
         });
     };

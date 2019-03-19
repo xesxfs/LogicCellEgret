@@ -1093,6 +1093,9 @@ var egret;
          */
         DisplayObject.prototype.$setScaleX = function (value) {
             var self = this;
+            if (self.$scaleX == value) {
+                return;
+            }
             self.$scaleX = value;
             self.$matrixDirty = true;
             self.$updateUseTransform();
@@ -1151,6 +1154,9 @@ var egret;
          */
         DisplayObject.prototype.$setScaleY = function (value) {
             var self = this;
+            if (self.$scaleY == value) {
+                return;
+            }
             self.$scaleY = value;
             self.$matrixDirty = true;
             self.$updateUseTransform();
@@ -1368,7 +1374,11 @@ var egret;
          * 设置显示宽度
          */
         DisplayObject.prototype.$setWidth = function (value) {
-            this.$explicitWidth = isNaN(value) ? NaN : value;
+            value = isNaN(value) ? NaN : value;
+            if (this.$explicitWidth == value) {
+                return;
+            }
+            this.$explicitWidth = value;
         };
         Object.defineProperty(DisplayObject.prototype, "height", {
             /**
@@ -1406,7 +1416,11 @@ var egret;
          * 设置显示高度
          */
         DisplayObject.prototype.$setHeight = function (value) {
-            this.$explicitHeight = isNaN(value) ? NaN : value;
+            value = isNaN(value) ? NaN : value;
+            if (this.$explicitHeight == value) {
+                return;
+            }
+            this.$explicitHeight = value;
         };
         Object.defineProperty(DisplayObject.prototype, "measuredWidth", {
             /**
@@ -1468,9 +1482,24 @@ var egret;
          */
         DisplayObject.prototype.$setAnchorOffsetX = function (value) {
             var self = this;
+            if (self.$anchorOffsetX == value) {
+                return;
+            }
             self.$anchorOffsetX = value;
             if (egret.nativeRender) {
                 self.$nativeDisplayObject.setAnchorOffsetX(value);
+            }
+            else {
+                var p = self.$parent;
+                if (p && !p.$cacheDirty) {
+                    p.$cacheDirty = true;
+                    p.$cacheDirtyUp();
+                }
+                var maskedObject = self.$maskedObject;
+                if (maskedObject && !maskedObject.$cacheDirty) {
+                    maskedObject.$cacheDirty = true;
+                    maskedObject.$cacheDirtyUp();
+                }
             }
         };
         Object.defineProperty(DisplayObject.prototype, "anchorOffsetY", {
@@ -1505,9 +1534,24 @@ var egret;
          */
         DisplayObject.prototype.$setAnchorOffsetY = function (value) {
             var self = this;
+            if (self.$anchorOffsetY == value) {
+                return;
+            }
             self.$anchorOffsetY = value;
             if (egret.nativeRender) {
                 self.$nativeDisplayObject.setAnchorOffsetY(value);
+            }
+            else {
+                var p = self.$parent;
+                if (p && !p.$cacheDirty) {
+                    p.$cacheDirty = true;
+                    p.$cacheDirtyUp();
+                }
+                var maskedObject = self.$maskedObject;
+                if (maskedObject && !maskedObject.$cacheDirty) {
+                    maskedObject.$cacheDirty = true;
+                    maskedObject.$cacheDirtyUp();
+                }
             }
         };
         Object.defineProperty(DisplayObject.prototype, "visible", {
@@ -1537,6 +1581,9 @@ var egret;
         });
         DisplayObject.prototype.$setVisible = function (value) {
             var self = this;
+            if (self.$visible == value) {
+                return;
+            }
             self.$visible = value;
             if (egret.nativeRender) {
                 self.$nativeDisplayObject.setVisible(value);
@@ -1651,6 +1698,9 @@ var egret;
          */
         DisplayObject.prototype.$setAlpha = function (value) {
             var self = this;
+            if (self.$alpha == value) {
+                return;
+            }
             self.$alpha = value;
             if (egret.nativeRender) {
                 self.$nativeDisplayObject.setAlpha(value);
@@ -1711,7 +1761,7 @@ var egret;
          * @private
          */
         DisplayObject.prototype.$setTouchEnabled = function (value) {
-            this.$touchEnabled = value;
+            this.$touchEnabled = !!value;
         };
         Object.defineProperty(DisplayObject.prototype, "scrollRect", {
             /**
@@ -1787,6 +1837,16 @@ var egret;
             }
             if (!egret.nativeRender) {
                 self.$updateRenderMode();
+                var p = self.$parent;
+                if (p && !p.$cacheDirty) {
+                    p.$cacheDirty = true;
+                    p.$cacheDirtyUp();
+                }
+                var maskedObject = self.$maskedObject;
+                if (maskedObject && !maskedObject.$cacheDirty) {
+                    maskedObject.$cacheDirty = true;
+                    maskedObject.$cacheDirtyUp();
+                }
             }
         };
         Object.defineProperty(DisplayObject.prototype, "blendMode", {
@@ -1815,6 +1875,9 @@ var egret;
             set: function (value) {
                 var self = this;
                 var mode = egret.sys.blendModeToNumber(value);
+                if (self.$blendMode == mode) {
+                    return;
+                }
                 self.$blendMode = mode;
                 if (egret.nativeRender) {
                     self.$nativeDisplayObject.setBlendMode(mode);
@@ -1982,12 +2045,22 @@ var egret;
                 var self = this;
                 var filters = self.$filters;
                 if (!filters && !value) {
-                    self.$filters = null;
+                    self.$filters = value;
                     if (egret.nativeRender) {
                         self.$nativeDisplayObject.setFilters(null);
                     }
                     else {
                         self.$updateRenderMode();
+                        var p = self.$parent;
+                        if (p && !p.$cacheDirty) {
+                            p.$cacheDirty = true;
+                            p.$cacheDirtyUp();
+                        }
+                        var maskedObject = self.$maskedObject;
+                        if (maskedObject && !maskedObject.$cacheDirty) {
+                            maskedObject.$cacheDirty = true;
+                            maskedObject.$cacheDirtyUp();
+                        }
                     }
                     return;
                 }
@@ -1999,13 +2072,23 @@ var egret;
                     }
                 }
                 else {
-                    self.$filters = null;
+                    self.$filters = value;
                     if (egret.nativeRender) {
                         self.$nativeDisplayObject.setFilters(null);
                     }
                 }
                 if (!egret.nativeRender) {
                     self.$updateRenderMode();
+                    var p = self.$parent;
+                    if (p && !p.$cacheDirty) {
+                        p.$cacheDirty = true;
+                        p.$cacheDirtyUp();
+                    }
+                    var maskedObject = self.$maskedObject;
+                    if (maskedObject && !maskedObject.$cacheDirty) {
+                        maskedObject.$cacheDirty = true;
+                        maskedObject.$cacheDirtyUp();
+                    }
                 }
             },
             enumerable: true,
@@ -2367,7 +2450,7 @@ var egret;
          */
         DisplayObject.prototype.$hitTest = function (stageX, stageY) {
             var self = this;
-            if (!self.$renderNode || !self.$visible || self.$scaleX == 0 || self.$scaleY == 0) {
+            if ((!egret.nativeRender && !self.$renderNode) || !self.$visible || self.$scaleX == 0 || self.$scaleY == 0) {
                 return null;
             }
             var m = self.$getInvertedConcatenatedMatrix();
@@ -2913,8 +2996,8 @@ var egret;
          * 获取指定像素区域的颜色值
          * @param x  像素区域的X轴坐标
          * @param y  像素区域的Y轴坐标
-         * @param width  像素点的Y轴坐标
-         * @param height  像素点的Y轴坐标
+         * @param width  像素区域的宽度
+         * @param height  像素区域的高度
          * @returns  指定像素区域的颜色值
          * @version Egret 3.2.1
          * @platform Web
@@ -2987,9 +3070,6 @@ var egret;
                     this.$bitmapData.$dispose();
                 }
                 this.$bitmapData = null;
-            }
-            if (egret.nativeRender) {
-                egret_native.NativeDisplayObject.disposeTexture(this);
             }
         };
         return Texture;
@@ -3461,7 +3541,11 @@ var egret;
          * @language zh_CN
          */
         Event.create = function (EventClass, type, bubbles, cancelable) {
-            var eventPool = EventClass.eventPool;
+            var eventPool;
+            var hasEventPool = EventClass.hasOwnProperty("eventPool");
+            if (hasEventPool) {
+                eventPool = EventClass.eventPool;
+            }
             if (!eventPool) {
                 eventPool = EventClass.eventPool = [];
             }
@@ -4393,6 +4477,9 @@ var egret;
             }
             self.$children.splice(index, 0, child);
             child.$setParent(self);
+            if (egret.nativeRender) {
+                self.$nativeDisplayObject.addChildAt(child.$nativeDisplayObject.id, index);
+            }
             var stage = self.$stage;
             if (stage) {
                 child.$onAddToStage(stage, self.$nestLevel + 1);
@@ -4409,10 +4496,7 @@ var egret;
                     }
                 }
             }
-            if (egret.nativeRender) {
-                self.$nativeDisplayObject.addChildAt(child.$nativeDisplayObject.id, index);
-            }
-            else {
+            if (!egret.nativeRender) {
                 if (child.$maskedObject) {
                     child.$maskedObject.$updateRenderMode();
                 }
@@ -5520,7 +5604,7 @@ var egret;
          * @private
          */
         Bitmap.prototype.setBitmapDataToWasm = function (data) {
-            this.$nativeDisplayObject.setBitmapData(data);
+            this.$nativeDisplayObject.setTexture(data);
         };
         /**
          * @private
@@ -5618,7 +5702,6 @@ var egret;
              * @default <code>BitmapFillMode.SCALE</code>
              *
              * @version Egret 2.4
-             * @version eui 1.0
              * @platform Web
              * @language en_US
              */
@@ -5630,7 +5713,6 @@ var egret;
              * @default <code>BitmapFillMode.SCALE</code>
              *
              * @version Egret 2.4
-             * @version eui 1.0
              * @platform Web
              * @language zh_CN
              */
@@ -5644,12 +5726,26 @@ var egret;
             configurable: true
         });
         Bitmap.prototype.$setFillMode = function (value) {
-            if (value == this.$fillMode) {
+            var self = this;
+            if (value == self.$fillMode) {
                 return false;
             }
-            this.$fillMode = value;
+            self.$fillMode = value;
             if (egret.nativeRender) {
-                this.$nativeDisplayObject.setBitmapFillMode(this.$fillMode);
+                self.$nativeDisplayObject.setBitmapFillMode(self.$fillMode);
+            }
+            else {
+                self.$renderDirty = true;
+                var p = self.$parent;
+                if (p && !p.$cacheDirty) {
+                    p.$cacheDirty = true;
+                    p.$cacheDirtyUp();
+                }
+                var maskedObject = self.$maskedObject;
+                if (maskedObject && !maskedObject.$cacheDirty) {
+                    maskedObject.$cacheDirty = true;
+                    maskedObject.$cacheDirtyUp();
+                }
             }
             return true;
         };
@@ -5670,11 +5766,24 @@ var egret;
                 return this.$smoothing;
             },
             set: function (value) {
+                var self = this;
                 if (value == this.$smoothing) {
                     return;
                 }
                 this.$smoothing = value;
                 this.$renderNode.smoothing = value;
+                if (!egret.nativeRender) {
+                    var p = self.$parent;
+                    if (p && !p.$cacheDirty) {
+                        p.$cacheDirty = true;
+                        p.$cacheDirtyUp();
+                    }
+                    var maskedObject = self.$maskedObject;
+                    if (maskedObject && !maskedObject.$cacheDirty) {
+                        maskedObject.$cacheDirty = true;
+                        maskedObject.$cacheDirtyUp();
+                    }
+                }
             },
             enumerable: true,
             configurable: true
@@ -8225,11 +8334,29 @@ var egret;
              * webgl纹理生成后，是否删掉原始图像数据
              */
             _this.$deleteSource = true;
+            if (egret.nativeRender) {
+                var nativeBitmapData = new egret_native.NativeBitmapData();
+                nativeBitmapData.$init();
+                _this.$nativeBitmapData = nativeBitmapData;
+            }
             _this.source = source;
             _this.width = source.width;
             _this.height = source.height;
             return _this;
         }
+        Object.defineProperty(BitmapData.prototype, "source", {
+            get: function () {
+                return this.$source;
+            },
+            set: function (value) {
+                this.$source = value;
+                if (egret.nativeRender) {
+                    egret_native.NativeDisplayObject.setSourceToNativeBitmapData(this.$nativeBitmapData, value);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
         BitmapData.create = function (type, data, callback) {
             var base64 = "";
             if (type === "arraybuffer") {
@@ -8273,6 +8400,9 @@ var egret;
                 this.source.dispose();
             }
             this.source = null;
+            if (egret.nativeRender) {
+                egret_native.NativeDisplayObject.disposeNativeBitmapData(this.$nativeBitmapData);
+            }
             BitmapData.$dispose(this);
         };
         BitmapData.$addDisplayObject = function (displayObject, bitmapData) {
@@ -8367,9 +8497,6 @@ var egret;
                     maskedObject.$cacheDirty = true;
                     maskedObject.$cacheDirtyUp();
                 }
-            }
-            if (egret.nativeRender) {
-                egret_native.NativeDisplayObject.disposeBitmapData(bitmapData);
             }
             delete BitmapData._displayList[hashCode];
         };
@@ -9166,6 +9293,7 @@ var egret;
                     j++;
                 }
             }
+            this.onPropertyChange();
         };
         /**
          * @private
@@ -9656,6 +9784,86 @@ var egret;
             value += Math.PI * 2;
         }
         return value;
+    }
+    /**
+     * @private
+     * 根据传入的锚点组返回贝塞尔曲线上的一组点,返回类型为egret.Point[];
+     * @param pointsData 锚点组,保存着所有控制点的x和y坐标,格式为[x0,y0,x1,y1,x2,y2...]
+     * @param pointsAmount 要获取的点的总个数，实际返回点数不一定等于该属性，与范围有关
+     * @param range 要获取的点与中心锚点的范围值，0~1之间
+     * @returns egret.Point[];
+     */
+    function createBezierPoints(pointsData, pointsAmount) {
+        var points = [];
+        for (var i = 0; i < pointsAmount; i++) {
+            var point = getBezierPointByFactor(pointsData, i / pointsAmount);
+            if (point)
+                points.push(point);
+        }
+        return points;
+    }
+    /**
+     * @private
+     * 根据锚点组与取值系数获取贝塞尔曲线上的一点
+     * @param pointsData 锚点组,保存着所有控制点的x和y坐标,格式为[x0,y0,x1,y1,x2,y2...]
+     * @param t 取值系数
+     * @returns egret.Point
+     */
+    function getBezierPointByFactor(pointsData, t) {
+        var i = 0;
+        var x = 0, y = 0;
+        var len = pointsData.length;
+        //根据传入的数据数量判断是二次贝塞尔还是三次贝塞尔
+        if (len / 2 == 3) {
+            //二次
+            var x0 = pointsData[i++];
+            var y0 = pointsData[i++];
+            var x1 = pointsData[i++];
+            var y1 = pointsData[i++];
+            var x2 = pointsData[i++];
+            var y2 = pointsData[i++];
+            x = getCurvePoint(x0, x1, x2, t);
+            y = getCurvePoint(y0, y1, y2, t);
+        }
+        else if (len / 2 == 4) {
+            //三次
+            var x0 = pointsData[i++];
+            var y0 = pointsData[i++];
+            var x1 = pointsData[i++];
+            var y1 = pointsData[i++];
+            var x2 = pointsData[i++];
+            var y2 = pointsData[i++];
+            var x3 = pointsData[i++];
+            var y3 = pointsData[i++];
+            x = getCubicCurvePoint(x0, x1, x2, x3, t);
+            y = getCubicCurvePoint(y0, y1, y2, y3, t);
+        }
+        return egret.Point.create(x, y);
+    }
+    /**
+     * 通过factor参数获取二次贝塞尔曲线上的位置
+     * 公式为B(t) = (1-t)^2 * P0 + 2t(1-t) * P1 + t^2 * P2
+     * @param value0 P0
+     * @param value1 P1
+     * @param value2 P2
+     * @param factor t，从0到1的闭区间
+     */
+    function getCurvePoint(value0, value1, value2, factor) {
+        var result = Math.pow((1 - factor), 2) * value0 + 2 * factor * (1 - factor) * value1 + Math.pow(factor, 2) * value2;
+        return result;
+    }
+    /**
+     * 通过factor参数获取三次贝塞尔曲线上的位置
+     * 公式为B(t) = (1-t)^3 * P0 + 3t(1-t)^2 * P1 + 3t^2 * (1-t) t^2 * P2 + t^3 *P3
+     * @param value0 P0
+     * @param value1 P1
+     * @param value2 P2
+     * @param value3 P3
+     * @param factor t，从0到1的闭区间
+     */
+    function getCubicCurvePoint(value0, value1, value2, value3, factor) {
+        var result = Math.pow((1 - factor), 3) * value0 + 3 * factor * Math.pow((1 - factor), 2) * value1 + 3 * (1 - factor) * Math.pow(factor, 2) * value2 + Math.pow(factor, 3) * value3;
+        return result;
     }
     /**
      * The Graphics class contains a set of methods for creating vector shape. Display objects that support drawing include Sprite and Shape objects. Each class in these classes includes the graphics attribute that is a Graphics object.
@@ -10163,7 +10371,14 @@ var egret;
             var strokePath = this.strokePath;
             fillPath && fillPath.curveTo(controlX, controlY, anchorX, anchorY);
             strokePath && strokePath.curveTo(controlX, controlY, anchorX, anchorY);
-            this.extendBoundsByPoint(controlX, controlY);
+            var lastX = this.lastX || 0;
+            var lastY = this.lastY || 0;
+            var bezierPoints = createBezierPoints([lastX, lastY, controlX, controlY, anchorX, anchorY], 50);
+            for (var i = 0; i < bezierPoints.length; i++) {
+                var point = bezierPoints[i];
+                this.extendBoundsByPoint(point.x, point.y);
+                egret.Point.release(point);
+            }
             this.extendBoundsByPoint(anchorX, anchorY);
             this.updatePosition(anchorX, anchorY);
             this.dirty();
@@ -10206,8 +10421,14 @@ var egret;
             var strokePath = this.strokePath;
             fillPath && fillPath.cubicCurveTo(controlX1, controlY1, controlX2, controlY2, anchorX, anchorY);
             strokePath && strokePath.cubicCurveTo(controlX1, controlY1, controlX2, controlY2, anchorX, anchorY);
-            this.extendBoundsByPoint(controlX1, controlY1);
-            this.extendBoundsByPoint(controlX2, controlY2);
+            var lastX = this.lastX || 0;
+            var lastY = this.lastY || 0;
+            var bezierPoints = createBezierPoints([lastX, lastY, controlX1, controlY1, controlX2, controlY2, anchorX, anchorY], 50);
+            for (var i = 0; i < bezierPoints.length; i++) {
+                var point = bezierPoints[i];
+                this.extendBoundsByPoint(point.x, point.y);
+                egret.Point.release(point);
+            }
             this.extendBoundsByPoint(anchorX, anchorY);
             this.updatePosition(anchorX, anchorY);
             this.dirty();
@@ -10278,6 +10499,20 @@ var egret;
         Graphics.prototype.dirty = function () {
             var self = this;
             self.$renderNode.dirtyRender = true;
+            if (!egret.nativeRender) {
+                var target = self.$targetDisplay;
+                target.$cacheDirty = true;
+                var p = target.$parent;
+                if (p && !p.$cacheDirty) {
+                    p.$cacheDirty = true;
+                    p.$cacheDirtyUp();
+                }
+                var maskedObject = target.$maskedObject;
+                if (maskedObject && !maskedObject.$cacheDirty) {
+                    maskedObject.$cacheDirty = true;
+                    maskedObject.$cacheDirtyUp();
+                }
+            }
         };
         /**
          * @private
@@ -11999,6 +12234,8 @@ var egret;
     locale_strings[1048] = "Video loading failed";
     locale_strings[1049] = "In the absence of sound is not allowed to play after loading";
     locale_strings[1050] = "ExternalInterface calls the method without js registration: {0}";
+    locale_strings[1051] = "runtime only support webgl render mode";
+    locale_strings[1052] = "network request timeout{0}";
     //gui  3000-3099
     locale_strings[3000] = "Theme configuration file failed to load: {0}";
     locale_strings[3001] = "Cannot find the skin name which is configured in Theme: {0}";
@@ -12019,11 +12256,15 @@ var egret;
     locale_strings[3100] = "Current browser does not support WebSocket";
     locale_strings[3101] = "Please connect Socket firstly";
     locale_strings[3102] = "Please set the type of binary type";
+    //RES 3200-3299
+    locale_strings[3200] = "getResByUrl must be called after loadConfig";
     //db 4000-4299
     locale_strings[4000] = "An Bone cannot be added as a child to itself or one of its children (or children's children, etc.)";
     locale_strings[4001] = "Abstract class can not be instantiated!";
     locale_strings[4002] = "Unnamed data!";
     locale_strings[4003] = "Nonsupport version!";
+    //4500-5000 platform
+    locale_strings[4500] = "The platform does not support {0} adapter mode and has been automatically replaced with {1} mode, please modify your code adapter logic";
 })(egret || (egret = {}));
 //////////////////////////////////////////////////////////////////////////////////////
 //
@@ -12117,8 +12358,7 @@ var egret;
     egret.$locale_strings = egret.$locale_strings || {};
     egret.$locale_strings["zh_CN"] = egret.$locale_strings["zh_CN"] || {};
     var locale_strings = egret.$locale_strings["zh_CN"];
-    //eui 2000-2999
-    //RES 3200-3299
+    //eui 2000-2999    
     //core  1000-1999
     locale_strings[1001] = "找不到Egret入口类: {0}。";
     locale_strings[1002] = "Egret入口类 {0} 必须继承自egret.DisplayObject。";
@@ -12166,6 +12406,8 @@ var egret;
     locale_strings[1048] = "视频加载失败";
     locale_strings[1049] = "声音在没有加载完之前不允许播放";
     locale_strings[1050] = "ExternalInterface调用了js没有注册的方法: {0}";
+    locale_strings[1051] = "runtime 只支持 webgl 渲染模式";
+    locale_strings[1052] = "网络请求超时:{0}";
     //gui  3000-3099
     locale_strings[3000] = "主题配置文件加载失败: {0}";
     locale_strings[3001] = "找不到主题中所配置的皮肤类名: {0}";
@@ -12186,11 +12428,15 @@ var egret;
     locale_strings[3100] = "当前浏览器不支持WebSocket";
     locale_strings[3101] = "请先连接WebSocket";
     locale_strings[3102] = "请先设置type为二进制类型";
+    //RES 3200-3299
+    locale_strings[3200] = "getResByUrl 必须在 loadConfig 之后调用";
     //db 4000-4299
     locale_strings[4000] = "An Bone cannot be added as a child to itself or one of its children (or children's children, etc.)";
     locale_strings[4001] = "Abstract class can not be instantiated!";
     locale_strings[4002] = "Unnamed data!";
     locale_strings[4003] = "Nonsupport version!";
+    //4500-5000 platform
+    locale_strings[4500] = "该平台不支持 {0} 适配模式，已经自动替换为 {1} 模式，请修改您的代码适配逻辑";
 })(egret || (egret = {}));
 //////////////////////////////////////////////////////////////////////////////////////
 //
@@ -12396,9 +12642,8 @@ var egret;
      * @platform Web,Native
      * @language zh_CN
      */
-    var HttpMethod = (function () {
-        function HttpMethod() {
-        }
+    var HttpMethod;
+    (function (HttpMethod) {
         /**
          * Specifies that the HttpRequest object is a GET.
          * @version Egret 2.4
@@ -12425,10 +12670,7 @@ var egret;
          * @language zh_CN
          */
         HttpMethod.POST = "POST";
-        return HttpMethod;
-    }());
-    egret.HttpMethod = HttpMethod;
-    __reflect(HttpMethod.prototype, "egret.HttpMethod");
+    })(HttpMethod = egret.HttpMethod || (egret.HttpMethod = {}));
 })(egret || (egret = {}));
 //////////////////////////////////////////////////////////////////////////////////////
 //
@@ -13220,10 +13462,10 @@ var egret;
     if (egret.nativeRender) {
         var nrABIVersion = egret_native.nrABIVersion;
         var nrMinEgretVersion = egret_native.nrMinEgretVersion;
-        var requiredNrABIVersion = 3;
+        var requiredNrABIVersion = 5;
         if (nrABIVersion < requiredNrABIVersion) {
             egret.nativeRender = false;
-            var msg = "需要升级微端版本到 0.1.6 才可以开启原生渲染加速";
+            var msg = "需要升级微端版本到 0.1.14 才可以开启原生渲染加速";
             egret.sys.$warnToFPS(msg);
             egret.warn(msg);
         }
@@ -13534,18 +13776,20 @@ var egret;
                         stageHeight = screenHeight;
                         break;
                 }
-                //宽高不是2的整数倍会导致图片绘制出现问题
-                if (stageWidth % 2 != 0) {
-                    stageWidth += 1;
-                }
-                if (stageHeight % 2 != 0) {
-                    stageHeight += 1;
-                }
-                if (displayWidth % 2 != 0) {
-                    displayWidth += 1;
-                }
-                if (displayHeight % 2 != 0) {
-                    displayHeight += 1;
+                if (egret.Capabilities.runtimeType != egret.RuntimeType.WXGAME) {
+                    //宽高不是2的整数倍会导致图片绘制出现问题
+                    if (stageWidth % 2 != 0) {
+                        stageWidth += 1;
+                    }
+                    if (stageHeight % 2 != 0) {
+                        stageHeight += 1;
+                    }
+                    if (displayWidth % 2 != 0) {
+                        displayWidth += 1;
+                    }
+                    if (displayHeight % 2 != 0) {
+                        displayHeight += 1;
+                    }
                 }
                 return {
                     stageWidth: stageWidth,
@@ -13955,7 +14199,7 @@ var egret;
              * @private
              * 执行一次刷新
              */
-            SystemTicker.prototype.update = function () {
+            SystemTicker.prototype.update = function (forceUpdate) {
                 var t1 = egret.getTimer();
                 var callBackList = this.callBackList;
                 var thisObjectList = this.thisObjectList;
@@ -13982,7 +14226,7 @@ var egret;
                 var t2 = egret.getTimer();
                 var deltaTime = timeStamp - this.lastTimeStamp;
                 this.lastTimeStamp = timeStamp;
-                if (deltaTime >= this.frameDeltaTime) {
+                if (deltaTime >= this.frameDeltaTime || forceUpdate) {
                     this.lastCount = this.frameInterval;
                 }
                 else {
@@ -15350,11 +15594,11 @@ var egret;
             else {
                 var matrix = egret.Matrix.create();
                 matrix.identity();
+                matrix.scale(scale, scale);
                 //应用裁切
                 if (clipBounds) {
                     matrix.translate(-clipBounds.x, -clipBounds.y);
                 }
-                matrix.scale(scale, scale);
                 egret.sys.systemRenderer.render(displayObject, renderBuffer, matrix, true);
                 egret.Matrix.release(matrix);
             }
@@ -15725,32 +15969,35 @@ var egret;
                 }
                 return drawCalls;
             }
-            var maskRenderNode = mask.$getRenderNode();
             //遮罩是单纯的填充图形,且alpha为1,性能优化
-            if (mask && (!mask.$children || mask.$children.length == 0) &&
-                maskRenderNode && maskRenderNode.type == 3 /* GraphicsNode */ &&
-                maskRenderNode.drawData.length == 1 &&
-                maskRenderNode.drawData[0].type == 1 /* Fill */ &&
-                maskRenderNode.drawData[0].fillAlpha == 1) {
-                this.renderingMask = true;
-                context.save();
-                var maskMatrix = egret.Matrix.create();
-                maskMatrix.copyFrom(mask.$getConcatenatedMatrix());
-                mask.$getConcatenatedMatrixAt(displayObject, maskMatrix);
-                context.transform(maskMatrix.a, maskMatrix.b, maskMatrix.c, maskMatrix.d, maskMatrix.tx, maskMatrix.ty);
-                var calls = this.drawDisplayObject(mask, context, offsetX, offsetY);
-                this.renderingMask = false;
-                maskMatrix.$invertInto(maskMatrix);
-                context.transform(maskMatrix.a, maskMatrix.b, maskMatrix.c, maskMatrix.d, maskMatrix.tx, maskMatrix.ty);
-                egret.Matrix.release(maskMatrix);
-                if (scrollRect) {
-                    context.beginPath();
-                    context.rect(scrollRect.x + offsetX, scrollRect.y + offsetY, scrollRect.width, scrollRect.height);
-                    context.clip();
+            if (mask) {
+                var maskRenderNode = mask.$getRenderNode();
+                if ((!mask.$children || mask.$children.length == 0) &&
+                    maskRenderNode && maskRenderNode.type == 3 /* GraphicsNode */ &&
+                    maskRenderNode.drawData.length == 1 &&
+                    maskRenderNode.drawData[0].type == 1 /* Fill */ &&
+                    maskRenderNode.drawData[0].fillAlpha == 1) {
+                    this.renderingMask = true;
+                    context.save();
+                    var maskMatrix = egret.Matrix.create();
+                    maskMatrix.copyFrom(mask.$getConcatenatedMatrix());
+                    mask.$getConcatenatedMatrixAt(displayObject, maskMatrix);
+                    maskMatrix.prepend(1, 0, 0, 1, offsetX, offsetY);
+                    context.transform(maskMatrix.a, maskMatrix.b, maskMatrix.c, maskMatrix.d, maskMatrix.tx, maskMatrix.ty);
+                    var calls = this.drawDisplayObject(mask, context, 0, 0);
+                    this.renderingMask = false;
+                    maskMatrix.$invertInto(maskMatrix);
+                    context.transform(maskMatrix.a, maskMatrix.b, maskMatrix.c, maskMatrix.d, maskMatrix.tx, maskMatrix.ty);
+                    egret.Matrix.release(maskMatrix);
+                    if (scrollRect) {
+                        context.beginPath();
+                        context.rect(scrollRect.x + offsetX, scrollRect.y + offsetY, scrollRect.width, scrollRect.height);
+                        context.clip();
+                    }
+                    calls += this.drawDisplayObject(displayObject, context, offsetX, offsetY);
+                    context.restore();
+                    return calls;
                 }
-                calls += this.drawDisplayObject(displayObject, context, offsetX, offsetY);
-                context.restore();
-                return calls;
             }
             //todo 若显示对象是容器，同时子项有混合模式，则需要先绘制背景到displayBuffer并清除背景区域
             //绘制显示对象自身，若有scrollRect，应用clip
@@ -15759,6 +16006,9 @@ var egret;
             var displayBoundsY = displayBounds.y;
             var displayBoundsWidth = displayBounds.width;
             var displayBoundsHeight = displayBounds.height;
+            if (displayBoundsWidth <= 0 || displayBoundsHeight <= 0) {
+                return drawCalls;
+            }
             var displayBuffer = this.createRenderBuffer(displayBoundsWidth, displayBoundsHeight);
             var displayContext = displayBuffer.context;
             if (!displayContext) {
@@ -15768,6 +16018,7 @@ var egret;
             drawCalls += this.drawDisplayObject(displayObject, displayContext, -displayBoundsX, -displayBoundsY);
             //绘制遮罩
             if (mask) {
+                var maskRenderNode = mask.$getRenderNode();
                 var maskMatrix = egret.Matrix.create();
                 maskMatrix.copyFrom(mask.$getConcatenatedMatrix());
                 mask.$getConcatenatedMatrixAt(displayObject, maskMatrix);
@@ -16780,6 +17031,32 @@ var egret;
          * @language zh_CN
          */
         RuntimeType.WXGAME = "wxgame";
+        /**
+         * Running on Baidu mini game
+         * @version Egret 5.2.13
+         * @platform All
+         * @language en_US
+         */
+        /**
+         * 运行在百度小游戏上
+         * @version Egret 5.2.13
+         * @platform All
+         * @language zh_CN
+         */
+        RuntimeType.BAIDUGAME = "baidugame";
+        /**
+         * Running on Xiaomi quick game
+         * @version Egret 5.2.14
+         * @platform All
+         * @language en_US
+         */
+        /**
+         * 运行在小米快游戏上
+         * @version Egret 5.2.14
+         * @platform All
+         * @language zh_CN
+         */
+        RuntimeType.QGAME = "qgame";
     })(RuntimeType = egret.RuntimeType || (egret.RuntimeType = {}));
     /**
      * The Capabilities class provides properties that describe the system and runtime that are hosting the application.
@@ -16896,7 +17173,7 @@ var egret;
          * @platform Web,Native
          * @language zh_CN
          */
-        Capabilities.engineVersion = "5.1.11";
+        Capabilities.engineVersion = "5.2.15";
         /***
          * current render mode.
          * @type {string}
@@ -17599,6 +17876,18 @@ var egret;
                     return;
                 }
                 self.$smoothing = value;
+                if (!egret.nativeRender) {
+                    var p = self.$parent;
+                    if (p && !p.$cacheDirty) {
+                        p.$cacheDirty = true;
+                        p.$cacheDirtyUp();
+                    }
+                    var maskedObject = self.$maskedObject;
+                    if (maskedObject && !maskedObject.$cacheDirty) {
+                        maskedObject.$cacheDirty = true;
+                        maskedObject.$cacheDirtyUp();
+                    }
+                }
             },
             enumerable: true,
             configurable: true
@@ -17865,6 +18154,11 @@ var egret;
             var textLines = this.$getTextLines();
             var length = textLines.length;
             if (length == 0) {
+                if (egret.nativeRender && self.$font) {
+                    self.$nativeDisplayObject.setDataToBitmapNode(self.$nativeDisplayObject.id, self.$font.$texture, []);
+                    self.$nativeDisplayObject.setWidth(0);
+                    self.$nativeDisplayObject.setHeight(0);
+                }
                 return;
             }
             var drawArr = [];
@@ -18067,14 +18361,14 @@ var egret;
                         offsetX = texture.$offsetX;
                         offsetY = texture.$offsetY;
                     }
-                    if (isFirstChar) {
-                        isFirstChar = false;
-                        textOffsetX = Math.min(offsetX, textOffsetX);
-                    }
-                    if (isFirstLine) {
-                        isFirstLine = false;
-                        textOffsetY = Math.min(offsetY, textOffsetY);
-                    }
+                    // if (isFirstChar) {
+                    //     isFirstChar = false;
+                    //     textOffsetX = Math.min(offsetX, textOffsetX);
+                    // }
+                    // if (isFirstLine) {
+                    //     isFirstLine = false;
+                    //     textOffsetY = Math.min(offsetY, textOffsetY);
+                    // }
                     if (hasWidthSet && j > 0 && xPos + texureWidth > textFieldWidth) {
                         if (!setLineData(line.substring(0, j)))
                             break;
@@ -19302,8 +19596,9 @@ var egret;
         });
         TextField.prototype.$setLineSpacing = function (value) {
             var values = this.$TextField;
-            if (values[1 /* lineSpacing */] == value)
+            if (values[1 /* lineSpacing */] == value) {
                 return false;
+            }
             values[1 /* lineSpacing */] = value;
             this.$invalidateTextField();
             if (egret.nativeRender) {
@@ -19476,6 +19771,9 @@ var egret;
              * @language zh_CN
              */
             set: function (value) {
+                if (this.$TextField[37 /* inputType */] == value) {
+                    return;
+                }
                 this.$TextField[37 /* inputType */] = value;
                 if (egret.nativeRender) {
                     this.$nativeDisplayObject.setInputType(value);
@@ -19755,7 +20053,11 @@ var egret;
              * @language zh_CN
              */
             set: function (value) {
-                this.$TextField[28 /* scrollV */] = Math.max(value, 1);
+                value = Math.max(value, 1);
+                if (value == this.$TextField[28 /* scrollV */]) {
+                    return;
+                }
+                this.$TextField[28 /* scrollV */] = value;
                 if (egret.nativeRender) {
                     this.$nativeDisplayObject.setScrollV(value);
                 }
@@ -19885,6 +20187,9 @@ var egret;
          * @param value
          */
         TextField.prototype.$setMultiline = function (value) {
+            if (this.$TextField[30 /* multiline */] == value) {
+                return false;
+            }
             this.$TextField[30 /* multiline */] = value;
             this.$invalidateTextField();
             if (egret.nativeRender) {
@@ -20084,7 +20389,11 @@ var egret;
          */
         TextField.prototype.$setBorder = function (value) {
             value = !!value;
+            if (this.$TextField[31 /* border */] == value) {
+                return;
+            }
             this.$TextField[31 /* border */] = value;
+            this.$invalidateTextField();
             if (egret.nativeRender) {
                 this.$nativeDisplayObject.setBorder(value);
             }
@@ -20120,7 +20429,11 @@ var egret;
          */
         TextField.prototype.$setBorderColor = function (value) {
             value = +value || 0;
+            if (this.$TextField[32 /* borderColor */] == value) {
+                return;
+            }
             this.$TextField[32 /* borderColor */] = value;
+            this.$invalidateTextField();
             if (egret.nativeRender) {
                 this.$nativeDisplayObject.setBorderColor(value);
             }
@@ -20157,7 +20470,11 @@ var egret;
          * @private
          */
         TextField.prototype.$setBackground = function (value) {
+            if (this.$TextField[33 /* background */] == value) {
+                return;
+            }
             this.$TextField[33 /* background */] = value;
+            this.$invalidateTextField();
             if (egret.nativeRender) {
                 this.$nativeDisplayObject.setBackground(value);
             }
@@ -20192,7 +20509,11 @@ var egret;
          * @private
          */
         TextField.prototype.$setBackgroundColor = function (value) {
+            if (this.$TextField[34 /* backgroundColor */] == value) {
+                return;
+            }
             this.$TextField[34 /* backgroundColor */] = value;
+            this.$invalidateTextField();
             if (egret.nativeRender) {
                 this.$nativeDisplayObject.setBackgroundColor(value);
             }
@@ -20482,7 +20803,7 @@ var egret;
             get: function () {
                 this.$getLinesArr();
                 if (egret.nativeRender) {
-                    return egret_native.nrGetTextFieldWidth(this.$nativeDisplayObject.id);
+                    return egret_native.nrGetTextWidth(this.$nativeDisplayObject.id);
                 }
                 return this.$TextField[5 /* textWidth */];
             },
@@ -20505,7 +20826,7 @@ var egret;
             get: function () {
                 this.$getLinesArr();
                 if (egret.nativeRender) {
-                    return egret_native.nrGetTextFieldHeight(this.$nativeDisplayObject.id);
+                    return egret_native.nrGetTextHeight(this.$nativeDisplayObject.id);
                 }
                 return egret.TextFieldUtils.$getTextHeight(this);
             },
@@ -22147,14 +22468,14 @@ var egret;
         };
         /**
          * Read unsigned bytes from the byte stream.
-         * @return A 32-bit unsigned integer ranging from 0 to 255
+         * @return A unsigned integer ranging from 0 to 255
          * @version Egret 2.4
          * @platform Web,Native
          * @language en_US
          */
         /**
          * 从字节流中读取无符号的字节
-         * @return 介于 0 和 255 之间的 32 位无符号整数
+         * @return 介于 0 和 255 之间的无符号整数
          * @version Egret 2.4
          * @platform Web,Native
          * @language zh_CN
@@ -24087,8 +24408,8 @@ var egret;
      */
     /**
      * 调用父类的setter属性，代替其他语言的写法，如 super.alpha = 1;
-     * @param thisObj 当前对象。永远都this
      * @param currentClass 当前 class 类名，非字符串
+     * @param thisObj 当前对象。永远都this
      * @param type 需要调用的setter属性名称
      * @param values 传给父类的值
      *
@@ -24137,9 +24458,9 @@ var egret;
      */
     /**
      * 获取父类的getter属性值。代替其他语言的写法，如 super.alpha;
-     * @param thisObj 当前对象。永远都this
      * @param currentClass 当前 class 类名，非字符串
-     * @param type 需要调用的setter属性名称
+     * @param thisObj 当前对象。永远都this
+     * @param type 需要调用的getter属性名称
      * @returns {any} 父类返回的值
      *
      * @exmaple egret.superGetter(egret.Sprite, this, "alpha");

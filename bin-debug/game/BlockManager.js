@@ -29,7 +29,7 @@ var BlockManagerClass = (function (_super) {
     BlockManagerClass.prototype.tidy = function () {
         // let horizontalLayout = new eui.HorizontalLayout();
         // horizontalLayout.horizontalAlign = egret.HorizontalAlign.CENTER;
-        this.bottom = 150;
+        // this.bottom = 150;
         this.horizontalCenter = 0;
         // this.layout = horizontalLayout;
     };
@@ -230,24 +230,24 @@ var BlockManagerClass = (function (_super) {
         var i = 0;
         var length = this.vecInventoryBlock.length;
         if (this.vecBlock.length != 0) {
-            console.log("clearCheck false length", this.vecBlock);
+            // console.log("clearCheck false length", this.vecBlock);
             return false;
         }
         i = 0;
         while (i < length) {
             if (this.vecInventoryBlock[i] != null) {
-                console.log("clearCheck false");
+                // console.log("clearCheck false");
                 return false;
             }
             i++;
         }
         InputManager.newInput(null);
         if (this.field.stageData.star3 <= Status.score) {
-            InputManager.addChild(new ClearSprite(true));
+            InputManager.addChild(new ClearSprite(true, false, false));
             SharedManager.vecPuzzleClear[this.field.stageData.stageNo - 1] = 2;
         }
         else {
-            InputManager.addChild(new ClearSprite(false));
+            InputManager.addChild(new ClearSprite(false, false, false));
             if (SharedManager.vecPuzzleClear[this.field.stageData.stageNo - 1] != 2) {
                 SharedManager.vecPuzzleClear[this.field.stageData.stageNo - 1] = 1;
             }
@@ -256,17 +256,23 @@ var BlockManagerClass = (function (_super) {
         return true;
     };
     BlockManagerClass.prototype.finishCheck = function (cls) {
-        console.log("finishCheck:", this.vecBlock.length, this.vecBlock);
+        // console.log("finishCheck:", this.vecBlock.length, this.vecBlock);
         if (this.vecBlock.length != 9) {
             return false;
         }
+        //  && (Status.score != 0 || BlockManager.vecBlock.length == 20)
         this.finish(cls);
         return true;
     };
     BlockManagerClass.prototype.finish = function (cls) {
         Status.finishTime = new Date().getTime();
         var score = Status.score;
+        var video = true;
+        console.log("Status.mode ", Status.mode);
         switch (Status.mode) {
+            case 0:
+                video = false;
+                break;
             case 1:
                 SharedManager.saveScore(score);
                 break;
@@ -281,9 +287,47 @@ var BlockManagerClass = (function (_super) {
             case 4:
                 SharedManager.saveScore1combo(score);
         }
-        var f = new ClearSprite(true, true);
-        f.retryScene = cls;
-        InputManager.addChild(f);
+        video && (SharedManager.videoSuccess = this.onVideoSuccess.bind(this));
+        InputManager.setTouchEnble(false);
+        this.f = new ClearSprite(true, true, video);
+        this.f.retryScene = cls;
+        InputManager.addChild(this.f);
+    };
+    BlockManagerClass.prototype.onVideoSuccess = function () {
+        var mode = Status.mode;
+        if (mode == GameMode.Score) {
+            BlockManager.undo();
+            BlockManager.undo();
+        }
+        else if (mode == GameMode.Score30) {
+            if (SetScore30Scene.cnt == 0) {
+                SetScore30Scene.cnt = 20;
+            }
+            if (BlockManager.vecBlock.length == 9) {
+                BlockManager.undo();
+                BlockManager.undo();
+            }
+        }
+        else if (Status.mode == GameMode.Score1M) {
+            if (BlockManager.vecBlock.length == 9) {
+                BlockManager.undo();
+                BlockManager.undo();
+            }
+            if (SetScore1minScene.cnt >= 3600) {
+                SetScore1minScene.isFinish = false;
+                SetScore1minScene.cnt = 0;
+            }
+        }
+        else if (Status.mode == GameMode.ScoreCombo) {
+            SetScore1ComboScene.isFinish = false;
+            if (BlockManager.vecBlock.length == 20) {
+                BlockManager.undo();
+                BlockManager.undo();
+            }
+        }
+        InputManager.setTouchEnble();
+        this.f && this.f.parent && this.f.parent.removeChild(this.f);
+        this.f = null;
     };
     return BlockManagerClass;
 }(eui.Group));

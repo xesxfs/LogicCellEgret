@@ -35,7 +35,7 @@ class BlockManagerClass extends eui.Group {
 	public tidy() {
 		// let horizontalLayout = new eui.HorizontalLayout();
 		// horizontalLayout.horizontalAlign = egret.HorizontalAlign.CENTER;
-		this.bottom = 150;
+		// this.bottom = 150;
 		this.horizontalCenter = 0;
 		// this.layout = horizontalLayout;
 	}
@@ -263,11 +263,11 @@ class BlockManagerClass extends eui.Group {
 		InputManager.newInput(null);
 		if (this.field.stageData.star3 <= Status.score) {
 
-			InputManager.addChild(new ClearSprite(true))
+			InputManager.addChild(new ClearSprite(true,false,false))
 			SharedManager.vecPuzzleClear[this.field.stageData.stageNo - 1] = 2;
 		}
 		else {
-			InputManager.addChild(new ClearSprite(false))
+			InputManager.addChild(new ClearSprite(false,false,false))
 			if (SharedManager.vecPuzzleClear[this.field.stageData.stageNo - 1] != 2) {
 				SharedManager.vecPuzzleClear[this.field.stageData.stageNo - 1] = 1;
 			}
@@ -281,14 +281,22 @@ class BlockManagerClass extends eui.Group {
 		if (this.vecBlock.length != 9) {
 			return false;
 		}
+		//  && (Status.score != 0 || BlockManager.vecBlock.length == 20)
 		this.finish(cls);
 		return true;
 	}
 
+	public f: ClearSprite;
+
 	public finish(cls: any): void {
 		Status.finishTime = new Date().getTime();
 		var score = Status.score;
+		let video = true;
+		console.log("Status.mode ", Status.mode)
 		switch (Status.mode) {
+			case 0:
+				video = false;
+				break;
 			case 1:
 				SharedManager.saveScore(score);
 				break;
@@ -302,13 +310,62 @@ class BlockManagerClass extends eui.Group {
 				break;
 			case 4:
 				SharedManager.saveScore1combo(score);
-				// SetScore1cinboScene.isFinish = true;
+			// SetScore1cinboScene.isFinish = true;
+		}
+		video && (SharedManager.videoSuccess = this.onVideoSuccess.bind(this));
+		InputManager.setTouchEnble(false);
+		this.f = new ClearSprite(true, true, video);
+		this.f.retryScene = cls;
+		InputManager.addChild(this.f);
+
+	}
+
+	public onVideoSuccess() {
+
+		let mode = Status.mode;
+
+
+		if (mode == GameMode.Score) {
+			BlockManager.undo();
+			BlockManager.undo();
+		}
+		else if (mode == GameMode.Score30) {
+			if (SetScore30Scene.cnt == 0) {
+				SetScore30Scene.cnt = 20;
+			}
+
+			if (BlockManager.vecBlock.length == 9) {
+				BlockManager.undo();
+				BlockManager.undo();
+			}
+
+		}
+		else if (Status.mode == GameMode.Score1M) {
+			if (BlockManager.vecBlock.length == 9) {
+				BlockManager.undo();
+				BlockManager.undo();
+			}
+
+			if (SetScore1minScene.cnt >= 3600) {
+				SetScore1minScene.isFinish = false;
+				SetScore1minScene.cnt = 0;
+			}
+
+		}
+		else if (Status.mode == GameMode.ScoreCombo) {
+			SetScore1ComboScene.isFinish = false;
+			if (BlockManager.vecBlock.length == 20) {
+				BlockManager.undo();
+				BlockManager.undo();
+			}
+
 		}
 
-		let f = new ClearSprite(true, true);
-		f.retryScene = cls;
-		InputManager.addChild(f);
+		InputManager.setTouchEnble();
+		this.f && this.f.parent && this.f.parent.removeChild(this.f);
+		this.f = null;
 	}
+
 }
 
 var BlockManager: BlockManagerClass = new BlockManagerClass();

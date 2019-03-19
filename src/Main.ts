@@ -30,7 +30,6 @@
 class Main extends eui.UILayer {
     public constructor() {
         super();
-        SharedManager.init();
     }
 
     protected createChildren(): void {
@@ -62,6 +61,7 @@ class Main extends eui.UILayer {
     }
 
     private async runGame() {
+        SharedManager.init();
         // console.log("runGame");
         await this.loadResource();
         // await platform.login();

@@ -74,13 +74,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var Main = (function (_super) {
     __extends(Main, _super);
     function Main() {
-        var _this = _super.call(this) || this;
-        SharedManager.init();
-        return _this;
+        return _super.call(this) || this;
     }
     Main.prototype.createChildren = function () {
         _super.prototype.createChildren.call(this);
-        console.log("createChildren");
+        // console.log("createChildren");
         egret.lifecycle.addLifecycleListener(function (context) {
             // custom lifecycle plugin
         });
@@ -104,9 +102,11 @@ var Main = (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        console.log("runGame");
+                        SharedManager.init();
+                        // console.log("runGame");
                         return [4 /*yield*/, this.loadResource()];
                     case 1:
+                        // console.log("runGame");
                         _a.sent();
                         // await platform.login();
                         // const userInfo = await platform.getUserInfo();
@@ -123,29 +123,26 @@ var Main = (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        console.log("loadResource");
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 5, , 6]);
+                        _a.trys.push([0, 4, , 5]);
                         // const loadingView = new LoadingUI();
                         // this.stage.addChild(loadingView);
                         return [4 /*yield*/, RES.loadConfig("resource/default.res.json", "resource/")];
-                    case 2:
+                    case 1:
                         // const loadingView = new LoadingUI();
                         // this.stage.addChild(loadingView);
                         _a.sent();
                         return [4 /*yield*/, this.loadTheme()];
-                    case 3:
+                    case 2:
                         _a.sent();
                         return [4 /*yield*/, RES.loadGroup("preload", 0)];
-                    case 4:
+                    case 3:
                         _a.sent();
-                        return [3 /*break*/, 6];
-                    case 5:
+                        return [3 /*break*/, 5];
+                    case 4:
                         e_1 = _a.sent();
                         console.error(e_1);
-                        return [3 /*break*/, 6];
-                    case 6: return [2 /*return*/];
+                        return [3 /*break*/, 5];
+                    case 5: return [2 /*return*/];
                 }
             });
         });
@@ -166,7 +163,7 @@ var Main = (function (_super) {
      * Create scene interface
      */
     Main.prototype.createGameScene = function () {
-        console.log("createGameScene");
+        // console.log("createGameScene");
         App.startUp(this);
     };
     return Main;

@@ -80,6 +80,11 @@ var DebugPlatform = (function () {
     };
     DebugPlatform.prototype.getUpdateManager = function () {
     };
+    DebugPlatform.prototype.createBannerAd = function () {
+    };
+    DebugPlatform.prototype.initRewardedVideoAd = function (errorCallBack, onCloseCallBack) {
+    };
+    DebugPlatform.prototype.showRewardedVideoAd = function () { };
     return DebugPlatform;
 }());
 __reflect(DebugPlatform.prototype, "DebugPlatform", ["Platform"]);

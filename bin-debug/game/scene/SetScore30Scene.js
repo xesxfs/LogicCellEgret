@@ -17,8 +17,8 @@ var SetScore30Scene = (function (_super) {
         var backBitmap = Resource.getBlockChips(22, 220, 22, 22);
         backBitmap.width = 110;
         backBitmap.height = 110;
-        backBitmap.x = 265;
-        backBitmap.y = 1000;
+        App.BackButton = backBitmap;
+        _this.setTopPos();
         _this.addChild(backBitmap);
         BlockManager.addRandomInventoryBlock(0);
         BlockManager.addRandomInventoryBlock(1);
@@ -31,6 +31,12 @@ var SetScore30Scene = (function (_super) {
         InputSetScore.field = _this.field;
         return _this;
     }
+    SetScore30Scene.prototype.setTopPos = function () {
+        this.field.top = 200;
+        BlockManager.top = this.field.top + this.field.height + 30;
+        App.BackButton.horizontalCenter = 0;
+        App.BackButton.top = BlockManager.top + 110 + 30;
+    };
     SetScore30Scene.prototype.update = function () {
         BlockManager.update();
         EffectManager.update();

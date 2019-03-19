@@ -11,6 +11,9 @@ class SelectScene extends Scene {
 	public score30Lab: eui.Label;
 	public score1mLab: eui.Label;
 	public scoreComboLab: eui.Label;
+	public vedioGroup: eui.Group;
+
+
 
 	public constructor() {
 		super();
@@ -24,5 +27,12 @@ class SelectScene extends Scene {
 		this.score30Lab.text = SharedManager.score30.toString();
 		this.scoreComboLab.text = SharedManager.score1combo.toString();
 		this.puzzleLab.text = SharedManager.getCurPuzzle().toString() + '/25';
+
+	}
+
+
+	public addBannerBottom() {
+
+
 	}
 }

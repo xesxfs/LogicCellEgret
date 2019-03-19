@@ -10,8 +10,8 @@
 	],
 	"game": [
 		"bin-debug/effect/Effect.js",
-		"bin-debug/frame/Scene.js",
 		"bin-debug/frame/Input.js",
+		"bin-debug/frame/Scene.js",
 		"bin-debug/game/StageData.js",
 		"bin-debug/game/Game.js",
 		"bin-debug/ThemeAdapter.js",
@@ -33,7 +33,7 @@
 		"bin-debug/game/ClearSprite.js",
 		"bin-debug/game/CountDownSprite.js",
 		"bin-debug/game/Field.js",
-		"bin-debug/game/scene/TitleScene.js",
+		"bin-debug/AssetAdapter.js",
 		"bin-debug/game/Grid.js",
 		"bin-debug/game/HudManagerScore.js",
 		"bin-debug/Platform.js",
@@ -52,10 +52,10 @@
 		"bin-debug/game/scene/RankingScene.js",
 		"bin-debug/game/scene/SelectScene.js",
 		"bin-debug/game/scene/SetPuzzleScene.js",
-		"bin-debug/game/scene/SetScore1comboScene.js",
+		"bin-debug/game/scene/SetScore1ComboScene.js",
 		"bin-debug/game/scene/SetScore1minScene.js",
 		"bin-debug/game/scene/SetScore30Scene.js",
 		"bin-debug/game/scene/SetScoreScene.js",
-		"bin-debug/AssetAdapter.js"
+		"bin-debug/game/scene/TitleScene.js"
 	]
 }

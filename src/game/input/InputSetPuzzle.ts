@@ -21,9 +21,9 @@ class InputSetPuzzleClass extends Input {
 			BlockManager.mouseY = e.stageY;
 			BlockManager.mouseDownInventory(selectBlock);
 			// console.log("down0", selectBlock);
-		} else if (e.stageY >= 1000 && e.stageX >= 130 && e.stageX <= (130 + 110)) {
+		} else if (App.BackButton && App.BackButton.hitTestPoint(e.stageX, e.stageY)) {
 			App.BackMenu.updateStart();
-		} else if (e.stageY >= 1000 && e.stageX >= 410 && e.stageX <= (410 + 110)) {
+		} else if (App.undoBitmap && App.undoBitmap.hitTestPoint(e.stageX, e.stageY)) {
 			BlockManager.undo();
 		}
 	}
